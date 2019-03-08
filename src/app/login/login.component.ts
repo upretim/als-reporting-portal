@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import {AuthService}  from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   });
 
   
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder, private authService: AuthService) { 
     //let emailRegex = "^[a-z0-9_-]{8,15}$";  Validators.pattern(emailRegex)
     this.loginFrom = this.fb.group({
       email: ['', Validators.required],
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(loginVals){
     console.log('Logged in', loginVals);
+    this.authService.validateUser(loginVals.email, loginVals.password);
   }
 
 }
