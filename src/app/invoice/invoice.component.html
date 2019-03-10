@@ -1,0 +1,51 @@
+<div class="container">
+  <form class="form-invioce" [formGroup]="invoiceFrom" (ngSubmit)="onSubmit(invoiceFrom.value)">
+     <div class="row">
+      <div class="col-sm-9 col-md-9 col-lg-9 mx-auto">
+        <div class="form-label-group row">
+          <label for="invNo" class="col-2 float-right">Invoice No.</label>
+          <input class="form-control col-4" id="invNo" placeholder="Invoice No" required autofocus type="text" formControlName="no"/>
+          <form class="form-inline" [formGroup]="invoiceFrom">
+              <label for="invDate" class="col-2 float-right">Invoice Date</label>
+            <div class="form-group">
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" [(ngModel)]="invDate" ngbDatepicker #d="ngbDatepicker" formControlName="billDate">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="d.toggle()" type="button"></button>
+                </div>
+              </div>
+            </div>
+          </form>  
+        </div>
+      </div>
+    </div> 
+    <div class="row">
+        <form class="form-inline" [formGroup]="invoiceFrom">
+            <label for="dueDate" class="col-2 float-right">Due Date</label>
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd"
+                     name="dpd" [(ngModel)]="dueDate" ngbDatepicker #dd="ngbDatepicker" formControlName="dueDate">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="dd.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </form>  
+        <label for="invType" class="col-2 float-right">Invoice Type</label>
+         <input class="form-control col-4" id="invType" placeholder="Invoice Type" required autofocus type="text"  formControlName="type" />
+    </div>
+    <div class="row">
+    
+        <label for="invAmount" class="col-2 float-right">Invoice Amount</label>
+         <input class="form-control col-4" id="invAmount" placeholder="Amount" required autofocus type="number" formControlName="amount"/>
+         <label for="invBilledTo" class="col-2 float-right">Billed To</label>
+         <input class="form-control col-4" id="invBilledTo" placeholder="Billed To" required autofocus type="text"   formControlName="billedTo" />
+         <label for="rcvd" class="col-2 float-right">Amount Received</label>
+         <input class="form-control col-4" id="rcvd" placeholder="Billed To" required autofocus type="text"  formControlName="amountRcvd" />
+    
+        </div>
+    <button id="addInv" [disabled]="!invoiceFrom.valid" type="submit" class="btn btn-primary float-right text-uppercase">Add Invoice</button>
+    </form>
+</div>

@@ -1,0 +1,109 @@
+{
+    
+    "clients": {
+        "metroHospitals":{
+            "clientId": "001",
+            "name":"Metro Hospitals Group",
+            "hasChild":true,
+            "childs": [
+               {
+                   "palamViharMetro": {
+                    "clientId": "001_001",
+                    "name":"Metro Hospital Palam Vihar",
+                    "hasChild":false
+                      },
+                      "shadipurMetro": {
+                        "clientId": "001_002",
+                        "name":"RLKC Shadipur",
+                        "hasChild":false
+
+                    },
+                    "noidaMetro": {
+                        "clientId": "001_002",
+                        "name":"Metro Hospital Noida",
+                        "hasChild":false
+                    }
+                } 
+            ]
+        },
+        "aiimsND":{
+            "clientId": "002",
+            "name":"AIIMS New Delhi",
+            "hasChild":true,
+            "childs": [
+               {
+                   "heamotology": {
+
+                      },
+                      "amatomy": {
+
+                    }
+                } 
+            ]
+        },
+        "dnaExpert":{
+            "clientId": "003",
+            "hasChild":false,
+             "name": "DNA experts Pvt Ltd"
+        },
+        "dpmi":{
+            "clientId": "004",
+            "hasChild":false,
+             "name": "DMPI Ashok Nagar"
+        },
+        "crystalCrop":{
+            "clientId": "005",
+            "hasChild":false,
+             "name": "Crystal Crop Protection Pvt Ltd"
+        }
+
+
+    },
+    "invoice":[
+        {
+            "no": "ALS001",
+            "issueDate": "ALS001",
+            "dueDate": "test",
+            "issuedTo": "ClientID",
+            "invoiceType": "string",
+            "amount": 12000,
+            "paymentRcvd": "yes"
+        },
+        {
+            "no": "ALS002",
+            "issueDate": "ALS001",
+            "dueDate": "test",
+            "issuedTo": "ClientID",
+            "invoiceType": "string",
+            "amount": 12000,
+            "paymentRcvd": "yes"
+        },
+        {
+            "no": "ALS003",
+            "issueDate": "ALS001",
+            "dueDate": "test",
+            "issuedTo": "ClientID",
+            "invoiceType": "string",
+            "amount": 12000,
+            "paymentRcvd": "yes"
+        },
+        {
+            "no": "ALS004",
+            "issueDate": "ALS001",
+            "dueDate": "test",
+            "issuedTo": "ClientID",
+            "invoiceType": "string",
+            "amount": 12000,
+            "paymentRcvd": "yes"
+        },
+        {
+            "no": "ALS005",
+            "issueDate": "ALS001",
+            "dueDate": "test",
+            "issuedTo": "ClientID",
+            "invoiceType": "string",
+            "amount": 12000,
+            "paymentRcvd": "yes"
+        }
+    ]
+}
