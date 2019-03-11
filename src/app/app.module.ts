@@ -18,6 +18,7 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import {NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
 import { HttpClientModule } from  '@angular/common/http';
+import { InvoiceTableComponent } from './invoice-table/invoice-table.component';
 
 
 
@@ -29,7 +30,8 @@ import { HttpClientModule } from  '@angular/common/http';
     LoginComponent,
     ErrorComponent,
     HomeComponent,
-    InvoiceComponent
+    InvoiceComponent,
+    InvoiceTableComponent
   ],
   imports: [
     BrowserModule,
