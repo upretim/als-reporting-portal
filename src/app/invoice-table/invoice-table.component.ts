@@ -9,17 +9,15 @@ import { Router } from  "@angular/router";
   styleUrls: ['./invoice-table.component.css']
 })
 export class InvoiceTableComponent implements OnInit {
-  invoiceData: any[];
-  invoiceDataPopulate: any[];
+  invoiceData: Iinvoice[];
   clients: any;
   constructor(private dataService: DataService, private router: Router) {
-
+   // this.dataService.getJSONData();
   }
 
   ngOnInit() {
-    this.dataService.getdata('assets/data.json').subscribe((rcvddata) => {
-      let data = rcvddata;
-      this.dataService.data = rcvddata;
+    this.dataService.getdata('assets/data.json').subscribe((data) => {
+      this.dataService.data = data;
       this.invoiceData = data.invoice;
       this.clients = data.clients;
       for (let i = 0; i < this.invoiceData.length; i++) {
@@ -31,6 +29,16 @@ export class InvoiceTableComponent implements OnInit {
       }
     });
 
+      // this.invoiceData = this.dataService.data.invoice;
+      // this.clients = this.dataService.data.clients;
+      // for (let i = 0; i < this.invoiceData.length; i++) {
+      //   for (let prop in this.clients) {
+      //     if (this.invoiceData[i].billedTo == this.clients[prop].clientId) {
+      //       this.invoiceData[i].billedToName = this.clients[prop].name;
+      //     }
+      //   }
+      // }
+  
   }
 
 

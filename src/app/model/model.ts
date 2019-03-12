@@ -1,9 +1,10 @@
 export interface Iinvoice {
     no: string,
-    type: string,
-    date:string,
+    issueDate: string,
     dueDate: string,
     billedTo: string,
-    amount: string,
-    amountRcvd: string
+    billedToName: string,
+    invoiceType: string,
+    amount: number,
+    paymentRcvd: string
 }

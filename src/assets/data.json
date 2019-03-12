@@ -70,7 +70,7 @@
             "dueDate": "10/01/2019",
             "billedTo": "003",
             "billedToName":"test",
-            "type": "string",
+            "type": "Retail",
             "amount": 12000,
             "amountRcvd": "No"
         },
@@ -80,7 +80,7 @@
             "dueDate": "10/02/2019",
             "billedTo": "002",
             "billedToName":"test",
-            "type": "string",
+            "type": "Tax",
             "amount": 12000,
             "amountRcvd": "Yes"
         },
@@ -90,7 +90,7 @@
             "dueDate": "10/01/2019",
             "billedTo": "001",
             "billedToName":"test",
-            "type": "string",
+            "type": "Retail",
             "amount": 12000,
             "amountRcvd": "No"
         },
@@ -100,13 +100,13 @@
             "dueDate": "10/01/2019",
             "billedTo": "004",
             "billedToName":"test",
-            "type": "string",
+            "type": "Tax",
             "amount": 12000,
             "amountRcvd": "Yes"
         },
         {
             "no": "ALS005",
-            "type": "string",
+            "type": "Retail",
             "billDate": "12/12/2018",
             "dueDate": "12/01/2019",
             "billedTo": "001",

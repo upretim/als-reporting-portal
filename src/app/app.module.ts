@@ -19,8 +19,8 @@ import {NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
 import { HttpClientModule } from  '@angular/common/http';
 import { InvoiceTableComponent } from './invoice-table/invoice-table.component';
-
-
+import {AuthService} from './auth.service';
+import {DataService} from './data.service';
 
 
 
@@ -48,7 +48,7 @@ import { InvoiceTableComponent } from './invoice-table/invoice-table.component';
      FormsModule,
      HttpClientModule
   ],
-  providers: [],
+  providers: [AuthService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

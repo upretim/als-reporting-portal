@@ -10,13 +10,21 @@ import { map, catchError, tap } from 'rxjs/operators';
 })
 export class DataService {
     data: any;
-  constructor(private httpClient: HttpClient) { }
+    editInv: any;
+  constructor(private httpClient: HttpClient) {
+     this.getJSONData();  
+   }
     getdata(url): Observable<any> {
       return this.httpClient.get(url);
     }  
-    getstaticData(){
-      return this.data;
+    getJSONData(){
+      this.getdata('assets/data.json').subscribe((rcvddata)=>{
+        this.data  = rcvddata;
+        return this.data;  
+      })  
     }
+
+    
 
     addInvoice(invoice){
         var inv = {
@@ -45,6 +53,11 @@ export class DataService {
          }      
     }
     updateInvoice(inv){
+      this.editInv = inv;
       console.log('Invoice Updated', inv);
+    }
+
+    sendInvDetails(){
+      return this.editInv;
     }
 }

@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
 
   
   constructor(private fb: FormBuilder, private authService: AuthService) { 
-    //let emailRegex = "^[a-z0-9_-]{8,15}$";  Validators.pattern(emailRegex)
     this.loginFrom = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]

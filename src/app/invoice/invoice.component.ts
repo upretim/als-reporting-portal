@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import {DataService} from '../data.service';
 import { Router } from  "@angular/router";
+import { ValidatorFn, AbstractControl } from '@angular/forms';
+import {minValueValidator, greateThanZero}  from '../validators/validator';
+
 
 @Component({
   selector: 'app-invoice',
@@ -27,10 +30,15 @@ export class InvoiceComponent implements OnInit {
       billDate: ['', Validators.required],
       dueDate: ['', Validators.required],
       billedTo: ['', Validators.required],
-      amount: ['', Validators.required],
+      amount: ['', Validators.required, greateThanZero],
       amountRcvd: ['', Validators.required]
     });
-   
+    this.populateFrom();
+  }
+  
+  populateFrom(){
+   // this.invoiceFrom.controls['no'].setValue('ALS1101');
+   // console.log('this.invoiceFrom is ', this.invoiceFrom);
   }
 
   ngOnInit() {
