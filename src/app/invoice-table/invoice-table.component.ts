@@ -12,9 +12,6 @@ export class InvoiceTableComponent implements OnInit {
   invoiceData: Iinvoice[];
   clients: any;
   filterObj : any = {
-    billedTo: "none",
-    amountRcvd: "none"
-
   }
   constructor(private dataService: DataService, private router: Router) {
 
@@ -57,36 +54,28 @@ export class InvoiceTableComponent implements OnInit {
   }
 
   selectChangeClient(event){
-   
-    let selectedClientId = event.currentTarget.value;
+   let selectedClientId = event.currentTarget.value;
    this.filterObj.billedTo = selectedClientId;
-    if(selectedClientId!="none"){
-      this.invoiceData = [];
-      for(let val in  this.dataService.data.invoice){
-         if(this.dataService.data.invoice[val].billedTo ==this.filterObj.billedTo){
-           this.invoiceData.push(this.dataService.data.invoice[val])
-         }
-      }
-    }
-    else{
-      this.invoiceData  = this.dataService.data.invoice;
-    }
+   this.invoiceData = this.multiFilter(this.dataService.data.invoice, this.filterObj);
   }
 
 
   selectChangeBillRealized(event){
    let selectedClientId = event.currentTarget.value;
    this.filterObj.amountRcvd = selectedClientId;
-    if(selectedClientId!="none"){
-      this.invoiceData = [];
-      for(let val in  this.dataService.data.invoice){
-         if(this.dataService.data.invoice[val].amountRcvd ==this.filterObj.amountRcvd){
-           this.invoiceData.push(this.dataService.data.invoice[val])
-         }
-      }
-    }
-    else{
-      this.invoiceData  = this.dataService.data.invoice;
-    }
+   this.invoiceData = this.multiFilter(this.dataService.data.invoice, this.filterObj);
+  }
+
+  multiFilter(array, filters) {
+    const filterKeys = Object.keys(filters);
+    // filters all elements passing the criteria
+    return array.filter((item) => {
+      // dynamically validate all filter criteria
+      return filterKeys.every(key => {
+        // ignores an empty filter
+        if (!filters[key].length) return true;
+        return filters[key].includes(item[key]);
+      });
+    });
   }
 }
