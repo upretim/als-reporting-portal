@@ -1,4 +1,23 @@
 <div class="container">   
+  <div class="row">
+    <div class="col-3">
+      <select id="clientId" class="form-control"  (change)="selectChangeClient($event)">
+          <option value="none" default selected>Select Client</option>
+          <option value="001">Metro Hospitals Group</option>
+          <option value="002">AIIMS New Delhi</option>
+          <option value="003">DNA experts Pvt Ltd</option>
+          <option value="004">DPMI Ashok Nagar</option>
+          <option value="005">Crystal Crop Protection Pvt Ltd</option> 
+      </select>
+    </div>
+    <div class="col-2">
+        <select id="clientId" class="form-control"  (change)="selectChangeBillRealized($event)">
+            <option value="none" default selected>Bill Realized</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+      </div>
+  </div>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -7,7 +26,7 @@
         <th>Due Date</th>
         <th>Billed To</th>
         <th>Amount</th>
-        <th>Paid</th>
+        <th>Amt Rcvd</th>
         <th>Type</th>
         <th>Edit</th>
         <th>Delete</th>

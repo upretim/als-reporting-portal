@@ -18,8 +18,7 @@ export class AuthService {
       } else {
         localStorage.setItem('user', null);
       }
-    })
-    
+    })   
   }
 
   async  validateUser(email:  string, password:  string) {

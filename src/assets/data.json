@@ -113,6 +113,16 @@
             "billedToName":"test",
             "amount": 12000,
             "amountRcvd": "No"
+        },
+        {
+            "no": "ALS006",
+            "type": "Tax",
+            "billDate": "12/12/2018",
+            "dueDate": "12/01/2019",
+            "billedTo": "005",
+            "billedToName":"test",
+            "amount": 12000,
+            "amountRcvd": "No"
         }
     ]
 }
