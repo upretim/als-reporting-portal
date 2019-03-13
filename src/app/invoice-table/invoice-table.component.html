@@ -27,12 +27,12 @@
         <th>Billed To</th>
         <th>Amount</th>
         <th>Amt Rcvd</th>
-        <th>Type</th>
+        <!-- <th>Type</th> -->
         <th>Edit</th>
         <th>Delete</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="hasDataToDisplay">
       <tr *ngFor="let inv of invoiceData; let i = index">
         <td>{{inv.no}}</td>
         <td>{{inv.billDate}}</td>
@@ -40,7 +40,7 @@
         <td>{{inv.billedToName}}</td>
         <td>&#x20b9; {{inv.amount}}</td>
         <td>{{inv.amountRcvd}}</td>
-        <td>{{inv.type}}</td>
+        <!-- <td>{{inv.type}}</td> -->
         <td>
             <button type="button" class="btn btn-default btn-sm" (click)="EditInv(inv)">
                 <i class="fa fa-edit" style='font-size:20px'></i>
@@ -54,4 +54,7 @@
       </tr>
     </tbody>
   </table>
+   <div *ngIf="!hasDataToDisplay" class="text-center">
+    No data found
+   </div>
 </div>

@@ -11,6 +11,7 @@ import { Router } from "@angular/router";
 export class InvoiceTableComponent implements OnInit {
   invoiceData: Iinvoice[];
   clients: any;
+  hasDataToDisplay:boolean = true;
   filterObj : any = {
   }
   constructor(private dataService: DataService, private router: Router) {
@@ -21,6 +22,10 @@ export class InvoiceTableComponent implements OnInit {
     if (this.dataService.data) {
       this.invoiceData = this.dataService.data.invoice;
       this.clients = this.dataService.data.clients;
+      this.hasDataToDisplay = true;
+      if(this.invoiceData.length==0){
+        this.hasDataToDisplay = false;
+      }
       for (let i = 0; i < this.invoiceData.length; i++) {
         for (let prop in this.clients) {
           if (this.invoiceData[i].billedTo == this.clients[prop].clientId) {
@@ -32,6 +37,10 @@ export class InvoiceTableComponent implements OnInit {
       this.dataService.getdata('assets/data.json').subscribe((rcvddata) => {
         this.dataService.data = rcvddata;
         this.invoiceData = this.dataService.data.invoice;
+        this.hasDataToDisplay = true;
+        if(this.invoiceData.length==0){
+          this.hasDataToDisplay = false;
+        }
         this.clients = this.dataService.data.clients;
         for (let i = 0; i < this.invoiceData.length; i++) {
           for (let prop in this.clients) {
@@ -57,6 +66,10 @@ export class InvoiceTableComponent implements OnInit {
    let selectedClientId = event.currentTarget.value;
    this.filterObj.billedTo = selectedClientId;
    this.invoiceData = this.multiFilter(this.dataService.data.invoice, this.filterObj);
+   this.hasDataToDisplay = true;
+    if(this.invoiceData.length==0){
+      this.hasDataToDisplay = false;
+    }
   }
 
 
@@ -64,6 +77,10 @@ export class InvoiceTableComponent implements OnInit {
    let selectedClientId = event.currentTarget.value;
    this.filterObj.amountRcvd = selectedClientId;
    this.invoiceData = this.multiFilter(this.dataService.data.invoice, this.filterObj);
+   this.hasDataToDisplay = true;
+    if(this.invoiceData.length==0){
+      this.hasDataToDisplay = false;
+    }
   }
 
   multiFilter(array, filters) {
