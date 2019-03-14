@@ -16,6 +16,7 @@ export class InvoiceTableComponent implements OnInit {
   subClientArr: []=[];
   subClientList:[]=[];
   totalValue:number =0;
+  numberOfInv: number = 0;
   hasDataToDisplay:boolean = true;
   filterObj : any = {
   }
@@ -27,6 +28,9 @@ export class InvoiceTableComponent implements OnInit {
     if (this.dataService.data) {
       this.invoiceData = this.dataService.data.invoice;
       this.hasDataToDisplay = true;
+      this.totalValue = this.invoiceData.reduce(function (accumulator, invoice) {
+        return accumulator + invoice.amount;
+      }, 0);
       if(this.invoiceData.length==0){
         this.hasDataToDisplay = false;
       }
@@ -35,6 +39,9 @@ export class InvoiceTableComponent implements OnInit {
         this.dataService.data = rcvddata;
         this.invoiceData = this.dataService.data.invoice;
         this.hasDataToDisplay = true;
+        this.totalValue = this.invoiceData.reduce(function (accumulator, invoice) {
+          return accumulator + invoice.amount;
+        }, 0);
         if(this.invoiceData.length==0){
           this.hasDataToDisplay = false;
         }
@@ -68,6 +75,9 @@ export class InvoiceTableComponent implements OnInit {
     }
   }
    this.invoiceData = this.multiFilter(this.dataService.data.invoice, this.filterObj);
+   this.totalValue = this.invoiceData.reduce(function (accumulator, invoice) {
+    return accumulator + invoice.amount;
+  }, 0);
    this.hasDataToDisplay = true;
     if(this.invoiceData.length==0){
       this.hasDataToDisplay = false;
@@ -79,6 +89,9 @@ export class InvoiceTableComponent implements OnInit {
    let selectedClientId = event.currentTarget.value;
    this.filterObj.amountRcvd = selectedClientId;
    this.invoiceData = this.multiFilter(this.dataService.data.invoice, this.filterObj);
+   this.totalValue = this.invoiceData.reduce(function (accumulator, invoice) {
+    return accumulator + invoice.amount;
+  }, 0);
    this.hasDataToDisplay = true;
     if(this.invoiceData.length==0){
       this.hasDataToDisplay = false;
@@ -89,6 +102,9 @@ export class InvoiceTableComponent implements OnInit {
     let selectedClientId  = event.currentTarget.value;
      this.filterObj.subclientId = selectedClientId;
     this.invoiceData = this.multiFilter(this.dataService.data.invoice, this.filterObj);
+    this.totalValue = this.invoiceData.reduce(function (accumulator, invoice) {
+      return accumulator + invoice.amount;
+    }, 0);
     this.hasDataToDisplay = true;
     if(this.invoiceData.length==0){
       this.hasDataToDisplay = false;

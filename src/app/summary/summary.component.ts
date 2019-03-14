@@ -5,10 +5,14 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.css']
 })
-//@Input()
-export class SummaryComponent implements OnInit {
 
-  constructor() { }
+
+export class SummaryComponent implements OnInit {
+  @Input() noOfInv: number;
+  @Input() totValue: number;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

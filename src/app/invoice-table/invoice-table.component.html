@@ -63,6 +63,6 @@
    <div *ngIf="!hasDataToDisplay" class="text-center">
     No data found
    </div>
-   <app-summary *ngIf="hasDataToDisplay" class="col-md-6 pull-right">
+   <app-summary *ngIf="hasDataToDisplay" class="col-md-6 pull-right" [totValue]="totalValue" [noOfInv]="invoiceData.length">
    </app-summary>
 </div>
