@@ -33,8 +33,7 @@
                             <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="dd.toggle()" type="button"></button>
                           </div>
                         </div>
-                      </div>
-                            
+                      </div>        
                 </div>
                 
                 <div class="form-group col-md-6">
@@ -54,15 +53,21 @@
                  
                  <div class="form-group col-md-6">
                      <label for="invBilledTo">Billed To</label>
-                     <select id="invBilledTo" class="form-control" formControlName="billedTo">
+                     <select id="invBilledTo" class="form-control" formControlName="billedTo" (click)="clientSelected($event)">
                          <option value="" default selected>Please Select</option>
-                         <option value="002">AIIMS, New Delhi</option>
-                         <option value="001" >Metro Hospital, Noida</option>
+                         <option [value]="client.clientId" *ngFor="let client of clientList; let i = index">{{client.name}}</option>
                      </select>
                    </div>
             </div> 
             <div class="form-row"> 
-                 <div class="form-group col-md-6">
+                <div class="form-group col-md-6" *ngIf="hasSubClient">
+                    <label for="invBilledToDept">Location/Dept</label>
+                    <select id="invBilledToDept" class="form-control" formControlName="billedToDept">
+                        <option value="" default selected>Please Select</option>
+                        <option *ngFor="let client of subClientList; let i = index" [value]="client.subclientId" >{{client.name}}</option>
+                    </select>
+                  </div>
+                 <div class="form-group col-md-4">
                      <label for="rcvd">Amount Received</label>
                      <select id="rcvd" class="form-control" formControlName="amountRcvd">
                          <option value="" default selected>Please Select</option>

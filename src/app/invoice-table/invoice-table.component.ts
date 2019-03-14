@@ -11,6 +11,11 @@ import { Router } from "@angular/router";
 export class InvoiceTableComponent implements OnInit {
   invoiceData: Iinvoice[];
   clients: any;
+  clientList: any;
+  hasSubClient = false;
+  subClientArr: []=[];
+  subClientList:[]=[];
+  totalValue:number =0;
   hasDataToDisplay:boolean = true;
   filterObj : any = {
   }
@@ -21,17 +26,9 @@ export class InvoiceTableComponent implements OnInit {
   ngOnInit() {
     if (this.dataService.data) {
       this.invoiceData = this.dataService.data.invoice;
-      this.clients = this.dataService.data.clients;
       this.hasDataToDisplay = true;
       if(this.invoiceData.length==0){
         this.hasDataToDisplay = false;
-      }
-      for (let i = 0; i < this.invoiceData.length; i++) {
-        for (let prop in this.clients) {
-          if (this.invoiceData[i].billedTo == this.clients[prop].clientId) {
-            this.invoiceData[i].billedToName = this.clients[prop].name;
-          }
-        }
       }
     } else {
       this.dataService.getdata('assets/data.json').subscribe((rcvddata) => {
@@ -40,14 +37,6 @@ export class InvoiceTableComponent implements OnInit {
         this.hasDataToDisplay = true;
         if(this.invoiceData.length==0){
           this.hasDataToDisplay = false;
-        }
-        this.clients = this.dataService.data.clients;
-        for (let i = 0; i < this.invoiceData.length; i++) {
-          for (let prop in this.clients) {
-            if (this.invoiceData[i].billedTo == this.clients[prop].clientId) {
-              this.invoiceData[i].billedToName = this.clients[prop].name;
-            }
-          }
         }
       });
     }
@@ -63,8 +52,21 @@ export class InvoiceTableComponent implements OnInit {
   }
 
   selectChangeClient(event){
+    this.hasSubClient = false;
+    this.subClientArr = [];
    let selectedClientId = event.currentTarget.value;
    this.filterObj.billedTo = selectedClientId;
+   this.clientList = this.dataService.data.clientsList;
+   this.filterObj.subclientId = "";
+   if(event.currentTarget.value!=""){
+    let selectedClient =  this.clientList.filter(function(val) {
+      return val.clientId == event.currentTarget.value;
+    });
+    if(selectedClient[0].hasChild){
+      this.hasSubClient = true;
+      this.subClientList =selectedClient[0].childs;
+    }
+  }
    this.invoiceData = this.multiFilter(this.dataService.data.invoice, this.filterObj);
    this.hasDataToDisplay = true;
     if(this.invoiceData.length==0){
@@ -78,6 +80,16 @@ export class InvoiceTableComponent implements OnInit {
    this.filterObj.amountRcvd = selectedClientId;
    this.invoiceData = this.multiFilter(this.dataService.data.invoice, this.filterObj);
    this.hasDataToDisplay = true;
+    if(this.invoiceData.length==0){
+      this.hasDataToDisplay = false;
+    }
+  }
+
+  selectChangeSubClient(event){
+    let selectedClientId  = event.currentTarget.value;
+     this.filterObj.subclientId = selectedClientId;
+    this.invoiceData = this.multiFilter(this.dataService.data.invoice, this.filterObj);
+    this.hasDataToDisplay = true;
     if(this.invoiceData.length==0){
       this.hasDataToDisplay = false;
     }

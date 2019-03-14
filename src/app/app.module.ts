@@ -21,6 +21,7 @@ import { HttpClientModule } from  '@angular/common/http';
 import { InvoiceTableComponent } from './invoice-table/invoice-table.component';
 import {AuthService} from './auth.service';
 import {DataService} from './data.service';
+import { SummaryComponent } from './summary/summary.component';
 
 
 
@@ -31,7 +32,8 @@ import {DataService} from './data.service';
     ErrorComponent,
     HomeComponent,
     InvoiceComponent,
-    InvoiceTableComponent
+    InvoiceTableComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule,

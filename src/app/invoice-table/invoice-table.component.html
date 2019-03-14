@@ -10,6 +10,12 @@
           <option value="005">Crystal Crop Protection Pvt Ltd</option> 
       </select>
     </div>
+    <div class="col-3" *ngIf="hasSubClient">
+      <select id="clientSubId" class="form-control"  (change)="selectChangeSubClient($event)">
+          <option value="" default selected>Select Location/Dept</option>
+          <option *ngFor="let subClient of subClientList; let i = index" [value]="subClient.subclientId">{{subClient.name}}</option>
+      </select>
+    </div>
     <div class="col-2">
         <select id="amountRcvd" class="form-control"  (change)="selectChangeBillRealized($event)">
             <option value="" default selected>Bill Realized</option>
@@ -57,4 +63,6 @@
    <div *ngIf="!hasDataToDisplay" class="text-center">
     No data found
    </div>
+   <app-summary *ngIf="hasDataToDisplay" class="col-md-6 pull-right">
+   </app-summary>
 </div>

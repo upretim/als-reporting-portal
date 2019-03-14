@@ -18,10 +18,15 @@ export class InvoiceComponent implements OnInit {
     billDate: new FormControl(''),
     dueDate: new FormControl(''),
     billedTo: new FormControl(''),
+    billedToDept:new FormControl(''),
     billedToName: new FormControl(''),
     amount: new FormControl(''),
     amountRcvd: new FormControl('')
   });
+
+  clientList: any;
+  subClientList:[]=[];
+  hasSubClient:boolean = false;
 
   constructor(private fb: FormBuilder, private dataService: DataService , private router: Router) { 
     this.invoiceFrom = this.fb.group({
@@ -30,28 +35,56 @@ export class InvoiceComponent implements OnInit {
       billDate: ['', Validators.required],
       dueDate: ['', Validators.required],
       billedTo: ['', Validators.required],
+      billedToDept:[''],
       amount: ['', Validators.required, greateThanZero],
       amountRcvd: ['', Validators.required]
     });
-    this.populateFrom();
   }
   
-  populateFrom(){
-   // this.invoiceFrom.controls['no'].setValue('ALS1101');
-   // console.log('this.invoiceFrom is ', this.invoiceFrom);
-  }
+
 
   ngOnInit() {
-    
+    this.clientList = this.dataService.data.clientsList;
   }
 
   onSubmit(val){
-  console.log('New Invoice added/updated successfully',val);
+    // let selectedClient =  this.clientList.filter(function(value) {
+    //   return value.clientId == val.billedTo;
+    // });
+    var el = document.getElementById('invBilledTo');
+    var BilledTo = el['options'][el['selectedIndex']].innerHTML;
+    var el2 = document.getElementById('invBilledToDept');
+    if(el2){
+      var billedToName = el2['options'][el2['selectedIndex']].innerHTML;
+      val.subclientId = this.invoiceFrom.controls.billedToDept.value;
+    }
+   
+    if(el2){
+      val.billedToName = billedToName;
+    }
+    else{
+      val.billedToName = BilledTo;
+    }
+   
+    console.log('label is ', BilledTo, billedToName);
   this.dataService.addInvoice(val);
   this.router.navigate(['/home']);
+  console.log('New Invoice added/updated successfully',val);
   }
   gotoHome(){
     this.router.navigate(['/home']);
   }
-
+  clientSelected(event){
+    this.invoiceFrom.controls.billedToDept.setValue("");
+    this.hasSubClient = false;
+    if(event.currentTarget.value!=""){
+      let selectedClient =  this.clientList.filter(function(val) {
+        return val.clientId == event.currentTarget.value;
+      });
+      if(selectedClient[0].hasChild){
+        this.hasSubClient = true;
+        this.subClientList =selectedClient[0].childs;
+      }
+    }
+  }
 }
