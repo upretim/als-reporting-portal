@@ -48,7 +48,9 @@ export class InvoiceComponent implements OnInit {
   preFillFrom(invoice){
     if(invoice){
       this.invoiceFrom.controls.no.setValue(invoice.no);
-      this.invoiceFrom.controls.billedTo.setValue('001');
+      this.invoiceFrom.controls.billedTo.setValue(invoice.billedTo);
+      this.invoiceFrom.controls.amount.setValue(invoice.amount);
+      this.invoiceFrom.controls.amountRcvd.setValue(invoice.amountRcvd);
     }
      
 }

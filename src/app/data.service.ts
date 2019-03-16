@@ -61,6 +61,6 @@ export class DataService {
         }
     }
     updateInvoice(inv) {
-        console.log('Invoice Updated', inv);
+        console.log('Invoice Updated', this.data.invoice);
     }
 }

@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   addInvoice(){
+    this.dataService.publishLastUpdate('');
     this.router.navigate(['/invoice']);
   }
 
