@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -10,10 +11,19 @@ import { map, catchError, tap } from 'rxjs/operators';
 })
 export class DataService {
     data: any;
-    editInv: any;
+   // selectedInvoice: any;
+   // https://embed.plnkr.co/UEPbIj4OmfWrMuU9jpzN/ - plunker link
+
+    private selectedInvoice = new BehaviorSubject<any>('');
+    lastUpdate$ = this.selectedInvoice.asObservable();
 
     constructor(private httpClient: HttpClient) {
     }
+
+    publishLastUpdate(inv) {
+        this.selectedInvoice.next(inv);
+      }
+
     getdata(url): Observable<any> {
         return this.httpClient.get(url);
     }
@@ -51,11 +61,6 @@ export class DataService {
         }
     }
     updateInvoice(inv) {
-        this.editInv = inv;
         console.log('Invoice Updated', inv);
-    }
-
-    sendInvDetails() {
-        return this.editInv;
     }
 }

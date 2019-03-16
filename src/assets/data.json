@@ -7,7 +7,7 @@
             "billedTo": "003",
             "billedToName":"DNA experts Pvt Ltd",
             "type": "Retail",
-            "amount": 12000,
+            "amount": 12010,
             "amountRcvd": "No"
         },
         {
@@ -17,7 +17,7 @@
             "billedTo": "002",
             "billedToName":"AIIMS - Dept of Heamotology",
             "type": "Tax",
-            "amount": 12000,
+            "amount": 11200,
             "amountRcvd": "Yes",
             "subclientId": "002_001"
         },
@@ -28,7 +28,7 @@
             "billedTo": "001",
             "billedToName":"Metro Hospital Palam Vihar",
             "type": "Retail",
-            "amount": 12000,
+            "amount": 2500,
             "amountRcvd": "No",
             "subclientId": "001_001"
         },
@@ -39,7 +39,7 @@
             "billedTo": "004",
             "billedToName":"DPMI Ashok Nagar",
             "type": "Tax",
-            "amount": 12000,
+            "amount": 4500,
             "amountRcvd": "Yes"
         },
         {
@@ -49,7 +49,7 @@
             "dueDate": "12/01/2019",
             "billedTo": "001",
             "billedToName":"RLKC Shadipur",
-            "amount": 12000,
+            "amount": 23000,
             "amountRcvd": "No",
             "subclientId": "001_002"
         },
@@ -60,7 +60,7 @@
             "dueDate": "12/01/2019",
             "billedTo": "005",
             "billedToName":"Crystal Crop Protection Pvt Ltd",
-            "amount": 12000,
+            "amount": 1200,
             "amountRcvd": "No"
         },
         {
@@ -81,7 +81,7 @@
             "billedTo": "001",
             "billedToName":"Metro Hospital Noida",
             "type": "Tax",
-            "amount": 12000,
+            "amount": 12021,
             "amountRcvd": "Yes",
             "subclientId": "001_003"
         }
@@ -94,19 +94,16 @@
                 "childs": [
                         {
                         "subclientId": "001_001",
-                        "name":"Metro Hospital Palam Vihar",
-                        "hasChild":false
+                        "name":"Metro Hospital Palam Vihar"
                           },
                           {
                             "subclientId": "001_002",
-                            "name":"RLKC Shadipur",
-                            "hasChild":false
+                            "name":"RLKC Shadipur"
     
                         },
                          {
                             "subclientId": "001_003",
-                            "name":"Metro Hospital Noida",
-                            "hasChild":false
+                            "name":"Metro Hospital Noida"
                         }                   
                 ]
             },
@@ -117,13 +114,11 @@
                 "childs": [             
                        {
                         "subclientId": "002_001",
-                        "name":"AIIMS - Dept of Heamotology",
-                        "hasChild":false
+                        "name":"AIIMS - Dept of Heamotology"
                         },
                         {
                             "subclientId": "002_002",
-                            "name":"AIIMS - Dept of Anatomy",
-                            "hasChild":false
+                            "name":"AIIMS - Dept of Anatomy"
                         }                  
                 ]
             },

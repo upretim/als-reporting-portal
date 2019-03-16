@@ -54,6 +54,7 @@ export class InvoiceTableComponent implements OnInit {
     this.dataService.deleteInvoice(invoiceId);
   }
   EditInv(inv) {
+    this.dataService.publishLastUpdate(inv);
     this.dataService.updateInvoice(inv);
     this.router.navigate(['/invoice']);
   }

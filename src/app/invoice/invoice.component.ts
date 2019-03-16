@@ -4,6 +4,7 @@ import {DataService} from '../data.service';
 import { Router } from  "@angular/router";
 import { ValidatorFn, AbstractControl } from '@angular/forms';
 import {minValueValidator, greateThanZero}  from '../validators/validator';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -27,7 +28,9 @@ export class InvoiceComponent implements OnInit {
   clientList: any;
   subClientList:[]=[];
   hasSubClient:boolean = false;
-
+  private invoiceToUpdate;
+  subscription: Subscription;
+ 
   constructor(private fb: FormBuilder, private dataService: DataService , private router: Router) { 
     this.invoiceFrom = this.fb.group({
       no: ['', Validators.required],
@@ -38,19 +41,28 @@ export class InvoiceComponent implements OnInit {
       billedToDept:[''],
       amount: ['', Validators.required, greateThanZero],
       amountRcvd: ['', Validators.required]
-    });
+    }); 
   }
   
-
+   
+  preFillFrom(invoice){
+    if(invoice){
+      this.invoiceFrom.controls.no.setValue(invoice.no);
+      this.invoiceFrom.controls.billedTo.setValue('001');
+    }
+     
+}
 
   ngOnInit() {
     this.clientList = this.dataService.data.clientsList;
+    this.subscription = this.dataService.lastUpdate$.subscribe(
+      lastUpdate => {
+        this.invoiceToUpdate = lastUpdate;
+       this.preFillFrom(this.invoiceToUpdate);
+    });
   }
 
   onSubmit(val){
-    // let selectedClient =  this.clientList.filter(function(value) {
-    //   return value.clientId == val.billedTo;
-    // });
     var el = document.getElementById('invBilledTo');
     var BilledTo = el['options'][el['selectedIndex']].innerHTML;
     var el2 = document.getElementById('invBilledToDept');
@@ -65,11 +77,8 @@ export class InvoiceComponent implements OnInit {
     else{
       val.billedToName = BilledTo;
     }
-   
-    console.log('label is ', BilledTo, billedToName);
   this.dataService.addInvoice(val);
   this.router.navigate(['/home']);
-  console.log('New Invoice added/updated successfully',val);
   }
   gotoHome(){
     this.router.navigate(['/home']);

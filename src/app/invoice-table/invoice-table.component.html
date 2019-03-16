@@ -24,8 +24,8 @@
         </select>
       </div>
   </div>
-  <table class="table table-striped">
-    <thead>
+  <table class="table table-striped" >
+    <thead *ngIf="hasDataToDisplay">
       <tr>
         <th>Invoice No</th>
         <th>Date</th>
@@ -38,7 +38,7 @@
         <th>Delete</th>
       </tr>
     </thead>
-    <tbody *ngIf="hasDataToDisplay">
+    <tbody>
       <tr *ngFor="let inv of invoiceData; let i = index">
         <td>{{inv.no}}</td>
         <td>{{inv.billDate}}</td>
@@ -50,7 +50,7 @@
         <td>
             <button type="button" class="btn btn-default btn-sm" (click)="EditInv(inv)">
                 <i class="fa fa-edit" style='font-size:20px'></i>
-              </button>
+            </button>
         </td>
         <td>
           <button type="button" class="btn btn-default btn-sm" (click)="DeleteInv(inv.no)">
@@ -61,8 +61,8 @@
     </tbody>
   </table>
    <div *ngIf="!hasDataToDisplay" class="text-center">
-    No data found
+    <label class="font-weight-bold">No data found</label> 
    </div>
-   <app-summary *ngIf="hasDataToDisplay" class="col-md-6 pull-right" [totValue]="totalValue" [noOfInv]="invoiceData.length">
+   <app-summary *ngIf="hasDataToDisplay" class="col-md-6 pull-right" [totValue]="totalValue" [noOfInv]="invoiceData?.length">
    </app-summary>
 </div>
