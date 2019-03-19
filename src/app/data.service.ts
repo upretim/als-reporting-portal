@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestore} from '@angular/fire/firestore';
 import { Iinvoice } from './model/model';
+import { Router } from "@angular/router";
 
 
 
@@ -13,7 +14,7 @@ import { Iinvoice } from './model/model';
     providedIn: 'root'
 })
 export class DataService {
-    data: any;
+   public data: any;
     list:Iinvoice[];
     clients:{}=[];
    // selectedInvoice: any;
@@ -24,7 +25,7 @@ export class DataService {
    
     private selectedInvoice = new BehaviorSubject<any>('');
     lastUpdate$ = this.selectedInvoice.asObservable();
-    constructor(private httpClient: HttpClient, private db: AngularFireDatabase, private angularFirestore: AngularFirestore) {
+    constructor(private httpClient: HttpClient, private db: AngularFireDatabase, private angularFirestore: AngularFirestore, private router: Router) {
     }
 
     getDataFromFireBase(collection:string):Observable<any>{
@@ -38,46 +39,32 @@ export class DataService {
         if (invoice.subclientId== undefined){
             invoice.subclientId = ""
         }
-        var inv = {
-            $key: invoice.no,
-            "no": invoice.no,
-            "billDate": invoice.billDate.day + "/" + invoice.billDate.month + "/" + invoice.billDate.year,
-            "dueDate": invoice.dueDate.day + "/" + invoice.dueDate.month + "/" + invoice.dueDate.year,
-            "billedTo": invoice.billedTo,
-            "type": invoice.type,
-            "amount": invoice.amount,
-            "amountRcvd": invoice.amountRcvd,
-            "billedToName": invoice.billedToName,
-            "subclientId": invoice.subclientId      
-        }
+        var inv = Object.assign({},invoice);
+         inv['$key'] = invoice.no; 
+         inv['billDate'] = invoice.billDate.day + "/" + invoice.billDate.month + "/" + invoice.billDate.year;
+         inv['dueDate'] = invoice.dueDate.day + "/" + invoice.dueDate.month + "/" + invoice.dueDate.year;
+         let _this = this;
 
         this.angularFirestore.collection('Invoices').doc(inv.$key).set(inv)
         .then(function() {
             console.log("Invoice Added/Updated Successfully");
+            _this.data = null;
         })
         .catch(function(error) {
-            console.error("Error adding invoice: ", error);
+            console.error("Error adding/editing invoice: ", error);
+        }).finally(function(){
+            _this.router.navigate(['/home']);
         });
     }
     
 
     deleteInvoice(Invoice) {
-        console.log(this.data.invoice);
+        let _this = this;
         this.angularFirestore.collection("Invoices").doc(Invoice).delete().then(function() {
             console.log("Document successfully deleted!");
+            _this.data = null;
         }).catch(function(error) {
             console.error("Error removing document: ", error);
         });
     }
-    // updateInvoice(inv) {
-    //     console.log('Invoice Updated', this.data.invoice);
-    //     inv.$key = inv.no;
-    //     this.angularFirestore.collection('Invoices').doc(inv.$key).set(inv)
-    //     .then(function() {
-    //         console.log("Invoice Added Successfully");
-    //     })
-    //     .catch(function(error) {
-    //         console.error("Error adding invoice: ", error);
-    //     });
-    // }
 }

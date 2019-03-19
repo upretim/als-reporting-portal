@@ -21,9 +21,7 @@ export class InvoiceTableComponent implements OnInit {
   hasDataToDisplay: boolean = true;
   filterObj: any = {
   }
-  constructor(private dataService: DataService, private router: Router, private ngxService: NgxUiLoaderService) {
-    
-  }
+  constructor(private dataService: DataService, private router: Router, private ngxService: NgxUiLoaderService) { }
 
   ngOnInit() {
     this.ngxService.start();
@@ -35,7 +33,6 @@ export class InvoiceTableComponent implements OnInit {
       this.populateUI(this.dataService.data)
     }
   }
-
 
   DeleteInv(invoiceId) {
     this.dataService.deleteInvoice(invoiceId);
@@ -122,12 +119,7 @@ export class InvoiceTableComponent implements OnInit {
     this.invoiceData = data.invoice;
     this.clientList = data.clientsList;
     this.hasDataToDisplay = true;
-    this.totalValue = this.invoiceData.reduce(function (accumulator, invoice) {
-      return accumulator + invoice.amount;
-    }, 0);
-    if (this.invoiceData.length == 0) {
-      this.hasDataToDisplay = false;
-    }
+    this.filterData();
     this.ngxService.stopLoader('loader-01');
     this.ngxService.stop();
   }

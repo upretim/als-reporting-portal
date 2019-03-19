@@ -8,7 +8,7 @@ import { AuthService } from "../auth.service";
   styleUrls: ['./nav-panel.component.css']
 })
 export class NavPanelComponent implements OnInit {
-
+  
   constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {

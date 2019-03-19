@@ -83,7 +83,7 @@ export class InvoiceComponent implements OnInit {
       val.billedToName = BilledTo;
     }
   this.dataService.addInvoice(val);
-  this.router.navigate(['/home']);
+ // this.router.navigate(['/home']);
   }
   clientSelected(event){
     this.invoiceFrom.controls.billedToDept.setValue("");
