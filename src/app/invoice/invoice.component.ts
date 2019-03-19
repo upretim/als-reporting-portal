@@ -63,6 +63,13 @@ export class InvoiceComponent implements OnInit {
     this.subscription = this.dataService.lastUpdate$.subscribe(
       lastUpdate => {
         this.invoiceToUpdate = lastUpdate;
+        this.hasSubClient = false;
+        if(lastUpdate!=""){
+          let selectedClient =  this.clientList.filter(function(val) {
+            return val.clientId == lastUpdate.billedTo;
+          });
+          this.getSubClients(selectedClient);
+        } 
        this.preFillFrom(this.invoiceToUpdate);
     });
   }
@@ -83,7 +90,6 @@ export class InvoiceComponent implements OnInit {
       val.billedToName = BilledTo;
     }
   this.dataService.addInvoice(val);
- // this.router.navigate(['/home']);
   }
   clientSelected(event){
     this.invoiceFrom.controls.billedToDept.setValue("");
@@ -92,10 +98,15 @@ export class InvoiceComponent implements OnInit {
       let selectedClient =  this.clientList.filter(function(val) {
         return val.clientId == event.currentTarget.value;
       });
-      if(selectedClient[0].hasChild){
-        this.hasSubClient = true;
-        this.subClientList =selectedClient[0].childs;
-      }
+     this.getSubClients(selectedClient);
     }
+  }
+
+  getSubClients(selectedClient){
+    if(selectedClient[0].hasChild){
+      this.hasSubClient = true;
+      this.subClientList =selectedClient[0].childs;
+    }
+
   }
 }
