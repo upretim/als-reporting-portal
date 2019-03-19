@@ -1,13 +1,10 @@
 <div class="container">   
-  <div class="row">
+  <div class="row  mt-3">
+      <button id="addInv"  class="btn btn-success" (click)="addInvoice()"> <i class="fa fa-plus" style="font-size:14px;color:#fff"></i>  <i class="fa fa-file-text" style="font-size:14px;color:#fff"></i> Invoice</button>
     <div class="col-3">
       <select id="clientId" class="form-control"  (change)="selectChangeClient($event)">
           <option value="" default selected>Select Client</option>
-          <option value="001">Metro Hospitals Group</option>
-          <option value="002">AIIMS New Delhi</option>
-          <option value="003">DNA experts Pvt Ltd</option>
-          <option value="004">DPMI Ashok Nagar</option>
-          <option value="005">Crystal Crop Protection Pvt Ltd</option> 
+          <option [value]="client.clientId" *ngFor="let client of clientList; let i = index">{{client.name}}</option>
       </select>
     </div>
     <div class="col-3" *ngIf="hasSubClient">
@@ -16,16 +13,17 @@
           <option *ngFor="let subClient of subClientList; let i = index" [value]="subClient.subclientId">{{subClient.name}}</option>
       </select>
     </div>
-    <div class="col-2">
+      <div class="col-2">
         <select id="amountRcvd" class="form-control"  (change)="selectChangeBillRealized($event)">
             <option value="" default selected>Bill Realized</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
         </select>
       </div>
+      
   </div>
-  <table class="table table-striped" >
-    <thead *ngIf="hasDataToDisplay">
+  <table class="table table-striped mt-3" >
+    <thead>
       <tr>
         <th>Invoice No</th>
         <th>Date</th>
@@ -53,7 +51,7 @@
             </button>
         </td>
         <td>
-          <button type="button" class="btn btn-default btn-sm" (click)="DeleteInv(inv.no)">
+          <button type="button" class="btn btn-default btn-sm" (click)="DeleteInv(inv.$key)">
               <i class="fa fa-trash" style='font-size:20px'></i> 
           </button>
         </td>
@@ -65,4 +63,8 @@
    </div>
    <app-summary *ngIf="hasDataToDisplay" class="col-md-6 pull-right" [totValue]="totalValue" [noOfInv]="invoiceData?.length">
    </app-summary>
+</div>
+<div style="position: relative">
+   <!-- https://github.com/t-ho/ngx-ui-loader/wiki/Getting-started-->
+  <ngx-ui-loader></ngx-ui-loader>
 </div>

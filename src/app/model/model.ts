@@ -1,4 +1,5 @@
 export interface Iinvoice {
+    $key?:null,
     no: string,
     issueDate: string,
     dueDate: string,

@@ -1,9 +1,12 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { map, catchError, tap } from 'rxjs/operators';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Observable} from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFirestore} from '@angular/fire/firestore';
+import { Iinvoice } from './model/model';
+
 
 
 @Injectable({
@@ -11,30 +14,32 @@ import { Subject, BehaviorSubject } from 'rxjs';
 })
 export class DataService {
     data: any;
+    list:Iinvoice[];
+    clients:{}=[];
    // selectedInvoice: any;
    // https://embed.plnkr.co/UEPbIj4OmfWrMuU9jpzN/ - plunker link
-
+   // https://www.youtube.com/watch?v=5I6k77uqtLY
+   // https://www.youtube.com/watch?v=5I6k77uqtLY
+   //https://stackoverflow.com/questions/42719503/angular-2-component-cannot-retrieve-data-from-service
+   
     private selectedInvoice = new BehaviorSubject<any>('');
     lastUpdate$ = this.selectedInvoice.asObservable();
+    constructor(private httpClient: HttpClient, private db: AngularFireDatabase, private angularFirestore: AngularFirestore) {
+    }
 
-    constructor(private httpClient: HttpClient) {
+    getDataFromFireBase(collection:string):Observable<any>{
+        return this.angularFirestore.collection(collection).snapshotChanges();
     }
 
     publishLastUpdate(inv) {
         this.selectedInvoice.next(inv);
       }
-
-    getdata(url): Observable<any> {
-        return this.httpClient.get(url);
-    }
-    getJSONData() {
-        this.getdata('assets/data.json').subscribe((rcvddata) => {
-            this.data = rcvddata;
-        })
-    }
-
     addInvoice(invoice) {
+        if (invoice.subclientId== undefined){
+            invoice.subclientId = ""
+        }
         var inv = {
+            $key: invoice.no,
             "no": invoice.no,
             "billDate": invoice.billDate.day + "/" + invoice.billDate.month + "/" + invoice.billDate.year,
             "dueDate": invoice.dueDate.day + "/" + invoice.dueDate.month + "/" + invoice.dueDate.year,
@@ -43,24 +48,36 @@ export class DataService {
             "amount": invoice.amount,
             "amountRcvd": invoice.amountRcvd,
             "billedToName": invoice.billedToName,
-            "subclientId": invoice.subclientId         
+            "subclientId": invoice.subclientId      
         }
-        this.data.invoice.push(inv);
+
+        this.angularFirestore.collection('Invoices').doc(inv.$key).set(inv)
+        .then(function() {
+            console.log("Invoice Added/Updated Successfully");
+        })
+        .catch(function(error) {
+            console.error("Error adding invoice: ", error);
+        });
     }
+    
 
     deleteInvoice(Invoice) {
         console.log(this.data.invoice);
-        for (let prop = 0; prop < this.data.invoice.length; prop++) {
-            console.log('this.data.invoice[prop].no ', this.data.invoice[prop].no);
-            console.log('Invoice ', Invoice);
-            if (this.data.invoice[prop].no == Invoice) {
-                this.data.invoice.splice(prop, 1);
-                console.log('Invoice Deleted', Invoice);
-                console.log(this.data.invoice);
-            }
-        }
+        this.angularFirestore.collection("Invoices").doc(Invoice).delete().then(function() {
+            console.log("Document successfully deleted!");
+        }).catch(function(error) {
+            console.error("Error removing document: ", error);
+        });
     }
-    updateInvoice(inv) {
-        console.log('Invoice Updated', this.data.invoice);
-    }
+    // updateInvoice(inv) {
+    //     console.log('Invoice Updated', this.data.invoice);
+    //     inv.$key = inv.no;
+    //     this.angularFirestore.collection('Invoices').doc(inv.$key).set(inv)
+    //     .then(function() {
+    //         console.log("Invoice Added Successfully");
+    //     })
+    //     .catch(function(error) {
+    //         console.error("Error adding invoice: ", error);
+    //     });
+    // }
 }

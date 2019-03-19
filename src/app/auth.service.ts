@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { auth } from  'firebase/app';
 import { AngularFireAuth } from  "@angular/fire/auth";
 import { User } from  'firebase';
 import { Router } from  "@angular/router";
@@ -9,6 +8,7 @@ import { Router } from  "@angular/router";
 })
 export class AuthService {
   user: User;
+ 
 
   constructor(public  afAuth:  AngularFireAuth, public  router:  Router) { 
     this.afAuth.authState.subscribe(user => {
@@ -25,9 +25,10 @@ export class AuthService {
     try {
         await  this.afAuth.auth.signInWithEmailAndPassword(email, password)
         this.router.navigate(['/home']);
-    } catch (e) {
-      this.router.navigate(['/login']);
-    }
+    } catch (error) {
+        console.log('Error in login ', error);
+        this.router.navigate(['/login']);
+      }
     }
 
     async logout(){

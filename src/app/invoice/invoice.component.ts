@@ -48,7 +48,10 @@ export class InvoiceComponent implements OnInit {
   preFillFrom(invoice){
     if(invoice){
       this.invoiceFrom.controls.no.setValue(invoice.no);
+      this.invoiceFrom.controls.type.setValue(invoice.type);
+     // this.invoiceFrom.controls.billDate.setValue('2019-03-09');
       this.invoiceFrom.controls.billedTo.setValue(invoice.billedTo);
+      this.invoiceFrom.controls.billedToDept.setValue(invoice.subclientId);
       this.invoiceFrom.controls.amount.setValue(invoice.amount);
       this.invoiceFrom.controls.amountRcvd.setValue(invoice.amountRcvd);
     }
@@ -81,9 +84,6 @@ export class InvoiceComponent implements OnInit {
     }
   this.dataService.addInvoice(val);
   this.router.navigate(['/home']);
-  }
-  gotoHome(){
-    this.router.navigate(['/home']);
   }
   clientSelected(event){
     this.invoiceFrom.controls.billedToDept.setValue("");

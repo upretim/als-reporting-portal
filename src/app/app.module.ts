@@ -9,7 +9,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { NgxUiLoaderModule } from  'ngx-ui-loader';
 import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './error/error.component';
@@ -50,7 +52,9 @@ import { NavPanelComponent } from './nav-panel/nav-panel.component';
      MatFormFieldModule,
      NgbModule,
      FormsModule,
-     HttpClientModule
+     HttpClientModule,
+     AngularFireDatabaseModule,
+     NgxUiLoaderModule
   ],
   providers: [AuthService, DataService],
   bootstrap: [AppComponent]
