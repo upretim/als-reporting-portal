@@ -1,7 +1,5 @@
 <app-nav-panel></app-nav-panel>
 <div class="container">
-   
-    <!-- <button id="home" class="btn btn-success float-left text-uppercase" (click)="gotoHome()"><i style="font-size:24px" class="fa">&#xf015;</i></button> -->
      <div class="row">
       <div class="col-sm-9 col-md-9 col-lg-9 mx-auto">
           <form [formGroup]="invoiceFrom" (ngSubmit)="onSubmit(invoiceFrom.value)">
@@ -14,8 +12,8 @@
                     <label for="invDate">Invoice Date</label>
                     <div class="form-group">
                       <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd"
-                               name="dp" [(ngModel)]="invDate" ngbDatepicker #d="ngbDatepicker" formControlName="billDate">
+                        <input class="form-control" placeholder="yyyy-mm-dd" id ="invDate"
+                               name="dp"  ngbDatepicker #d="ngbDatepicker" formControlName="billDate">
                         <div class="input-group-append">
                           <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="d.toggle()" type="button"></button>
                         </div>
@@ -29,8 +27,8 @@
                       <label for="dueDate">Due Date</label>
                       <div class="form-group">
                         <div class="input-group">
-                          <input class="form-control" placeholder="yyyy-mm-dd"
-                                 name="dpd" [(ngModel)]="dueDate" ngbDatepicker #dd="ngbDatepicker" formControlName="dueDate">
+                          <input class="form-control" placeholder="yyyy-mm-dd" id="dueDate"
+                                 name="dpd" ngbDatepicker #dd="ngbDatepicker" formControlName="dueDate">
                           <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="dd.toggle()" type="button"></button>
                           </div>
