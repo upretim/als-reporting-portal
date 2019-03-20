@@ -23,4 +23,8 @@ export class NavPanelComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  gotoReceivableSummary(){
+    this.router.navigate(['/summary']);
+  }
+
 }

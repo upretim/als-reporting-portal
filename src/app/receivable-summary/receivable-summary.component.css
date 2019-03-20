@@ -1,0 +1,9 @@
+table {
+    margin: 0 auto; /* or margin: 0 auto 0 auto */
+  }
+
+  th {
+     color: gray;
+     font-weight: normal;
+  }
+  

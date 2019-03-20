@@ -26,6 +26,7 @@ import {AuthService} from './auth.service';
 import {DataService} from './data.service';
 import { SummaryComponent } from './summary/summary.component';
 import { NavPanelComponent } from './nav-panel/nav-panel.component';
+import { ReceivableSummaryComponent } from './receivable-summary/receivable-summary.component';
 
 
 
@@ -38,7 +39,8 @@ import { NavPanelComponent } from './nav-panel/nav-panel.component';
     InvoiceComponent,
     InvoiceTableComponent,
     SummaryComponent,
-    NavPanelComponent
+    NavPanelComponent,
+    ReceivableSummaryComponent
   ],
   imports: [
     BrowserModule,

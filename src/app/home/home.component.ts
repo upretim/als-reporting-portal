@@ -5,6 +5,9 @@ import {DataService} from '../data.service';
 // Deploy on firebase
 //https://www.youtube.com/watch?v=mF7FTWHS3ys&t=13s
 // https://arth-e37f3.firebaseapp.com
+// firebase login
+// firebase init
+//firebase deploy
 
 @Component({
   selector: 'app-home',

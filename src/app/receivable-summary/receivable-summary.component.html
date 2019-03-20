@@ -1,0 +1,32 @@
+<app-nav-panel></app-nav-panel>
+<div class="container">
+    <div>
+  <h5 class="text-center mt-3">Summary of Receivables</h5>
+    </div>
+    <div class="row">
+        <table class="table table-striped mt-3 col-8 text-center" >
+            <thead>
+              <tr>
+                <th>SN</th>
+                <th>Name</th>
+                <th>Number of Bills</th>
+                <th>Amount</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let inv of objToPopulatUI; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{inv.name}}</td>
+                <td>{{inv.length}}</td>
+                <td>&#x20b9;  {{inv.total}}</td>
+              </tr>
+            </tbody>
+          </table>
+       
+    </div>
+    <app-summary class="col-md-7 pull-right mt-3" [totValue]="totalValue" [noOfInv]="numberOfInvoices">
+      </app-summary>
+</div>
+
+

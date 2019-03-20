@@ -34,7 +34,6 @@ export class InvoiceComponent implements OnInit {
   constructor(private fb: FormBuilder, private dataService: DataService , private router: Router) { 
     this.invoiceFrom = this.fb.group({
       no: ['', Validators.required],
-      // type: ['', Validators.required],
       billDate: ['', Validators.required],
       dueDate: ['', Validators.required],
       billedTo: ['', Validators.required],
