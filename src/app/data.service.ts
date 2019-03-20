@@ -7,6 +7,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestore} from '@angular/fire/firestore';
 import { Iinvoice } from './model/model';
 import { Router } from "@angular/router";
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -25,7 +26,7 @@ export class DataService {
    
     private selectedInvoice = new BehaviorSubject<any>('');
     lastUpdate$ = this.selectedInvoice.asObservable();
-    constructor(private httpClient: HttpClient, private db: AngularFireDatabase, private angularFirestore: AngularFirestore, private router: Router) {
+    constructor(private toastr: ToastrService, private db: AngularFireDatabase, private angularFirestore: AngularFirestore, private router: Router) {
     }
 
     getDataFromFireBase(collection:string):Observable<any>{
@@ -40,20 +41,22 @@ export class DataService {
             invoice.subclientId = ""
         }
         var inv = Object.assign({},invoice);
-         inv['$key'] = invoice.no; 
+        if(!inv['$key'] ){
+            inv['$key'] = invoice.no.replace(/\//g, "").replace(/-/g, "") ; 
+         }
          inv['billDate'] = invoice.billDate.day + "/" + invoice.billDate.month + "/" + invoice.billDate.year;
          inv['dueDate'] = invoice.dueDate.day + "/" + invoice.dueDate.month + "/" + invoice.dueDate.year;
-         //let _this = this;
-
         this.angularFirestore.collection('Invoices').doc(inv.$key).set(inv)
         .then((success) =>{
             console.log("Invoice Added/Updated Successfully ", success);
+            this.toastr.success('Invoice Added/Updated Successfully', 'Invoice Updated');
+            this.router.navigate(['/home']);
             this.data = null;
         })
         .catch((error) => {
+            this.toastr.warning('Error in updating/editing record', 'Update failed');
             console.error("Error adding/editing invoice: ", error);
         }).finally(()=>{
-            this.router.navigate(['/home']);
         });
     }
     

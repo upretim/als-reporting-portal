@@ -57,7 +57,7 @@ import { NavPanelComponent } from './nav-panel/nav-panel.component';
      AngularFireDatabaseModule,
      NgxUiLoaderModule,
      ToastrModule.forRoot({
-      timeOut: 3000,
+      timeOut: 2000,
       preventDuplicates: true,
     })
   ],

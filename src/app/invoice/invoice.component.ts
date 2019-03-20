@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 export class InvoiceComponent implements OnInit {
   invoiceFrom = new FormGroup({
     no: new FormControl(''),
-    type: new FormControl(''),
+    // type: new FormControl(''),
     billDate: new FormControl(''),
     dueDate: new FormControl(''),
     billedTo: new FormControl(''),
@@ -34,7 +34,7 @@ export class InvoiceComponent implements OnInit {
   constructor(private fb: FormBuilder, private dataService: DataService , private router: Router) { 
     this.invoiceFrom = this.fb.group({
       no: ['', Validators.required],
-      type: ['', Validators.required],
+      // type: ['', Validators.required],
       billDate: ['', Validators.required],
       dueDate: ['', Validators.required],
       billedTo: ['', Validators.required],
@@ -47,15 +47,14 @@ export class InvoiceComponent implements OnInit {
    
   preFillFrom(invoice){
     if(invoice){
+      document.getElementById("invNo")['readOnly'] = true;
       this.invoiceFrom.controls.no.setValue(invoice.no);
-      this.invoiceFrom.controls.type.setValue(invoice.type);
-     // this.invoiceFrom.controls.billDate.setValue('2019-03-09');
+      // this.invoiceFrom.controls.type.setValue(invoice.type);
       this.invoiceFrom.controls.billedTo.setValue(invoice.billedTo);
       this.invoiceFrom.controls.billedToDept.setValue(invoice.subclientId);
       this.invoiceFrom.controls.amount.setValue(invoice.amount);
       this.invoiceFrom.controls.amountRcvd.setValue(invoice.amountRcvd);
-    }
-     
+    }   
 }
 
   ngOnInit() {

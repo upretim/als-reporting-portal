@@ -4,11 +4,23 @@
       <div class="col-sm-9 col-md-9 col-lg-9 mx-auto">
           <form [formGroup]="invoiceFrom" (ngSubmit)="onSubmit(invoiceFrom.value)">
             <div class="form-row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-5">
                   <label for="invNo" >Invoice No.</label>
                   <input  id="invNo" class="form-control" placeholder="Invoice No" required autofocus type="text" formControlName="no"/>
               </div>
-              <div class="form-group col-md-6">
+
+              <div class="form-group col-md-5">
+                <label for="invBilledTo">Billed To</label>
+                <select id="invBilledTo" class="form-control" formControlName="billedTo" (click)="clientSelected($event)">
+                    <option value="" default selected>Please Select</option>
+                    <option [value]="client.clientId" *ngFor="let client of clientList; let i = index">{{client.name}}</option>
+                </select>
+              </div>
+
+                       
+            </div> 
+            <div class="form-row">
+                <div class="form-group col-md-5">
                     <label for="invDate">Invoice Date</label>
                     <div class="form-group">
                       <div class="input-group">
@@ -19,10 +31,9 @@
                         </div>
                       </div>
                     </div>               
-              </div>              
-            </div> 
-            <div class="form-row">
-                 <div class="form-group col-md-6">
+              </div>     
+
+                 <div class="form-group col-md-5">
                   
                       <label for="dueDate">Due Date</label>
                       <div class="form-group">
@@ -35,49 +46,34 @@
                         </div>
                       </div>        
                 </div>
-                
-                <div class="form-group col-md-6">
-                    <label for="invType">Invoice Type</label>
-                    <select id="invType" class="form-control" formControlName="type">
-                        <option value="" default selected>Please Select</option>
-                        <option>Tax</option>
-                        <option>Retail</option>
-                    </select>
-                  </div>
             </div>  
             <div class="form-row">
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-5">
                       <label for="invAmount" >Invoice Amount</label>
                       <input  id="invAmount"  class="form-control" placeholder="Invoice Amount" required autofocus type="number" formControlName="amount"/>
                   </div>
-                 
-                 <div class="form-group col-md-6">
-                     <label for="invBilledTo">Billed To</label>
-                     <select id="invBilledTo" class="form-control" formControlName="billedTo" (click)="clientSelected($event)">
-                         <option value="" default selected>Please Select</option>
-                         <option [value]="client.clientId" *ngFor="let client of clientList; let i = index">{{client.name}}</option>
-                     </select>
-                   </div>
+
+                  <div class="form-group col-md-5">
+                      <label for="rcvd">Amount Received</label>
+                      <select id="rcvd" class="form-control" formControlName="amountRcvd">
+                          <option value="" default selected>Please Select</option>
+                          <option>Yes</option>
+                          <option>No</option>
+                      </select>
+                    </div>
             </div> 
             <div class="form-row"> 
-                <div class="form-group col-md-6" *ngIf="hasSubClient">
+                <div class="form-group col-md-5" *ngIf="hasSubClient">
                     <label for="invBilledToDept">Location/Dept</label>
                     <select id="invBilledToDept" class="form-control" formControlName="billedToDept">
                         <option value="" default selected>Please Select</option>
                         <option *ngFor="let client of subClientList; let i = index" [value]="client.subclientId" >{{client.name}}</option>
                     </select>
                   </div>
-                 <div class="form-group col-md-4">
-                     <label for="rcvd">Amount Received</label>
-                     <select id="rcvd" class="form-control" formControlName="amountRcvd">
-                         <option value="" default selected>Please Select</option>
-                         <option>Yes</option>
-                         <option>No</option>
-                     </select>
-                   </div>
                </div> 
-
-      <button id="addInv" [disabled]="!invoiceFrom.valid" type="submit" class="btn btn-primary float-right text-uppercase">Submit</button>
+               <div class="form-group col-md-10">
+                  <button id="addInv" [disabled]="!invoiceFrom.valid" type="submit" class="btn btn-primary float-right text-uppercase">Submit</button>
+               </div>
       </form>      
     </div>
     </div> 
