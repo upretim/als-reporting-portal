@@ -43,17 +43,17 @@ export class DataService {
          inv['$key'] = invoice.no; 
          inv['billDate'] = invoice.billDate.day + "/" + invoice.billDate.month + "/" + invoice.billDate.year;
          inv['dueDate'] = invoice.dueDate.day + "/" + invoice.dueDate.month + "/" + invoice.dueDate.year;
-         let _this = this;
+         //let _this = this;
 
         this.angularFirestore.collection('Invoices').doc(inv.$key).set(inv)
-        .then(function() {
-            console.log("Invoice Added/Updated Successfully");
-            _this.data = null;
+        .then((success) =>{
+            console.log("Invoice Added/Updated Successfully ", success);
+            this.data = null;
         })
-        .catch(function(error) {
+        .catch((error) => {
             console.error("Error adding/editing invoice: ", error);
-        }).finally(function(){
-            _this.router.navigate(['/home']);
+        }).finally(()=>{
+            this.router.navigate(['/home']);
         });
     }
     

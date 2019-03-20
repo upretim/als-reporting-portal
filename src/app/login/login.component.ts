@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import {AuthService}  from '../auth.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader'; 
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   });
 
   
-  constructor(private fb: FormBuilder, private authService: AuthService, private ngxService:NgxUiLoaderService) { 
+  constructor(private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService, private ngxService:NgxUiLoaderService) { 
     this.loginFrom = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
@@ -28,15 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(loginVals){
-    this.authService.validateUser(loginVals.email, loginVals.password).then((success)=>{
-     this.unAuthUser = false;
-     console.log('Successful login ', success);
-    },
-    (error) =>{
-      this.unAuthUser = true;
-      console.log('Error in login ', error);
-    }
-    )
+    this.authService.validateUser(loginVals.email, loginVals.password)
   }
 
 }

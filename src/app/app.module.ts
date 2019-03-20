@@ -12,6 +12,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
+import { ToastrModule } from 'ngx-toastr';
 import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './error/error.component';
@@ -54,7 +55,11 @@ import { NavPanelComponent } from './nav-panel/nav-panel.component';
      FormsModule,
      HttpClientModule,
      AngularFireDatabaseModule,
-     NgxUiLoaderModule
+     NgxUiLoaderModule,
+     ToastrModule.forRoot({
+      timeOut: 3000,
+      preventDuplicates: true,
+    })
   ],
   providers: [AuthService, DataService],
   bootstrap: [AppComponent]
