@@ -24,8 +24,6 @@ export class InvoiceTableComponent implements OnInit {
   constructor(private dataService: DataService, private router: Router, private ngxService: NgxUiLoaderService) { }
 
   ngOnInit() {
-    this.ngxService.start();
-    this.ngxService.startLoader('loader-01');
     if(!this.dataService.data){
       this.getDataFromDB();
     }
@@ -91,6 +89,7 @@ export class InvoiceTableComponent implements OnInit {
   }
 
   getDataFromDB(){
+    this.ngxService.start();
     this.ngxService.startLoader('loader-01');
     combineLatest(
       this.dataService.getDataFromFireBase('Invoices'),
@@ -110,6 +109,8 @@ export class InvoiceTableComponent implements OnInit {
        this.dataService.data.invoice =  invoice;
        this.dataService.data.clientsList =  client;
       this.populateUI(this.dataService.data);
+      this.ngxService.stopLoader('loader-01');
+      this.ngxService.stop();
     }, err => {
       console.log('Error in fetching data from Firebase ',err)
     });
@@ -120,8 +121,6 @@ export class InvoiceTableComponent implements OnInit {
     this.clientList = data.clientsList;
     this.hasDataToDisplay = true;
     this.filterData();
-    this.ngxService.stopLoader('loader-01');
-    this.ngxService.stop();
   }
 
   filterData(){
