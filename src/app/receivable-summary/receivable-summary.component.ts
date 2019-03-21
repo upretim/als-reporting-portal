@@ -30,10 +30,11 @@ export class ReceivableSummaryComponent implements OnInit {
   getObjToPopulateTable(){
     let clientList = this.dataService.data.clientsList;
       let bills;
+      let index = 0;
     for (let i=0;i<clientList.length;i++){ 
       let totalvalue = 0;
       let name = "";
-      bills = this.unPaidInvoices.filter(function (val) {
+      bills = this.unPaidInvoices.filter((val)=> {
         if (val.billedTo == clientList[i].clientId){
           totalvalue = totalvalue + val.amount;
             name = clientList[i].name;
@@ -42,11 +43,11 @@ export class ReceivableSummaryComponent implements OnInit {
         });
         if(bills.length){
           this.objToPopulatUI.push(bills);
-          this.objToPopulatUI[i].name = name;
-          this.objToPopulatUI[i].total = totalvalue;
+          this.objToPopulatUI[index].name = name;
+          this.objToPopulatUI[index].total = totalvalue;
+          index++;
         }
     }
-    console.log('data of unpaid invoices objToPopulatUI ',  this.objToPopulatUI);
   }
 
 }
