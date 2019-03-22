@@ -9,3 +9,7 @@ body{
 /* input.ng-invalid.ng-touched{
     border-color: #dc3545;
 } */
+
+tr {
+    line-height: 12px;
+}

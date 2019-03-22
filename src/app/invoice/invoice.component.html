@@ -11,7 +11,7 @@
 
               <div class="form-group col-md-5">
                 <label for="invBilledTo">Billed To</label>
-                <select id="invBilledTo" class="form-control" formControlName="billedTo" (click)="clientSelected($event)">
+                <select id="invBilledTo" class="form-control" formControlName="billedTo" (change)="clientSelected($event)">
                     <option value="" default selected>Please Select</option>
                     <option [value]="client.clientId" *ngFor="let client of clientList; let i = index">{{client.name}}</option>
                 </select>
@@ -24,8 +24,7 @@
                     <label for="invDate">Invoice Date</label>
                     <div class="form-group">
                       <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" id ="invDate"
-                               name="dp"  ngbDatepicker #d="ngbDatepicker" formControlName="billDate">
+                        <input class="form-control" placeholder="yyyy-mm-dd" id ="invDate"                               name="dp"  ngbDatepicker #d="ngbDatepicker" formControlName="billDate"  [(ngModel)]="invoiceDate">
                         <div class="input-group-append">
                           <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="d.toggle()" type="button"></button>
                         </div>
@@ -38,8 +37,8 @@
                       <label for="dueDate">Due Date</label>
                       <div class="form-group">
                         <div class="input-group">
-                          <input class="form-control" placeholder="yyyy-mm-dd" id="dueDate"
-                                 name="dpd" ngbDatepicker #dd="ngbDatepicker" formControlName="dueDate">
+                          <input class="form-control" placeholder="yyyy-mm-dd" id="dueDate" 
+                                 name="dpd" ngbDatepicker #dd="ngbDatepicker" formControlName="dueDate" [(ngModel)]="invoiceDueDate">
                           <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="dd.toggle()" type="button"></button>
                           </div>

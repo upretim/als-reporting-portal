@@ -1,4 +1,9 @@
-th {
-    color: black;
-    font-weight: normal;
- }
+ 
+ table {
+    margin: 0 auto;
+  }
+ 
+  th {
+     color: gray;
+     font-weight: normal;
+  }

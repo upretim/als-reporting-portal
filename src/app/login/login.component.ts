@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   
   constructor(private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService, private ngxService:NgxUiLoaderService) { 
     this.loginFrom = this.fb.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }

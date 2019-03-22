@@ -5,6 +5,8 @@ import { Router } from  "@angular/router";
 import { ValidatorFn, AbstractControl } from '@angular/forms';
 import {minValueValidator, greateThanZero}  from '../validators/validator';
 import { Subscription } from 'rxjs';
+import {NgbDate, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap'
+
 
 
 @Component({
@@ -15,7 +17,6 @@ import { Subscription } from 'rxjs';
 export class InvoiceComponent implements OnInit {
   invoiceFrom = new FormGroup({
     no: new FormControl(''),
-    // type: new FormControl(''),
     billDate: new FormControl(''),
     dueDate: new FormControl(''),
     billedTo: new FormControl(''),
@@ -25,15 +26,20 @@ export class InvoiceComponent implements OnInit {
     amountRcvd: new FormControl('')
   });
 
+
   clientList: any;
   subClientList:[]=[];
   hasSubClient:boolean = false;
   private invoiceToUpdate;
   subscription: Subscription;
+  invoiceDate = null;
+  invoiceDueDate = null;
+  billedToDeptFormField;
  
   constructor(private fb: FormBuilder, private dataService: DataService , private router: Router) { 
+    let regexForInvoiceNo = /(ALS)\/[0-9]\d{2}\/[0-9]\d{1}[-]+[0-9]\d{1}/
     this.invoiceFrom = this.fb.group({
-      no: ['', Validators.required],
+      no: ['', [Validators.required,Validators.maxLength(13), Validators.pattern(regexForInvoiceNo)]],
       billDate: ['', Validators.required],
       dueDate: ['', Validators.required],
       billedTo: ['', Validators.required],
@@ -41,14 +47,19 @@ export class InvoiceComponent implements OnInit {
       amount: ['', Validators.required, greateThanZero],
       amountRcvd: ['', Validators.required]
     }); 
+    this.billedToDeptFormField = this.invoiceFrom.get('billedToDept');
   }
   
    
   preFillFrom(invoice){
+    console.log('INvoice ', invoice);
+   let res = invoice.billDate.split("/");
+   let res2 = invoice.dueDate.split("/");
+    this.invoiceDate  = new NgbDate(parseInt(res[2],10), parseInt(res[1],10), parseInt(res[0],10));
+    this.invoiceDueDate  = new NgbDate(parseInt(res2[2],10), parseInt(res2[1],10), parseInt(res2[0],10));
     if(invoice){
       document.getElementById("invNo")['readOnly'] = true;
       this.invoiceFrom.controls.no.setValue(invoice.no);
-      // this.invoiceFrom.controls.type.setValue(invoice.type);
       this.invoiceFrom.controls.billedTo.setValue(invoice.billedTo);
       this.invoiceFrom.controls.billedToDept.setValue(invoice.subclientId);
       this.invoiceFrom.controls.amount.setValue(invoice.amount);
@@ -68,8 +79,12 @@ export class InvoiceComponent implements OnInit {
           });
           this.getSubClients(selectedClient);
         } 
-       this.preFillFrom(this.invoiceToUpdate);
+        if(this.invoiceToUpdate!=""){
+          this.preFillFrom(this.invoiceToUpdate);
+        }
     });
+    document.getElementById("invDate")['readOnly'] = true;
+    document.getElementById("dueDate")['readOnly'] = true;
   }
 
   onSubmit(val){
@@ -90,9 +105,11 @@ export class InvoiceComponent implements OnInit {
   this.dataService.addInvoice(val);
   }
   clientSelected(event){
+    this.billedToDeptFormField.setValidators(null);
     this.invoiceFrom.controls.billedToDept.setValue("");
     this.hasSubClient = false;
     if(event.currentTarget.value!=""){
+      this.billedToDeptFormField.setValidators([Validators.required]);
       let selectedClient =  this.clientList.filter(function(val) {
         return val.clientId == event.currentTarget.value;
       });
@@ -100,7 +117,7 @@ export class InvoiceComponent implements OnInit {
     }
   }
 
-  getSubClients(selectedClient){
+  getSubClients(selectedClient){ 
     if(selectedClient[0].hasChild){
       this.hasSubClient = true;
       this.subClientList =selectedClient[0].childs;
