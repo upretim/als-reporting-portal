@@ -1,9 +1,14 @@
 table {
-    margin: 0 auto; /* or margin: 0 auto 0 auto */
+    margin: 0 auto;
   }
 
   th {
      color: gray;
      font-weight: normal;
   }
+  
+  .clickbleRow {
+   background: rgb(196, 191, 191);
+   cursor: pointer;
+}
   

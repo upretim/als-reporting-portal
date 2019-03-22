@@ -9,7 +9,9 @@ import { DataService} from '../data.service'
 export class ReceivableSummaryComponent implements OnInit {
   objToPopulatUI = [];
   unPaidInvoices;
+  dataForDetailTable;
   totalValue :number = 0;
+  showDetailsFlag: boolean = false;
   numberOfInvoices: number =0;
   constructor(private dataService: DataService) {
     let allInvoices = this.dataService.data.invoice;
@@ -46,6 +48,15 @@ export class ReceivableSummaryComponent implements OnInit {
           this.objToPopulatUI[index].total = totalvalue;
           index++;
         }
+    }
+  }
+
+  showDetails(invoiceArray){
+    this.showDetailsFlag = true;
+    console.log('data for  details ', invoiceArray);
+    this.dataForDetailTable = invoiceArray;
+    for(let i =0; i<invoiceArray; i++){
+
     }
   }
 
