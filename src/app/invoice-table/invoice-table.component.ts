@@ -6,6 +6,10 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { _ } from 'underscore';
+
+// Pagination refrence
+//  https://www.npmjs.com/package/ngx-pagination
+
 @Component({
   selector: 'app-invoice-table',
   templateUrl: './invoice-table.component.html',
@@ -20,6 +24,7 @@ export class InvoiceTableComponent implements OnInit {
   totalValue: number = 0;
   numberOfInv: number = 0;
   hasDataToDisplay: boolean = true;
+  selectedPage: number =1;
   filterObj: any = {
   }
   constructor(private dataService: DataService, private router: Router, private ngxService: NgxUiLoaderService) { }
@@ -137,4 +142,9 @@ export class InvoiceTableComponent implements OnInit {
       this.hasDataToDisplay = false;
     }
   }
+
+  updatePage(event){
+    this.selectedPage = event;
+  }
+  
 }

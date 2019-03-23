@@ -20,6 +20,7 @@ import { HomeComponent } from './home/home.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import {NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
+import {NgxPaginationModule} from 'ngx-pagination';
 import { HttpClientModule } from  '@angular/common/http';
 import { InvoiceTableComponent } from './invoice-table/invoice-table.component';
 import {AuthService} from './auth.service';
@@ -58,6 +59,7 @@ import { ReceivableSummaryComponent } from './receivable-summary/receivable-summ
      HttpClientModule,
      AngularFireDatabaseModule,
      NgxUiLoaderModule,
+     NgxPaginationModule,
      ToastrModule.forRoot({
       timeOut: 2000,
       preventDuplicates: true,

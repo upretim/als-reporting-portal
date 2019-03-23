@@ -7,3 +7,9 @@
      color: gray;
      font-weight: normal;
   }
+
+  .my-pagination /deep/ .ngx-pagination .current {
+   background: lightskyblue;
+   border-radius: 8px;
+   border-color: lightskyblue;
+ }
