@@ -5,7 +5,8 @@ import { Router } from  "@angular/router";
 import { ValidatorFn, AbstractControl } from '@angular/forms';
 import {minValueValidator, greateThanZero}  from '../validators/validator';
 import { Subscription } from 'rxjs';
-import {NgbDate, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap'
+import {NgbDate, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -37,7 +38,7 @@ export class InvoiceComponent implements OnInit {
   billedToDeptFormField;
  
   constructor(private fb: FormBuilder, private dataService: DataService , private router: Router) { 
-    let regexForInvoiceNo = /(ALS)\/[0-9]\d{2}\/[0-9]\d{1}[-]+[0-9]\d{1}/
+    let regexForInvoiceNo = /(ALS)\/[0-9]\d{1}[-]+[0-9]\d{1}\/[0-9]\d{2}/
     this.invoiceFrom = this.fb.group({
       no: ['', [Validators.required,Validators.maxLength(13), Validators.pattern(regexForInvoiceNo)]],
       billDate: ['', Validators.required],
@@ -52,7 +53,6 @@ export class InvoiceComponent implements OnInit {
   
    
   preFillFrom(invoice){
-    console.log('INvoice ', invoice);
    let res = invoice.billDate.split("/");
    let res2 = invoice.dueDate.split("/");
     this.invoiceDate  = new NgbDate(parseInt(res[2],10), parseInt(res[1],10), parseInt(res[0],10));

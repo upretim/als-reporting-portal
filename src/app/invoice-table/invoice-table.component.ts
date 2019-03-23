@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { _ } from 'underscore';
 @Component({
   selector: 'app-invoice-table',
   templateUrl: './invoice-table.component.html',
@@ -106,8 +107,10 @@ export class InvoiceTableComponent implements OnInit {
       let client = res['clients'].map(item => {
         return item.payload.doc.data();
       });
+      invoice.reverse();
        this.dataService.data.invoice =  invoice;
        this.dataService.data.clientsList =  client;
+      
       this.populateUI(this.dataService.data);
       this.ngxService.stopLoader('loader-01');
       this.ngxService.stop();
@@ -125,6 +128,7 @@ export class InvoiceTableComponent implements OnInit {
 
   filterData(){
     this.invoiceData = this.multiFilter(this.dataService.data.invoice, this.filterObj);
+  
     this.totalValue = this.invoiceData.reduce(function (accumulator, invoice) {
       return accumulator + invoice.amount;
     }, 0);
