@@ -9,7 +9,15 @@
   }
 
   .my-pagination /deep/ .ngx-pagination .current {
-   background: lightskyblue;
-   border-radius: 8px;
-   border-color: lightskyblue;
+   border-radius: 5px;
+   background-color: #28a745;
+   border-color: #28a745;
  }
+
+ .editIcon {
+   font-size:20px;
+   cursor: pointer;
+ }
+ tr {
+   line-height: 12px;
+}

@@ -37,7 +37,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let inv of invoiceData | paginate:{ itemsPerPage: 7, currentPage: selectedPage }">
+      <tr *ngFor="let inv of invoiceData | paginate:{ itemsPerPage: 8, currentPage: selectedPage }">
         <td>{{inv.no}}</td>
         <td>{{inv.billDate}}</td>
         <td>{{inv.dueDate}}</td>
@@ -45,9 +45,7 @@
         <td>&#x20b9; {{inv.amount}}</td>
         <td>{{inv.amountRcvd}}</td>
         <td>
-            <button type="button" class="btn btn-default btn-sm" (click)="EditInv(inv)">
-                <i class="fa fa-edit" style='font-size:20px'></i>
-            </button>
+           <i class="fa fa-edit editIcon" style='font-size:20px' (click)="EditInv(inv)"></i>
         </td>
       </tr>
     </tbody>
@@ -56,10 +54,11 @@
     <label class="font-weight-bold">No data found</label> 
    </div>
 
-  <div class="text-center">
+  <div *ngIf="hasDataToDisplay" class="text-center">
       <pagination-controls (pageChange)="updatePage($event)"
-      class="my-pagination">
-
+          previousLabel="Previous"
+          nextLabel="Next"
+          class="my-pagination">
       </pagination-controls>
   </div>
   
