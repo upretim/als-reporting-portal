@@ -25,19 +25,19 @@
   <table class="table table-striped mt-3  text-center" >
     <thead>
       <tr>
+        <th>S No.</th>
         <th>Invoice No</th>
         <th>Date</th>
         <th>Due Date</th>
         <th>Billed To</th>
         <th>Amount</th>
         <th>Amt Rcvd</th>
-        <!-- <th>Type</th> -->
         <th>Edit</th>
-        <!-- <th>Delete</th> -->
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let inv of invoiceData | paginate:{ itemsPerPage: 8, currentPage: selectedPage }">
+      <tr *ngFor="let inv of invoiceData | paginate:{ itemsPerPage: 8, currentPage: selectedPage }; let i = index">
+        <td >{{(selectedPage-1)*8 + i+1}}.</td>
         <td>{{inv.no}}</td>
         <td>{{inv.billDate}}</td>
         <td>{{inv.dueDate}}</td>
