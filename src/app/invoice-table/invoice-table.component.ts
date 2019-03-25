@@ -47,6 +47,7 @@ export class InvoiceTableComponent implements OnInit {
   }
 
   selectChangeClient(event) {
+    this.selectedPage = 1;
     this.hasSubClient = false;
     let selectedClientId = event.currentTarget.value;
     this.filterObj.billedTo = selectedClientId;
@@ -65,12 +66,14 @@ export class InvoiceTableComponent implements OnInit {
 
 
   selectChangeBillRealized(event) {
+    this.selectedPage = 1;
     let selectedClientId = event.currentTarget.value;
     this.filterObj.amountRcvd = selectedClientId;
     this.filterData(); 
   }
 
   selectChangeSubClient(event) {
+    this.selectedPage = 1;
     let selectedClientId = event.currentTarget.value;
     this.filterObj.subclientId = selectedClientId;
     this.filterData(); 
@@ -133,7 +136,6 @@ export class InvoiceTableComponent implements OnInit {
 
   filterData(){
     this.invoiceData = this.multiFilter(this.dataService.data.invoice, this.filterObj);
-  
     this.totalValue = this.invoiceData.reduce(function (accumulator, invoice) {
       return accumulator + invoice.amount;
     }, 0);
