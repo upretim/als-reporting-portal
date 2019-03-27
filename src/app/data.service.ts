@@ -62,11 +62,9 @@ export class DataService {
     
 
     deleteInvoice(Invoice) {
-        let _this = this;
-        this.angularFirestore.collection("Invoices").doc(Invoice).delete().then(function() {
+        this.angularFirestore.collection("Invoices").doc(Invoice).delete().then(()=> {
             console.log("Document successfully deleted!");
-            _this.data = null;
-        }).catch(function(error) {
+        }).catch((error) =>{
             console.error("Error removing document: ", error);
         });
     }
