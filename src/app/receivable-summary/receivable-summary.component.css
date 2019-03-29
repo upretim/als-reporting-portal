@@ -1,0 +1,19 @@
+
+  
+  .clickbleRow:hover {
+   background: rgb(196, 191, 191);
+   cursor: pointer;
+}
+
+tr {
+   line-height: 12px;
+}
+  
+table {
+   margin: 0 auto;
+ }
+
+ th {
+    color: gray;
+    font-weight: normal;
+ }
