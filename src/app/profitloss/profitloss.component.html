@@ -1,0 +1,59 @@
+<div class="container"> 
+<app-nav-panel></app-nav-panel>
+<div class="row  mt-3">
+    
+  <div class="col-2">
+    <select id="month" class="form-control"  (change)="selectChangeMonth($event)">
+        <option value="" default selected>Select Month</option>
+        <option value="apr">April</option>
+        <option value="may">May</option>
+        <option value="june">June</option>
+        <option value="july">July</option>
+        <option value="aug">August</option>
+        <option value="sep">September</option>
+        <option value="oct">October</option>
+        <option value="nov">November</option>
+        <option value="dec">December</option>
+        <option value="jan">January</option>
+        <option value="feb">February</option>
+        <option value="mar">March</option>
+    </select>
+  </div>  
+  <div class="col-2">
+    <select id="clientId" class="form-control"  (change)="selectChangeClient($event)">
+        <option value="" default selected>Select Client</option>
+        <option [value]="client.clientId" *ngFor="let client of clientList; let i = index">{{client.name}}</option>
+    </select>
+  </div>  
+</div>
+
+<table class="table table-striped mt-3  text-center" >
+    <thead>
+      <tr>
+        <th>#No</th>
+        <th>Invoice No</th>
+        <th>Date</th>
+        <th>Due Date</th>
+        <th>Billed To</th>
+        <th>Bill Amount</th>
+        <th>Purchase Amount</th>
+        <th>Delivery Expenses</th>
+        <th>Tax</th>
+        <th>Net Profit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inv of invoiceData; let i = index">
+        <td>{{inv.no}}</td>
+        <td>{{inv.billDate}}</td>
+        <td>{{inv.dueDate}}</td>
+        <td>{{inv.billedToName}}</td>
+        <td>&#x20b9; {{inv.amount}}</td>
+        <td>&#x20b9; {{inv.amount}}</td>
+        <td>&#x20b9; {{inv.amount}}</td>
+        <td>&#x20b9; {{inv.amount}}</td>
+      </tr>
+    </tbody>
+</table>
+</div>
+

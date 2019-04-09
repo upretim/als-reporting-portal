@@ -21,12 +21,12 @@ export class AuthService {
         localStorage.setItem('user', null);
       }
     });
-    window.onbeforeunload = function (e) {
-      window.onunload = function () {
-              window.localStorage.removeItem('user');
-      }
-      return undefined;
-  };   
+  //   window.onbeforeunload = function (e) {
+  //     window.onunload = function () {
+  //             window.localStorage.removeItem('user');
+  //     }
+  //     return undefined;
+  // };   
   }
 
   async  validateUser(email:  string, password:  string) {

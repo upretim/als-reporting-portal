@@ -24,7 +24,10 @@ export class InvoiceComponent implements OnInit {
     billedToDept:new FormControl(''),
     billedToName: new FormControl(''),
     amount: new FormControl(''),
-    amountRcvd: new FormControl('')
+    amountRcvd: new FormControl(''),
+    purchaseamount: new FormControl(''),
+    taxAmount: new FormControl(''),
+    othExpenses: new FormControl('')
   });
 
 
@@ -46,7 +49,10 @@ export class InvoiceComponent implements OnInit {
       billedTo: ['', Validators.required],
       billedToDept:[''],
       amount: ['', Validators.required, greateThanZero],
-      amountRcvd: ['', Validators.required]
+      amountRcvd: ['', Validators.required],
+      purchaseamount:['', Validators.required],
+      taxAmount: ['', Validators.required],
+      othExpenses: ['', Validators.required]
     }); 
     this.billedToDeptFormField = this.invoiceFrom.get('billedToDept');
   }
@@ -74,7 +80,7 @@ export class InvoiceComponent implements OnInit {
         this.invoiceToUpdate = lastUpdate;
         this.hasSubClient = false;
         if(lastUpdate!=""){
-          let selectedClient =  this.clientList.filter(function(val) {
+          let selectedClient =  this.clientList.filter((val)=> {
             return val.clientId == lastUpdate.billedTo;
           });
           this.getSubClients(selectedClient);
@@ -110,7 +116,7 @@ export class InvoiceComponent implements OnInit {
     this.hasSubClient = false;
     if(event.currentTarget.value!=""){
       this.billedToDeptFormField.setValidators([Validators.required]);
-      let selectedClient =  this.clientList.filter(function(val) {
+      let selectedClient =  this.clientList.filter((val) => {
         return val.clientId == event.currentTarget.value;
       });
      this.getSubClients(selectedClient);
