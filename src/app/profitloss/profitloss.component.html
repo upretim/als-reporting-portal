@@ -30,16 +30,15 @@
 <table class="table table-striped mt-3  text-center" >
     <thead>
       <tr>
-        <th>#No</th>
         <th>Invoice No</th>
         <th>Date</th>
         <th>Due Date</th>
         <th>Billed To</th>
         <th>Bill Amount</th>
-        <th>Purchase Amount</th>
-        <th>Delivery Expenses</th>
+        <th>Pur Amount</th>
+        <th>Del Expenses</th>
         <th>Tax</th>
-        <th>Net Profit</th>
+        <th>Net Val</th>
       </tr>
     </thead>
     <tbody>
@@ -49,9 +48,10 @@
         <td>{{inv.dueDate}}</td>
         <td>{{inv.billedToName}}</td>
         <td>&#x20b9; {{inv.amount}}</td>
-        <td>&#x20b9; {{inv.amount}}</td>
-        <td>&#x20b9; {{inv.amount}}</td>
-        <td>&#x20b9; {{inv.amount}}</td>
+        <td>&#x20b9; {{inv.purchaseamount}}</td>
+        <td>&#x20b9; {{inv.othExpenses}}</td>
+        <td>&#x20b9; {{inv.taxAmount}}</td>
+        <td>&#x20b9; {{inv.amount - inv.purchaseamount - inv.othExpenses - inv.taxAmount}}</td>
       </tr>
     </tbody>
 </table>
