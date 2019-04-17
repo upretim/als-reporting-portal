@@ -53,6 +53,14 @@
         <td>&#x20b9; {{inv.taxAmount}}</td>
         <td>&#x20b9; {{inv.amount - inv.purchaseamount - inv.othExpenses - inv.taxAmount}}</td>
       </tr>
+      <tr>
+        <td colspan="4">Total Summary</td>
+        <td>&#x20b9; {{totalSaleValue}}</td>
+        <td>&#x20b9; {{totalPurchaseValue}}</td>
+        <td>&#x20b9; {{totalDeliveryExpenses}}</td>
+        <td>&#x20b9; {{totalTaxValue}}</td>
+        <td>&#x20b9; {{totalSaleValue - totalPurchaseValue - totalDeliveryExpenses - totalTaxValue}}</td>
+      </tr>
     </tbody>
 </table>
 </div>

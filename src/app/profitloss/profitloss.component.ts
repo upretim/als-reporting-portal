@@ -13,10 +13,14 @@ export class ProfitlossComponent implements OnInit {
   clientList: any;
   hasSubClient = false;
   subClientList: [] = [];
-  totalValue: number = 0;
+  totalSaleValue: number = 0;
+  totalPurchaseValue: number = 0;
+  totalTaxValue: number = 0;
+  totalDeliveryExpenses: number = 0;
   numberOfInv: number = 0;
   hasDataToDisplay: boolean = true;
   selectedPage: number =1;
+  totalSum= [];
   filterObj: any = {
   }
 
@@ -52,9 +56,21 @@ export class ProfitlossComponent implements OnInit {
 
   filterData(){
     this.invoiceData = this.multiFilter(this.dataService.data.invoice, this.filterObj);
-    this.totalValue = this.invoiceData.reduce( (accumulator, invoice) => {
+    this.totalSaleValue = this.invoiceData.reduce( (accumulator, invoice) => {
       return accumulator + invoice.amount;
     }, 0);
+
+    this.totalPurchaseValue = this.invoiceData.reduce( (accumulator, invoice) => {
+      return accumulator + invoice.purchaseamount;
+    }, 0);
+    this.totalTaxValue = this.invoiceData.reduce( (accumulator, invoice) => {
+      return accumulator + invoice.taxAmount;
+    }, 0);
+    this.totalDeliveryExpenses = this.invoiceData.reduce( (accumulator, invoice) => {
+      return accumulator + invoice.othExpenses;
+    }, 0);
+
+
     this.hasDataToDisplay = true;
     if (this.invoiceData.length == 0) {
       this.hasDataToDisplay = false;

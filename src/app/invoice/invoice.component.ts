@@ -70,6 +70,9 @@ export class InvoiceComponent implements OnInit {
       this.invoiceFrom.controls.billedToDept.setValue(invoice.subclientId);
       this.invoiceFrom.controls.amount.setValue(invoice.amount);
       this.invoiceFrom.controls.amountRcvd.setValue(invoice.amountRcvd);
+      this.invoiceFrom.controls.purchaseamount.setValue(invoice.purchaseamount);
+      this.invoiceFrom.controls.taxAmount.setValue(invoice.taxAmount);
+      this.invoiceFrom.controls.othExpenses.setValue(invoice.othExpenses);
     }   
 }
 
