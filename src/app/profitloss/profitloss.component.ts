@@ -23,13 +23,17 @@ export class ProfitlossComponent implements OnInit {
   totalSum= [];
   filterObj: any = {
   }
+  UpdatedInvoiceData: any;
 
   constructor(private dataService: DataService) { 
     this.clientList = this.dataService.data.clientsList;
   }
 
   ngOnInit() {
+    this.addMonthYearToInvoiceData(this.dataService.data.invoice);
+    console.log(this.UpdatedInvoiceData);
   }
+
   selectChangeMonth(event){
     console.log(event);
   }
@@ -88,5 +92,51 @@ export class ProfitlossComponent implements OnInit {
         return filters[key].includes(item[key]);
       });
     });
+  }
+
+  addMonthYearToInvoiceData(invoiceData){
+   this.UpdatedInvoiceData = Object.assign({},invoiceData);
+   for(let i=0;i<invoiceData.length;i++){
+     let month = invoiceData[i].billDate.split("/")[1];
+     this.UpdatedInvoiceData[i]['year'] = invoiceData[i].no.split("/")[1];
+     switch(month){
+       case "1":
+         this.UpdatedInvoiceData[i]['month'] = "jan";
+        break;
+       case "2":
+       this.UpdatedInvoiceData[i]['month'] = "feb";
+        break;
+        case "3":
+        this.UpdatedInvoiceData[i]['month'] = "mar";
+        break;
+       case "4":
+       this.UpdatedInvoiceData[i]['month'] = "apr";
+        break;
+        case "5":
+        this.UpdatedInvoiceData[i]['month'] = "may";
+        break;
+       case "6":
+       this.UpdatedInvoiceData[i]['month'] = "jun";
+        break;
+        case "7":
+        this.UpdatedInvoiceData[i]['month'] = "jul";
+        break;
+       case "8":
+        this.UpdatedInvoiceData[i]['month'] = "aug";   
+        break;
+        case "9":
+        this.UpdatedInvoiceData[i]['month'] = "sep";   
+        break;
+       case "10":
+       this.UpdatedInvoiceData[i]['month'] = "oct";   
+        break;
+        case "11":
+        this.UpdatedInvoiceData[i]['month'] = "nov";   
+        break;
+       case "12":
+       this.UpdatedInvoiceData[i]['month'] = "dec";   
+        break;
+     } 
+   }
   }
 }

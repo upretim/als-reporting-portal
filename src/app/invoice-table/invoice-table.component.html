@@ -1,19 +1,22 @@
 <div class="container">   
-  <div class="row  mt-3">
-      <button id="addInv"  class="btn btn-success" (click)="addInvoice()"> <i class="fa fa-plus" style="font-size:14px;color:#fff"></i>  <i class="fa fa-file-text" style="font-size:14px;color:#fff"></i> Invoice</button>
-    <div class="col-3">
+  <div class="row text-center mt-3">
+       <div class="col-lg-2 col-sm-6">
+          <button id="addInv"  class="btn btn-success pull-right  mb-3" (click)="addInvoice()"> <i class="fa fa-plus" style="font-size:14px;color:#fff"></i>  <i class="fa fa-file-text" style="font-size:14px;color:#fff"></i> Invoice</button>
+       </div>
+     
+    <div class="col-lg-3 col-sm-6 mb-3">
       <select id="clientId" class="form-control"  (change)="selectChangeClient($event)">
           <option value="" default selected>Select Client</option>
           <option [value]="client.clientId" *ngFor="let client of clientList; let i = index">{{client.name}}</option>
       </select>
     </div>
-    <div class="col-3" *ngIf="hasSubClient">
+    <div class="col-lg-3 col-sm-6 mb-3" *ngIf="hasSubClient">
       <select id="clientSubId" class="form-control"  (change)="selectChangeSubClient($event)">
           <option value="" default selected>Select Location/Dept</option>
           <option *ngFor="let subClient of subClientList; let i = index" [value]="subClient.subclientId">{{subClient.name}}</option>
       </select>
     </div>
-      <div class="col-2">
+      <div class="col-lg-2 mb-3 col-sm-6">
         <select id="amountRcvd" class="form-control"  (change)="selectChangeBillRealized($event)">
             <option value="" default selected>Bill Realized</option>
             <option value="Yes">Yes</option>

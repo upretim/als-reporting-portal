@@ -4,7 +4,7 @@
         <h5 class="text-center mt-3">Summary of Receivables</h5>
     </div>
     <div class="row">
-        <table id="summaryTable" class="table table-striped mt-3 col-8 text-center" >
+        <table id="summaryTable" class="table table-striped mt-3 col-lg-8 text-center col-sm-12" >
             <thead>
               <tr>
                 <th>SN</th>
@@ -28,8 +28,11 @@
         <app-summary class="col-md-9 mt-3" [totValue]="totalValue" [noOfInv]="numberOfInvoices">
           </app-summary>
     </div>
-        <div class="row col-md-12" *ngIf="showDetailsFlag">
-            <table class="table table-striped mt-3  text-center" >
+   
+    <h5 *ngIf="showDetailsFlag" class="text-center mt-3">Details of Invoices</h5>
+  
+        <div class="row" *ngIf="showDetailsFlag">
+            <table id="detailTable" class="table table-striped mt-3  text-center  col-md-12 col-sm-12" >
                 <thead>
                   <tr>
                     <th>SNo.</th>
@@ -51,7 +54,8 @@
                   </tr>
                 </tbody>
               </table>
-        </div>
+        
+      </div>    
 
     
 </div>

@@ -33,16 +33,20 @@ only screen and (max-width: 760px),
 		position: absolute;
 		top: -9999px;
 		left: -9999px;
+		font-size: 0.8rem;
 	}
 	
-	tr { border: 1px solid #ccc; }
+	tr { border: 1px solid #ccc;
+		font-size: 0.8rem;
+	  }
 	
 	td { 
 		/* Behave  like a "row" */
 		border: none;
 		border-bottom: 1px solid #eee; 
 		position: relative;
-		padding-left: 50%; 
+      padding-left: 50%; 
+      text-align: left;
 	}
 	
 	td:before { 
@@ -62,6 +66,12 @@ only screen and (max-width: 760px),
   table#summaryTable tr td:first-child{display:none;}
   table#summaryTable td:nth-of-type(2):before { content: "Client Name"; }
   table#summaryTable td:nth-of-type(3):before { content: "Number Of Bills"; }
-  table#summaryTable td:nth-of-type(4):before { content: "Total Receivable Amount"; }
+  table#summaryTable td:nth-of-type(4):before { content: "Total  Amount"; }
 
+  table#detailTable tr td:first-child{display:none;}
+	td:nth-of-type(2):before { content: "Invoice No"; }
+	td:nth-of-type(3):before { content: "Bill Date"; }
+	td:nth-of-type(4):before { content: "Due Date"; }
+	td:nth-of-type(5):before { content: "Client Name"; }
+	td:nth-of-type(6):before { content: "Amount"; }
 }
