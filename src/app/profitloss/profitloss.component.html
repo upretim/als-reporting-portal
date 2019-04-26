@@ -1,9 +1,8 @@
 
  <app-nav-panel></app-nav-panel>
  <div class="container"> 
-<div class="row  mt-3">
-    
-  <div class="col-2">
+<div class="row  mt-3">  
+  <div class="col-lg-2 col-sm-6 mb-3">
     <select id="month" class="form-control"  (change)="selectChangeMonth($event)" [value]='filterObj.month'>
         <option value="" default selected>Select Month</option>
         <option value="4">April</option>
@@ -20,7 +19,7 @@
         <option value="3">March</option>
     </select>
   </div>  
-  <div class="col-2">
+  <div class="col-lg-2 col-sm-6">
     <select id="clientId" class="form-control"  (change)="selectChangeClient($event)">
         <option value="" default selected>Select Client</option>
         <option [value]="client.clientId" *ngFor="let client of clientList; let i = index">{{client.name}}</option>
