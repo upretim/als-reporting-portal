@@ -26,45 +26,47 @@
     </select>
   </div>  
 </div>
+<div class="text-center row">
+    <table class="table table-striped mt-3  text-center" >
+        <thead>
+          <tr>
+            <th>Invoice No</th>
+            <th class="hideMob">Date</th>
+            <th class="hideMob">Due Date</th>
+            <th class="hideMob">Billed To</th>
+            <th class="hideMob">Bill Amount</th>
+            <th class="hideMob">Pur Amount</th>
+            <th class="hideMob">Del Expenses</th>
+            <th class="hideMob">Tax</th>
+            <th>Net Val</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let inv of invoiceData; let i = index">
+            <td>{{inv.no}}</td>
+            <td class="hideMob">{{inv.billDate}}</td>
+            <td class="hideMob">{{inv.dueDate}}</td>
+            <td class="hideMob">{{inv.billedToName}}</td>
+            <td class="hideMob">&#x20b9; {{inv.amount}}</td>
+            <td class="hideMob">&#x20b9; {{inv.purchaseamount}}</td>
+            <td class="hideMob">&#x20b9; {{inv.othExpenses}}</td>
+            <td class="hideMob">&#x20b9; {{inv.taxAmount}}</td>
+            <td>&#x20b9; {{inv.amount - inv.purchaseamount - inv.othExpenses - inv.taxAmount}}</td>
+          </tr>
+          <tr *ngIf="hasDataToDisplay">
+            <td colspan="4" class="sum">Total Summary</td>
+            <td class="hideMob" >&#x20b9; {{totalPurchaseValue}}</td>
+            <td class="hideMob">&#x20b9; {{totalDeliveryExpenses}}</td>
+            <td class="hideMob">&#x20b9; {{totalTaxValue}}</td>
+            <td>&#x20b9; {{totalSaleValue - totalPurchaseValue - totalDeliveryExpenses - totalTaxValue}}</td>
+          </tr>
+        </tbody>
+    </table>
+    <div *ngIf="!hasDataToDisplay" class="text-center">
+      <label class="font-weight-bold">No data found</label> 
+     </div>
 
-<table class="table table-striped mt-3  text-center" >
-    <thead>
-      <tr>
-        <th>Invoice No</th>
-        <th>Date</th>
-        <th>Due Date</th>
-        <th>Billed To</th>
-        <th>Bill Amount</th>
-        <th>Pur Amount</th>
-        <th>Del Expenses</th>
-        <th>Tax</th>
-        <th>Net Val</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let inv of invoiceData; let i = index">
-        <td>{{inv.no}}</td>
-        <td>{{inv.billDate}}</td>
-        <td>{{inv.dueDate}}</td>
-        <td>{{inv.billedToName}}</td>
-        <td>&#x20b9; {{inv.amount}}</td>
-        <td>&#x20b9; {{inv.purchaseamount}}</td>
-        <td>&#x20b9; {{inv.othExpenses}}</td>
-        <td>&#x20b9; {{inv.taxAmount}}</td>
-        <td>&#x20b9; {{inv.amount - inv.purchaseamount - inv.othExpenses - inv.taxAmount}}</td>
-      </tr>
-      <tr *ngIf="hasDataToDisplay">
-        <td colspan="4" class="sum">Total Summary</td>
-        <td>&#x20b9; {{totalSaleValue}}</td>
-        <td>&#x20b9; {{totalPurchaseValue}}</td>
-        <td>&#x20b9; {{totalDeliveryExpenses}}</td>
-        <td>&#x20b9; {{totalTaxValue}}</td>
-        <td>&#x20b9; {{totalSaleValue - totalPurchaseValue - totalDeliveryExpenses - totalTaxValue}}</td>
-      </tr>
-    </tbody>
-</table>
-<div *ngIf="!hasDataToDisplay" class="text-center">
-  <label class="font-weight-bold">No data found</label> 
- </div>
+</div>
+
 </div>
 

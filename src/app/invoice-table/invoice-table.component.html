@@ -1,7 +1,7 @@
 <div class="container">   
   <div class="row text-center mt-3">
        <div class="col-lg-2 col-sm-6">
-          <button id="addInv"  class="btn btn-success pull-right  mb-3" (click)="addInvoice()"> <i class="fa fa-plus" style="font-size:14px;color:#fff"></i>  <i class="fa fa-file-text" style="font-size:14px;color:#fff"></i> Invoice</button>
+          <button id="addInv"  class="btn btn-outline-success pull-right  mb-3" (click)="addInvoice()"> <i class="fa fa-plus" style="font-size:14px;color: green"></i>  <i class="fa fa-file-text" style="font-size:14px;color:green"></i> Invoice</button>
        </div>
      
     <div class="col-lg-3 col-sm-6 mb-3">
@@ -55,14 +55,17 @@
    <div *ngIf="!hasDataToDisplay" class="text-center">
     <label class="font-weight-bold">No data found</label> 
    </div>
+   <div *ngIf="hasDataToDisplay" class="row">
+      <div  class="text-center col-sm-12">
+          <pagination-controls (pageChange)="updatePage($event)"
+              previousLabel="Previous"
+              nextLabel="Next"
+              class="my-pagination">
+          </pagination-controls>
+      </div>
 
-  <div *ngIf="hasDataToDisplay" class="text-center">
-      <pagination-controls (pageChange)="updatePage($event)"
-          previousLabel="Previous"
-          nextLabel="Next"
-          class="my-pagination">
-      </pagination-controls>
-  </div>
+   </div>
+ 
   
    <app-summary *ngIf="hasDataToDisplay" class="col-md-6 pull-right" [totValue]="totalValue" [noOfInv]="invoiceData?.length">
    </app-summary>
