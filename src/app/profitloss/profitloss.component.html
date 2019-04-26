@@ -1,33 +1,32 @@
-
- <app-nav-panel></app-nav-panel>
+<app-nav-panel></app-nav-panel>
  <div class="container"> 
-<div class="row  mt-3">  
-  <div class="col-lg-2 col-sm-6 mb-3">
-    <select id="month" class="form-control"  (change)="selectChangeMonth($event)" [value]='filterObj.month'>
-        <option value="" default selected>Select Month</option>
-        <option value="4">April</option>
-        <option value="5">May</option>
-        <option value="6">June</option>
-        <option value="7">July</option>
-        <option value="8">August</option>
-        <option value="9">September</option>
-        <option value="10">October</option>
-        <option value="11">November</option>
-        <option value="12">December</option>
-        <option value="1">January</option>
-        <option value="2">February</option>
-        <option value="3">March</option>
-    </select>
-  </div>  
-  <div class="col-lg-2 col-sm-6">
-    <select id="clientId" class="form-control"  (change)="selectChangeClient($event)">
-        <option value="" default selected>Select Client</option>
-        <option [value]="client.clientId" *ngFor="let client of clientList; let i = index">{{client.name}}</option>
-    </select>
-  </div>  
-</div>
-<div class="text-center row">
-    <table class="table table-striped mt-3  text-center" >
+  <div class="row  mt-3"> 
+    <div class="col-lg-2 col-sm-6 mb-3">
+      <select id="month" class="form-control"  (change)="selectChangeMonth($event)" [value]='filterObj.month'>
+          <option value="" default selected>Select Month</option>
+          <option value="4">April</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+      </select>
+    </div>  
+    <div class="col-lg-2 col-sm-6">
+      <select id="clientId" class="form-control"  (change)="selectChangeClient($event)">
+          <option value="" default selected>Select Client</option>
+          <option [value]="client.clientId" *ngFor="let client of clientList; let i = index">{{client.name}}</option>
+      </select>
+    </div>  
+  </div>
+<div class="row">
+    <table class=" table table-striped mt-3 text-center col-md-12 col-sm-12" >
         <thead>
           <tr>
             <th>Invoice No</th>
@@ -39,6 +38,7 @@
             <th class="hideMob">Del Expenses</th>
             <th class="hideMob">Tax</th>
             <th>Net Val</th>
+            <th class="hideDesktp">Details</th>
           </tr>
         </thead>
         <tbody>
@@ -52,9 +52,11 @@
             <td class="hideMob">&#x20b9; {{inv.othExpenses}}</td>
             <td class="hideMob">&#x20b9; {{inv.taxAmount}}</td>
             <td>&#x20b9; {{inv.amount - inv.purchaseamount - inv.othExpenses - inv.taxAmount}}</td>
+            <td class="hideDesktp"><i class="fa fa-eye" aria-hidden="true"></i></td>
           </tr>
           <tr *ngIf="hasDataToDisplay">
             <td colspan="4" class="sum">Total Summary</td>
+            <td class="hideMob" >&#x20b9; {{totalSaleValue}}</td>
             <td class="hideMob" >&#x20b9; {{totalPurchaseValue}}</td>
             <td class="hideMob">&#x20b9; {{totalDeliveryExpenses}}</td>
             <td class="hideMob">&#x20b9; {{totalTaxValue}}</td>
