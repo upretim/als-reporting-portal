@@ -3,20 +3,20 @@
 <div class="row  mt-3">
     
   <div class="col-2">
-    <select id="month" class="form-control"  (change)="selectChangeMonth($event)">
+    <select id="month" class="form-control"  (change)="selectChangeMonth($event)" [value]='filterObj.month'>
         <option value="" default selected>Select Month</option>
-        <option value="apr">April</option>
-        <option value="may">May</option>
-        <option value="june">June</option>
-        <option value="july">July</option>
-        <option value="aug">August</option>
-        <option value="sep">September</option>
-        <option value="oct">October</option>
-        <option value="nov">November</option>
-        <option value="dec">December</option>
-        <option value="jan">January</option>
-        <option value="feb">February</option>
-        <option value="mar">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
     </select>
   </div>  
   <div class="col-2">
@@ -53,8 +53,8 @@
         <td>&#x20b9; {{inv.taxAmount}}</td>
         <td>&#x20b9; {{inv.amount - inv.purchaseamount - inv.othExpenses - inv.taxAmount}}</td>
       </tr>
-      <tr>
-        <td colspan="4">Total Summary</td>
+      <tr *ngIf="hasDataToDisplay">
+        <td colspan="4" class="sum">Total Summary</td>
         <td>&#x20b9; {{totalSaleValue}}</td>
         <td>&#x20b9; {{totalPurchaseValue}}</td>
         <td>&#x20b9; {{totalDeliveryExpenses}}</td>
@@ -63,5 +63,8 @@
       </tr>
     </tbody>
 </table>
+<div *ngIf="!hasDataToDisplay" class="text-center">
+  <label class="font-weight-bold">No data found</label> 
+ </div>
 </div>
 

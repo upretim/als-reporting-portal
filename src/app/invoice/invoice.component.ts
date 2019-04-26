@@ -43,7 +43,7 @@ export class InvoiceComponent implements OnInit {
   constructor(private fb: FormBuilder, private dataService: DataService , private router: Router) { 
     let regexForInvoiceNo = /(ALS)\/[0-9]\d{1}[-]+[0-9]\d{1}\/[0-9]\d{2}/
     this.invoiceFrom = this.fb.group({
-      no: ['', [Validators.required,Validators.maxLength(13), Validators.pattern(regexForInvoiceNo)]],
+      no: ['', [Validators.required,Validators.maxLength(15), Validators.pattern(regexForInvoiceNo)]],
       billDate: ['', Validators.required],
       dueDate: ['', Validators.required],
       billedTo: ['', Validators.required],

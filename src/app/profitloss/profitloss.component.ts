@@ -31,11 +31,14 @@ export class ProfitlossComponent implements OnInit {
 
   ngOnInit() {
     this.addMonthYearToInvoiceData(this.dataService.data.invoice);
-    console.log(this.UpdatedInvoiceData);
+    let d = new Date();
+    this.filterObj.month = d.getMonth()+1+"";
+    this.filterData();  
   }
 
   selectChangeMonth(event){
-    console.log(event);
+    this.filterObj.month = event.currentTarget.value;
+    this.filterData();  
   }
 
  
@@ -59,7 +62,7 @@ export class ProfitlossComponent implements OnInit {
   }
 
   filterData(){
-    this.invoiceData = this.multiFilter(this.dataService.data.invoice, this.filterObj);
+    this.invoiceData = this.multiFilter(this.UpdatedInvoiceData, this.filterObj);
     this.totalSaleValue = this.invoiceData.reduce( (accumulator, invoice) => {
       return accumulator + invoice.amount;
     }, 0);
@@ -95,48 +98,10 @@ export class ProfitlossComponent implements OnInit {
   }
 
   addMonthYearToInvoiceData(invoiceData){
-   this.UpdatedInvoiceData = Object.assign({},invoiceData);
+   this.UpdatedInvoiceData = [...invoiceData]
    for(let i=0;i<invoiceData.length;i++){
-     let month = invoiceData[i].billDate.split("/")[1];
-     this.UpdatedInvoiceData[i]['year'] = invoiceData[i].no.split("/")[1];
-     switch(month){
-       case "1":
-         this.UpdatedInvoiceData[i]['month'] = "jan";
-        break;
-       case "2":
-       this.UpdatedInvoiceData[i]['month'] = "feb";
-        break;
-        case "3":
-        this.UpdatedInvoiceData[i]['month'] = "mar";
-        break;
-       case "4":
-       this.UpdatedInvoiceData[i]['month'] = "apr";
-        break;
-        case "5":
-        this.UpdatedInvoiceData[i]['month'] = "may";
-        break;
-       case "6":
-       this.UpdatedInvoiceData[i]['month'] = "jun";
-        break;
-        case "7":
-        this.UpdatedInvoiceData[i]['month'] = "jul";
-        break;
-       case "8":
-        this.UpdatedInvoiceData[i]['month'] = "aug";   
-        break;
-        case "9":
-        this.UpdatedInvoiceData[i]['month'] = "sep";   
-        break;
-       case "10":
-       this.UpdatedInvoiceData[i]['month'] = "oct";   
-        break;
-        case "11":
-        this.UpdatedInvoiceData[i]['month'] = "nov";   
-        break;
-       case "12":
-       this.UpdatedInvoiceData[i]['month'] = "dec";   
-        break;
-     } 
+    this.UpdatedInvoiceData[i]['month'] = invoiceData[i].billDate.split("/")[1];
+     this.UpdatedInvoiceData[i]['year'] = invoiceData[i].no.split("/")[1]; 
    }
   }
 }

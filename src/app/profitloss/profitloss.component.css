@@ -22,3 +22,7 @@
    line-height: 12px;
    font-size: 14px;
 }
+.sum {
+  text-align: right;
+  font-weight: bold;
+}
