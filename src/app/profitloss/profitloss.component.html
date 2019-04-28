@@ -68,6 +68,7 @@
     <table class=" table table-striped mt-3 text-center col-md-12 col-sm-12 hideDesktp" >
       <thead>
         <tr>
+          <th>No.</th>
           <th>Invoice No</th>
           <th>Net Val</th>
           <th>Details</th>
@@ -75,18 +76,19 @@
       </thead>
       <tbody>
         <tr *ngFor="let inv of invoiceData; let i = index">
+           <td >{{i+1}}</td>
           <td>{{inv.no}}</td>
           <td>&#x20b9; {{inv.amount - inv.purchaseamount - inv.othExpenses - inv.taxAmount}}</td>
           <td><i class="fa fa-eye" aria-hidden="true"></i></td>
         </tr>
         <tr *ngIf="hasDataToDisplay">
-          <td class="sum">Total</td>
+          <td colspan="2" class="sum">Total Net Value</td>
           <td>&#x20b9; {{totalSaleValue - totalPurchaseValue - totalDeliveryExpenses - totalTaxValue}}</td>
         </tr>
       </tbody>
   </table>
 
-    <div *ngIf="!hasDataToDisplay" class="text-center">
+    <div *ngIf="!hasDataToDisplay" class="text-center col-12">
       <label class="font-weight-bold">No data found</label> 
     </div>
 
