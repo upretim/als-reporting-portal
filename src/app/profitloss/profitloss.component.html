@@ -26,7 +26,7 @@
     </div>  
   </div>
 <div class="row">
-    <table class=" table table-striped mt-3 text-center col-md-12 col-sm-12" >
+    <table class=" table table-striped mt-3 text-center col-md-12 col-sm-12  hideMob" >
         <thead>
           <tr>
             <th>Invoice No</th>
@@ -55,7 +55,7 @@
             <td class="hideDesktp"><i class="fa fa-eye" aria-hidden="true"></i></td>
           </tr>
           <tr *ngIf="hasDataToDisplay">
-            <td colspan="4" class="sum">Total Summary</td>
+            <td colspan="4" class="sum">Total</td>
             <td class="hideMob" >&#x20b9; {{totalSaleValue}}</td>
             <td class="hideMob" >&#x20b9; {{totalPurchaseValue}}</td>
             <td class="hideMob">&#x20b9; {{totalDeliveryExpenses}}</td>
@@ -64,9 +64,31 @@
           </tr>
         </tbody>
     </table>
+    
+    <table class=" table table-striped mt-3 text-center col-md-12 col-sm-12 hideDesktp" >
+      <thead>
+        <tr>
+          <th>Invoice No</th>
+          <th>Net Val</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let inv of invoiceData; let i = index">
+          <td>{{inv.no}}</td>
+          <td>&#x20b9; {{inv.amount - inv.purchaseamount - inv.othExpenses - inv.taxAmount}}</td>
+          <td><i class="fa fa-eye" aria-hidden="true"></i></td>
+        </tr>
+        <tr *ngIf="hasDataToDisplay">
+          <td class="sum">Total</td>
+          <td>&#x20b9; {{totalSaleValue - totalPurchaseValue - totalDeliveryExpenses - totalTaxValue}}</td>
+        </tr>
+      </tbody>
+  </table>
+
     <div *ngIf="!hasDataToDisplay" class="text-center">
       <label class="font-weight-bold">No data found</label> 
-     </div>
+    </div>
 
 </div>
 
