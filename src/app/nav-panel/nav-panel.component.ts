@@ -31,4 +31,8 @@ export class NavPanelComponent implements OnInit {
     this.router.navigate(['/PLStatus']);
   }
 
+  gotoAddExpenses(){
+    this.router.navigate(['/add-expenses']);
+  }
+
 }
