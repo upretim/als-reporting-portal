@@ -1,33 +1,39 @@
 <app-nav-panel></app-nav-panel>
 <div class="container">
-  <div class="row">
+  <div class="row mt-4">
     <div class="col-sm-9 col-md-9 col-lg-9 mx-auto">
-      <form class="form">
+      <form class="form" [formGroup]="expenseFrom" (ngSubmit)="onSubmit(expenseFrom.value)">
           <div class="form-row">
               <div class="form-group col-md-5">
                   <label for="invDate">Expense Date</label>
                   <div class="form-group">
                     <div class="input-group">
-                      <input class="form-control" placeholder="yyyy-mm-dd" id ="invDate"                               name="dp"  ngbDatepicker #d="ngbDatepicker">
+                      <input class="form-control" placeholder="yyyy-mm-dd" id ="invDate"  name="dp"  ngbDatepicker #d="ngbDatepicker" formControlName="date">
                       <div class="input-group-append">
                         <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="d.toggle()" type="button"></button>
                       </div>
                     </div>
                   </div>               
              </div> 
+             <div class="form-group col-md-5">
+                      <label for="expAmount" >Expense Amount</label>
+                      <input  id="expAmount"  class="form-control" placeholder="Expense Amount" required autofocus type="number"  formControlName="amount"/>
+                  </div>
           </div>
           <div class="form-row">
-              <div class="form-group col-md-5">
+              <div class="form-group col-md-10">
                   <label for="invDate">Expense Details</label>
                   <div class="form-group">
                     <div class="input-group">
-                      <textarea class="form-control" placeholder="Add expenses Details" id ="expenseDetails">
-                       
+                      <textarea class="form-control" placeholder="Add expenses Details" id ="expenseDetails" formControlName="desc"> 
                      </textarea>
                     </div>
                   </div>               
              </div> 
           </div>
+          <div class="form-group col-md-10">
+            <button id="addExpenses" [disabled]="!expenseFrom.valid"  type="submit" class="btn btn-primary float-right text-uppercase mb-4">Add</button>
+         </div>
 
       </form>
     </div>

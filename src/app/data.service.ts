@@ -67,4 +67,8 @@ export class DataService {
             console.error("Error removing document: ", error);
         });
     }
+
+    addExpense(ExpensesDetails){
+        console.log('ExpensesDetails ', ExpensesDetails);
+    }
 }
