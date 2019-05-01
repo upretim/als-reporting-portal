@@ -28,6 +28,7 @@ import {DataService} from './data.service';
 import { SummaryComponent } from './summary/summary.component';
 import { NavPanelComponent } from './nav-panel/nav-panel.component';
 import { ReceivableSummaryComponent } from './receivable-summary/receivable-summary.component';
+import { ProfitlossComponent } from './profitloss/profitloss.component';
 
 
 
@@ -41,7 +42,8 @@ import { ReceivableSummaryComponent } from './receivable-summary/receivable-summ
     InvoiceTableComponent,
     SummaryComponent,
     NavPanelComponent,
-    ReceivableSummaryComponent
+    ReceivableSummaryComponent,
+    ProfitlossComponent
   ],
   imports: [
     BrowserModule,

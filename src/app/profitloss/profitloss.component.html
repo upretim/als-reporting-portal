@@ -1,0 +1,98 @@
+<app-nav-panel></app-nav-panel>
+ <div class="container"> 
+  <div class="row  mt-3"> 
+    <div class="col-lg-2 col-sm-6 mb-3">
+      <select id="month" class="form-control"  (change)="selectChangeMonth($event)" [value]='filterObj.month'>
+          <option value="" default selected>Select Month</option>
+          <option value="4">April</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+      </select>
+    </div>  
+    <div class="col-lg-2 col-sm-6">
+      <select id="clientId" class="form-control"  (change)="selectChangeClient($event)">
+          <option value="" default selected>Select Client</option>
+          <option [value]="client.clientId" *ngFor="let client of clientList; let i = index">{{client.name}}</option>
+      </select>
+    </div>  
+  </div>
+<div class="row">
+    <table class=" table table-striped mt-3 text-center col-md-12 col-sm-12  hideMob" >
+        <thead>
+          <tr>
+            <th>Invoice No</th>
+            <th class="hideMob">Date</th>
+            <th class="hideMob">Due Date</th>
+            <th class="hideMob">Billed To</th>
+            <th class="hideMob">Bill Amount</th>
+            <th class="hideMob">Pur Amount</th>
+            <th class="hideMob">Del Expenses</th>
+            <th class="hideMob">Tax</th>
+            <th>Net Val</th>
+            <th class="hideDesktp">Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let inv of invoiceData; let i = index">
+            <td>{{inv.no}}</td>
+            <td class="hideMob">{{inv.billDate}}</td>
+            <td class="hideMob">{{inv.dueDate}}</td>
+            <td class="hideMob">{{inv.billedToName}}</td>
+            <td class="hideMob">&#x20b9; {{inv.amount}}</td>
+            <td class="hideMob">&#x20b9; {{inv.purchaseamount}}</td>
+            <td class="hideMob">&#x20b9; {{inv.othExpenses}}</td>
+            <td class="hideMob">&#x20b9; {{inv.taxAmount}}</td>
+            <td>&#x20b9; {{inv.amount - inv.purchaseamount - inv.othExpenses - inv.taxAmount}}</td>
+            <td class="hideDesktp"><i class="fa fa-eye" aria-hidden="true"></i></td>
+          </tr>
+          <tr *ngIf="hasDataToDisplay">
+            <td colspan="4" class="sum">Total</td>
+            <td class="hideMob" >&#x20b9; {{totalSaleValue}}</td>
+            <td class="hideMob" >&#x20b9; {{totalPurchaseValue}}</td>
+            <td class="hideMob">&#x20b9; {{totalDeliveryExpenses}}</td>
+            <td class="hideMob">&#x20b9; {{totalTaxValue}}</td>
+            <td>&#x20b9; {{totalSaleValue - totalPurchaseValue - totalDeliveryExpenses - totalTaxValue}}</td>
+          </tr>
+        </tbody>
+    </table>
+    
+    <table class=" table table-striped mt-3 text-center col-md-12 col-sm-12 hideDesktp" >
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Invoice No</th>
+          <th>Net Val</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let inv of invoiceData; let i = index">
+           <td >{{i+1}}</td>
+          <td>{{inv.no}}</td>
+          <td>&#x20b9; {{inv.amount - inv.purchaseamount - inv.othExpenses - inv.taxAmount}}</td>
+          <td><i class="fa fa-eye" aria-hidden="true"></i></td>
+        </tr>
+        <tr *ngIf="hasDataToDisplay">
+          <td colspan="2" class="sum">Total Net Value</td>
+          <td>&#x20b9; {{totalSaleValue - totalPurchaseValue - totalDeliveryExpenses - totalTaxValue}}</td>
+        </tr>
+      </tbody>
+  </table>
+
+    <div *ngIf="!hasDataToDisplay" class="text-center col-12">
+      <label class="font-weight-bold">No data found</label> 
+    </div>
+
+</div>
+
+</div>
+

@@ -53,7 +53,7 @@ export class InvoiceTableComponent implements OnInit {
     this.filterObj.billedTo = selectedClientId;
     this.filterObj.subclientId = "";
     if (event.currentTarget.value != "") {
-      let selectedClient = this.clientList.filter(function (val) {
+      let selectedClient = this.clientList.filter( (val)=> {
         return val.clientId == event.currentTarget.value;
       });
       if (selectedClient[0].hasChild) {
@@ -63,7 +63,6 @@ export class InvoiceTableComponent implements OnInit {
     }
     this.filterData();  
   }
-
 
   selectChangeBillRealized(event) {
     this.selectedPage = 1;
@@ -136,7 +135,7 @@ export class InvoiceTableComponent implements OnInit {
 
   filterData(){
     this.invoiceData = this.multiFilter(this.dataService.data.invoice, this.filterObj);
-    this.totalValue = this.invoiceData.reduce(function (accumulator, invoice) {
+    this.totalValue = this.invoiceData.reduce( (accumulator, invoice) => {
       return accumulator + invoice.amount;
     }, 0);
     this.hasDataToDisplay = true;

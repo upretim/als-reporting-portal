@@ -27,4 +27,8 @@ export class NavPanelComponent implements OnInit {
     this.router.navigate(['/summary']);
   }
 
+  plsummary(){
+    this.router.navigate(['/PLStatus']);
+  }
+
 }

@@ -5,7 +5,9 @@ export interface Iinvoice {
     dueDate: string,
     billedTo: string,
     billedToName: string,
-    // invoiceType: string,
     amount: number,
-    paymentRcvd: string
+    paymentRcvd: string,
+    purchaseamount: number,
+    othExpenses: number,
+    taxAmount: number
 }
