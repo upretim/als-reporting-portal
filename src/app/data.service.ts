@@ -39,7 +39,7 @@ export class DataService {
         if (invoice.subclientId== undefined){
             invoice.subclientId = ""
         }
-        var inv = Object.assign({},invoice);
+        let inv = Object.assign({},invoice);
         if(!inv['$key'] ){
             inv['$key'] = invoice.no.replace(/\//g, "").replace(/-/g, "") ; 
          }
@@ -69,6 +69,23 @@ export class DataService {
     }
 
     addExpense(ExpensesDetails){
-        console.log('ExpensesDetails ', ExpensesDetails);
+        let expense = Object.assign({},ExpensesDetails);
+        expense['date'] = expense.date.day + "/" + expense.date.month + "/" + expense.date.year;
+        expense['month'] = ExpensesDetails.date.month;
+        expense['year']  = ExpensesDetails.date.year;
+        if(!expense['$key'] ){
+            expense['$key'] =  'E' + ExpensesDetails.date.day + ExpensesDetails.date.month + ExpensesDetails.date.year + expense['amount']; 
+         }
+        this.angularFirestore.collection('Expenses').doc(expense.$key).set(expense)
+        .then((success) =>{
+            console.log("Expense Added Successfully ", success);
+            this.toastr.success('"Expense Added Successfully', 'Added Successfully');
+            this.router.navigate(['/expense-details']);
+        })
+        .catch((error) => {
+            this.toastr.warning('Error in adding expense', 'Update failed');
+            console.error("Error in adding expense: ", error);
+        }).finally(()=>{
+        });
     }
 }

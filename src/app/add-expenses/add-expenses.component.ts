@@ -29,7 +29,6 @@ export class AddExpensesComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit(formValue){
-   console.log(formValue);
   this.dataService.addExpense(formValue);
   }
 }

@@ -83,9 +83,7 @@ export class InvoiceTableComponent implements OnInit {
     this.router.navigate(['/invoice']);
   }
 
-  addExpenses(){
-    this.router.navigate(['/add-expenses']);
-  }
+ 
 
   multiFilter(array, filters) {
     const filterKeys = Object.keys(filters);

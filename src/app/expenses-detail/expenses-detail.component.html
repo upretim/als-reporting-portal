@@ -1,3 +1,25 @@
 <app-nav-panel></app-nav-panel>
 <div class="container">
+  <div class="row text-center mt-3">
+    <div class="col-lg-2 col-sm-6">
+        <button id="addExp" class="btn btn-outline-success ml-3 mb-3 pull-right" (click)="addExpenses()"> <i class="fa fa-plus" style="font-size:14px;color: green"></i>  <i class="fa fa-money" style="font-size:14px;color:green"> Expense</i> </button>
+    </div>
+    <div class="col-lg-2 col-sm-6 mb-3">
+        <select id="month" class="form-control"  (change)="selectChangeMonth($event)" [value]='filterObj.month'>
+            <option value="" default selected>Select Month</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+        </select>
+      </div>  
+</div>
 </div>
