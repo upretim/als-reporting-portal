@@ -4,11 +4,11 @@
     <div class="col-sm-9 col-md-9 col-lg-9 mx-auto">
       <form class="form" [formGroup]="expenseFrom" (ngSubmit)="onSubmit(expenseFrom.value)">
           <div class="form-row">
-              <div class="form-group col-md-5">
-                  <label for="invDate">Expense Date</label>
+              <div class="col-md-5">
+                  <label for="expDate">Date</label>
                   <div class="form-group">
                     <div class="input-group">
-                      <input class="form-control" placeholder="yyyy-mm-dd" id ="invDate"  name="dp"  ngbDatepicker #d="ngbDatepicker" formControlName="date">
+                      <input class="form-control" placeholder="yyyy-mm-dd" id ="expDate"  name="dp"  ngbDatepicker #d="ngbDatepicker" formControlName="date">
                       <div class="input-group-append">
                         <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="d.toggle()" type="button"></button>
                       </div>
@@ -16,23 +16,36 @@
                   </div>               
              </div> 
              <div class="form-group col-md-5">
-                      <label for="expAmount" >Expense Amount</label>
+                      <label for="expAmount" >Amount</label>
                       <input  id="expAmount"  class="form-control" placeholder="Expense Amount" required autofocus type="number"  formControlName="amount"/>
-                  </div>
+              </div>
           </div>
           <div class="form-row">
-              <div class="form-group col-md-10">
-                  <label for="invDate">Expense Details</label>
-                  <div class="form-group">
+              <div class="form-group col-md-5">
+                  <label for="shortDesc" >Summary</label>
+                  <input  id="shortDesc"  class="form-control" placeholder="Summary" required autofocus type="text"  formControlName="shortDesc"/>
+               </div>
+               <div class="form-group col-md-5">
+                  <label for="forBill">Against Invoice</label>
+                  <select id="forBill" class="form-control" formControlName="againstBill">
+                      <option value="" default selected>Please Select</option>
+                      <option>Yes</option>
+                      <option>No</option>
+                  </select>
+                </div>
+          </div>
+          <div class="form-row">
+              <div class=" form-group col-md-10">
+                  <label for="expenseDetails">Details</label>
+              
                     <div class="input-group">
                       <textarea class="form-control" placeholder="Add expenses Details" id ="expenseDetails" formControlName="desc"> 
                      </textarea>
-                    </div>
                   </div>               
              </div> 
           </div>
           <div class="form-group col-md-10">
-            <button id="addExpenses" [disabled]="!expenseFrom.valid"  type="submit" class="btn btn-primary float-right text-uppercase mb-4">Add</button>
+            <button id="addExpenses" [disabled]="!expenseFrom.valid"  type="submit" class="btn btn-primary float-right text-uppercase  mt-4 mb-4">Add</button>
          </div>
 
       </form>

@@ -1,10 +1,11 @@
 <div class="container">   
   <div class="row text-center mt-3">
-       <div class="col-lg-2 col-sm-6">
-          <button id="addInv"  class="btn btn-outline-success pull-right  mb-3" (click)="addInvoice()"> <i class="fa fa-plus" style="font-size:14px;color: green"></i>  <i class="fa fa-file-text" style="font-size:14px;color:green"></i> Invoice</button>
-       </div>
-     
-    <div class="col-lg-3 col-sm-6 mb-3">
+    <div class="pull-right col-lg-3 col-sm-6">
+        <button id="addInv" class="btn btn-outline-success mb-3 ml-3 pull-right" (click)="addInvoice()"> <i class="fa fa-plus" style="font-size:14px;color: green"></i>  <i class="fa fa-file-text" style="font-size:14px;color:green"></i> Invoice</button>
+        <button id="addExp" class="btn btn-outline-success ml-3 mb-3 pull-right" (click)="addExpenses()"> <i class="fa fa-plus" style="font-size:14px;color: green"></i>  <i class="fa fa-money" style="font-size:14px;color:green"> Expense</i> </button>
+       
+    </div>
+            <div class="col-lg-3 col-sm-6 mb-3">
       <select id="clientId" class="form-control"  (change)="selectChangeClient($event)">
           <option value="" default selected>Select Client</option>
           <option [value]="client.clientId" *ngFor="let client of clientList; let i = index">{{client.name}}</option>

@@ -32,7 +32,7 @@ export class NavPanelComponent implements OnInit {
   }
 
   gotoAddExpenses(){
-    this.router.navigate(['/add-expenses']);
+   /// this.router.navigate(['/expense-details']);
   }
 
 }
