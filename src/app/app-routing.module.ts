@@ -7,6 +7,7 @@ import {ReceivableSummaryComponent} from './receivable-summary/receivable-summar
 import {AuthGuard} from './auth/auth.guard';
 import { ProfitlossComponent } from './profitloss/profitloss.component';
 import { AddExpensesComponent } from './add-expenses/add-expenses.component';
+import { ExpensesDetailComponent } from './expenses-detail/expenses-detail.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'summary', component: ReceivableSummaryComponent,  canActivate: [AuthGuard]},
   { path: 'PLStatus', component: ProfitlossComponent,  canActivate: [AuthGuard]},
   { path: 'add-expenses', component: AddExpensesComponent,  canActivate: [AuthGuard]},
+  { path: 'expense-details', component: ExpensesDetailComponent,  canActivate: [AuthGuard]},
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];

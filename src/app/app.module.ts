@@ -30,6 +30,7 @@ import { NavPanelComponent } from './nav-panel/nav-panel.component';
 import { ReceivableSummaryComponent } from './receivable-summary/receivable-summary.component';
 import { ProfitlossComponent } from './profitloss/profitloss.component';
 import {AddExpensesComponent}  from './add-expenses/add-expenses.component';
+import { ExpensesDetailComponent } from './expenses-detail/expenses-detail.component';
 
 
 
@@ -45,7 +46,8 @@ import {AddExpensesComponent}  from './add-expenses/add-expenses.component';
     NavPanelComponent,
     ReceivableSummaryComponent,
     ProfitlossComponent,
-    AddExpensesComponent
+    AddExpensesComponent,
+    ExpensesDetailComponent
   ],
   imports: [
     BrowserModule,
