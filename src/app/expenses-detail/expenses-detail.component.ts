@@ -10,9 +10,21 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 })
 export class ExpensesDetailComponent implements OnInit {
 
+  expenseData = [];
+
   constructor(private dataService: DataService, private router: Router, private ngxService: NgxUiLoaderService) { }
 
   ngOnInit() {
+    this.dataService.getDataFromFireBase('Expenses').subscribe((response)=>{
+      console.log('Expenses Data is ', response);
+      this.expenseData = response.map(item => {
+        return item.payload.doc.data();
+      });
+      console.log('Expenses Data is ', this.expenseData);
+    },
+    (error)=>{
+      console.log('Expenses Data is ', error);
+    })
   }
 
   addExpenses(){
