@@ -74,17 +74,18 @@ export class DataService {
         expense['month'] = ExpensesDetails.date.month;
         expense['year']  = ExpensesDetails.date.year;
         if(!expense['$key'] ){
-            expense['$key'] =  'E' + ExpensesDetails.date.day + ExpensesDetails.date.month + ExpensesDetails.date.year + expense['amount']; 
+            expense['$key'] =  expense.name + ExpensesDetails.date.day + ExpensesDetails.date.month + ExpensesDetails.date.year + expense['amount']; 
          }
-        this.angularFirestore.collection('Expenses').doc(expense.$key).set(expense)
+        this.angularFirestore.collection('TravelData').doc(expense.$key).set(expense)
         .then((success) =>{
-            console.log("Expense Added Successfully ", success);
-            this.toastr.success('"Expense Added Successfully', 'Added Successfully');
+            console.log("Travel data Added Successfully ", success);
+            console.log("Travel data Added Successfully ", success);
+            this.toastr.success('Travel Added Successfully', 'Added Successfully');
             this.router.navigate(['/expense-details']);
         })
         .catch((error) => {
-            this.toastr.warning('Error in adding expense', 'Update failed');
-            console.error("Error in adding expense: ", error);
+            this.toastr.warning('Error in adding travel expense', 'Update failed');
+            console.error("Error in adding  travel expense: ", error);
         }).finally(()=>{
         });
     }
