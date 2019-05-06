@@ -6,3 +6,18 @@ table {
      color: gray;
      font-weight: normal;
   }
+
+  .displayContent{
+     display: contents;
+  }
+  .halfFont {
+     font-size: 80%;
+  }
+
+  .removeUnderline{
+     text-decoration: none;
+  }
+
+  a:hover { 
+   text-decoration: none; 
+} 

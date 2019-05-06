@@ -26,21 +26,61 @@
     </div>
     <div class="row">
         <div class="col-lg-8 col-sm-12">
-            <table class="table  table-striped">
-                <th>SN.</th>
-                <th>Date</th>
-                <th>Name</th>
-                <th>Amount</th>
-            <tbody>
-                <tr *ngFor ="let exp of expenseData; let i = index">
-                    <td >{{i+1}}.</td>
-                    <td>{{exp?.date}}</td>
-                   
-                    <td>{{exp?.name}}</td>
-                    <td>{{exp?.amount}}</td>
-                </tr>
-            </tbody>
-        </table>
+            <table class="table" id="expData">
+                <thead>
+                    <tr>
+                        <th>SN.</th>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th class="d-none d-lg-table-cell">Against Bill</th>
+                        <th class="d-none d-lg-table-cell">Detail Note </th>
+                        <th class="d--lg-none"></th>
+                    </tr>
+                </thead>
+                <span *ngFor= "let expense of expenseData; let i = index;" class="displayContent">
+                    <a  class="displayContent collapse w-100 text-muted removeUnderline" aria-expanded="false" data-toggle="collapse" href="#expenseRow_{{i}}">
+                        <tbody>
+                            <tr>
+                                <td>{{ i +1 }}.</td>
+                                <td>{{expense.date}}</td>
+                                <td>{{expense.name}}</td>
+                                <td>{{expense.amount}}</td>
+                                <td class="d-none d-lg-table-cell">{{expense.againstBill}}</td>
+                                <td class="d-none d-lg-table-cell halfFont">{{expense.desc}}</td>
+                                <td class="d--lg-none"></td>
+                            </tr>
+
+                        </tbody>
+                    </a>
+
+                    <tbody>
+                        <tr  class="d-lg-none">
+                            <td colspan="100%">
+                                <div class="card-collapse collapse" id="expenseRow_{{i}}" data-parent="#expData">
+                                    <table class="table bg-transparent">
+                                        <tr>
+                                            <th  class="border-0">
+                                                Against Bill
+                                            </th>
+                                            <td class="border-0">{{expense.againstBill}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th  class="border-0">
+                                                Details
+                                            </th>
+                                            <td  class="border-0 halfFont">{{expense.desc}}</td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+
+                        </tr>
+
+                    </tbody>
+                </span>
+
+            </table>
         </div>
     </div>
 </div>
