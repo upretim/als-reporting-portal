@@ -16,4 +16,12 @@ only screen and (min-width: 760px) {
 .noMargins{
     margin-top:0px;
     margin-bottom: 0px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.navBotton {
+    display: inline-block;
+    width:20px;
+    height:25px;
 }

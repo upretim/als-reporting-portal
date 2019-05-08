@@ -20,7 +20,10 @@ table {
 
   a:hover { 
    text-decoration: none; 
+   cursor: default;
 } 
+
+
 
 .lowWidth {
    width: 35%;
