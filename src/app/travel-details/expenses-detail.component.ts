@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { DataService } from '../data.service';
+import { DataService } from '../services/data.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import {multiFilter} from '../utils/util.functions';
 
 @Component({
   selector: 'app-expenses-detail',
@@ -10,17 +11,21 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 })
 export class ExpensesDetailComponent implements OnInit {
 
-  expenseData = [];
+  filteredTravelData = [];
+  allTravelData = [];
+  filterObj: any = {
+  }
 
   constructor(private dataService: DataService, private router: Router, private ngxService: NgxUiLoaderService) { }
 
   ngOnInit() {
     this.dataService.getDataFromFireBase('TravelData').subscribe((response)=>{
       console.log('Travel Data is ', response);
-      this.expenseData = response.map(item => {
+      this.allTravelData = response.map(item => {
         return item.payload.doc.data();
       });
-      console.log('Travel Data is ', this.expenseData);
+      this.filteredTravelData  = this.allTravelData;
+      console.log('Travel Data is ', this.filteredTravelData);
     },
     (error)=>{
       console.log('Expenses Data is ', error);
@@ -28,10 +33,11 @@ export class ExpensesDetailComponent implements OnInit {
   }
 
   addExpenses(){
-    this.router.navigate(['/add-expenses']);
+    this.router.navigate(['/add-travel']);
   }
 
   selectChangeMonth(event){
-    
+    this.filterObj.month = event.currentTarget.value;
+    this.filteredTravelData = multiFilter(this.allTravelData, this.filterObj);
   }
 }

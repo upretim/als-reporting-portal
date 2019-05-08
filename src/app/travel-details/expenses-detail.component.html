@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-8 col-sm-12">
+        <div class="col-lg-12 col-sm-12">
             <table class="table" id="expData">
                 <thead>
                     <tr>
@@ -35,51 +35,48 @@
                         <th>Amount</th>
                         <th class="d-none d-lg-table-cell">Against Bill</th>
                         <th class="d-none d-lg-table-cell">Detail Note </th>
-                        <th class="d--lg-none"></th>
+                        <th class="d-lg-none"></th>
                     </tr>
                 </thead>
-                <span *ngFor= "let expense of expenseData; let i = index;" class="displayContent">
+                <span *ngFor= "let travel of filteredTravelData; let i = index;" class="displayContent">
                     <a  class="displayContent collapse w-100 text-muted removeUnderline" aria-expanded="false" data-toggle="collapse" href="#expenseRow_{{i}}">
                         <tbody>
                             <tr>
                                 <td>{{ i +1 }}.</td>
-                                <td>{{expense.date}}</td>
-                                <td>{{expense.name}}</td>
-                                <td>{{expense.amount}}</td>
-                                <td class="d-none d-lg-table-cell">{{expense.againstBill}}</td>
-                                <td class="d-none d-lg-table-cell halfFont">{{expense.desc}}</td>
-                                <td class="d--lg-none"></td>
+                                <td>{{travel.date}}</td>
+                                <td>{{travel.name}}</td>
+                                <td>&#x20b9;  {{travel.amount}}</td>
+                                <td class="d-none d-lg-table-cell">{{travel.againstBill}}</td>
+                                <td class="d-none d-lg-table-cell halfFont">{{travel.desc}}</td>
+                                <td class="d-lg-none">
+                                    <span class="chevron"> </span>
+                                </td>
                             </tr>
-
                         </tbody>
                     </a>
-
                     <tbody>
                         <tr  class="d-lg-none">
                             <td colspan="100%">
                                 <div class="card-collapse collapse" id="expenseRow_{{i}}" data-parent="#expData">
                                     <table class="table bg-transparent">
                                         <tr>
-                                            <th  class="border-0">
+                                            <th class="border-0  lowWidth halfFont">
                                                 Against Bill
                                             </th>
-                                            <td class="border-0">{{expense.againstBill}}</td>
+                                            <td class="border-0 halfFont">{{travel.againstBill}}</td>
                                         </tr>
                                         <tr>
-                                            <th  class="border-0">
+                                            <th  class="border-0  lowWidth halfFont">
                                                 Details
                                             </th>
-                                            <td  class="border-0 halfFont">{{expense.desc}}</td>
+                                            <td  class="border-0 halfFont">{{travel.desc}}</td>
                                         </tr>
 
                                     </table>
                                 </div>
-
                         </tr>
-
                     </tbody>
                 </span>
-
             </table>
         </div>
     </div>

@@ -4,7 +4,7 @@
   }
  
   th {
-     color: gray;
+     color: black;
      font-weight: normal;
   }
 
@@ -20,6 +20,7 @@
  }
  tr {
    line-height: 12px;
+   color:gray;
 }
 
 @media 

@@ -7,6 +7,7 @@
 
 tr {
    line-height: 12px;
+   color:gray;
 }
   
 table {
@@ -14,7 +15,7 @@ table {
  }
 
  th {
-    color: gray;
+    color: black;
     font-weight: normal;
  }
 

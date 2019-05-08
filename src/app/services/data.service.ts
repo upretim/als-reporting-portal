@@ -4,7 +4,7 @@ import { Observable} from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestore} from '@angular/fire/firestore';
-import { Iinvoice } from './model/model';
+import { Iinvoice } from '../model/model';
 import { Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 

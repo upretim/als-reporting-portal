@@ -4,7 +4,7 @@
   }
  
   th {
-     color: gray;
+     color: black;
      font-weight: normal;
   }
 
@@ -21,6 +21,7 @@
  tr {
    line-height: 12px;
    font-size: 14px;
+   color: grey;
 }
 .sum {
   text-align: right;

@@ -23,14 +23,14 @@ import {FormsModule} from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { HttpClientModule } from  '@angular/common/http';
 import { InvoiceTableComponent } from './invoice-table/invoice-table.component';
-import {AuthService} from './auth.service';
-import {DataService} from './data.service';
+import {AuthService} from './services/auth.service';
+import {DataService} from './services/data.service';
 import { SummaryComponent } from './summary/summary.component';
 import { NavPanelComponent } from './nav-panel/nav-panel.component';
 import { ReceivableSummaryComponent } from './receivable-summary/receivable-summary.component';
 import { ProfitlossComponent } from './profitloss/profitloss.component';
-import {AddExpensesComponent}  from './add-expenses/add-expenses.component';
-import { ExpensesDetailComponent } from './expenses-detail/expenses-detail.component';
+import {AddExpensesComponent}  from './add-travel/add-expenses.component';
+import { ExpensesDetailComponent } from './travel-details/expenses-detail.component';
 
 
 

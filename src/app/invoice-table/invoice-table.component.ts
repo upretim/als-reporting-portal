@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../data.service';
+import { DataService } from '../services/data.service';
 import { Iinvoice } from '../model/model';
 import { Router } from "@angular/router";
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { _ } from 'underscore';
+import {multiFilter} from '../utils/util.functions';
 
 // Pagination refrence
 //  https://www.npmjs.com/package/ngx-pagination
@@ -83,20 +84,6 @@ export class InvoiceTableComponent implements OnInit {
     this.router.navigate(['/invoice']);
   }
 
- 
-
-  multiFilter(array, filters) {
-    const filterKeys = Object.keys(filters);
-    // filters all elements passing the criteria
-    return array.filter((item) => {
-      // dynamically validate all filter criteria
-      return filterKeys.every(key => {
-        // ignores an empty filter
-        if (!filters[key].length) return true;
-        return filters[key].includes(item[key]);
-      });
-    });
-  }
 
   getDataFromDB(){
     this.ngxService.start();
@@ -136,7 +123,7 @@ export class InvoiceTableComponent implements OnInit {
   }
 
   filterData(){
-    this.invoiceData = this.multiFilter(this.dataService.data.invoice, this.filterObj);
+    this.invoiceData = multiFilter(this.dataService.data.invoice, this.filterObj);
     this.totalValue = this.invoiceData.reduce( (accumulator, invoice) => {
       return accumulator + invoice.amount;
     }, 0);

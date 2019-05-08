@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {DataService} from '../data.service';
+import {DataService} from '../services/data.service';
 import { Iinvoice } from '../model/model';
-
+import {multiFilter} from '../utils/util.functions';
 @Component({
   selector: 'app-profitloss',
   templateUrl: './profitloss.component.html',
@@ -62,7 +62,7 @@ export class ProfitlossComponent implements OnInit {
   }
 
   filterData(){
-    this.invoiceData = this.multiFilter(this.UpdatedInvoiceData, this.filterObj);
+    this.invoiceData = multiFilter(this.UpdatedInvoiceData, this.filterObj);
     this.totalSaleValue = this.invoiceData.reduce( (accumulator, invoice) => {
       return accumulator + invoice.amount;
     }, 0);
@@ -82,19 +82,6 @@ export class ProfitlossComponent implements OnInit {
     if (this.invoiceData.length == 0) {
       this.hasDataToDisplay = false;
     }
-  }
-
-  multiFilter(array, filters) {
-    const filterKeys = Object.keys(filters);
-    // filters all elements passing the criteria
-    return array.filter((item) => {
-      // dynamically validate all filter criteria
-      return filterKeys.every(key => {
-        // ignores an empty filter
-        if (!filters[key].length) return true;
-        return filters[key].includes(item[key]);
-      });
-    });
   }
 
   addMonthYearToInvoiceData(invoiceData){

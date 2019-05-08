@@ -3,7 +3,7 @@ table {
   }
  
   th {
-     color: gray;
+     color: black;
      font-weight: normal;
   }
 
@@ -21,3 +21,7 @@ table {
   a:hover { 
    text-decoration: none; 
 } 
+
+.lowWidth {
+   width: 35%;
+}
