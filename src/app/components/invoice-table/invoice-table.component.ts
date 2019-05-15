@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../services/data.service';
-import { Iinvoice } from '../model/model';
+import { DataService } from '../../services/data.service';
+import { Iinvoice } from '../../models/model';
 import { Router } from "@angular/router";
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { _ } from 'underscore';
-import {multiFilter} from '../utils/util.functions';
+import {multiFilter} from '../../utils/util.functions';
 
 // Pagination refrence
 //  https://www.npmjs.com/package/ngx-pagination

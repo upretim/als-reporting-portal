@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import {DataService} from '../services/data.service';
+import {DataService} from '../../services/data.service';
 import { Router } from  "@angular/router";
 import { ValidatorFn, AbstractControl } from '@angular/forms';
-import {minValueValidator, greateThanZero}  from '../validators/validator';
+import {minValueValidator, greateThanZero}  from '../../validators/validator';
 import { Subscription } from 'rxjs';
 import {NgbDate, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 

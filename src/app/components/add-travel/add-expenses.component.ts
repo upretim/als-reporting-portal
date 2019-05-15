@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import {DataService} from '../services/data.service';
+import {DataService} from '../../services/data.service';
 
 @Component({
   selector: 'app-add-expenses',

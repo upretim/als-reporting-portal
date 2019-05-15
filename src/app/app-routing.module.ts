@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
-import { InvoiceComponent } from './invoice/invoice.component';
-import {ReceivableSummaryComponent} from './receivable-summary/receivable-summary.component';
-import {AuthGuard} from './auth/auth.guard';
-import { ProfitlossComponent } from './profitloss/profitloss.component';
-import { AddExpensesComponent } from './add-travel/add-expenses.component';
-import { ExpensesDetailComponent } from './travel-details/expenses-detail.component';
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
+import { InvoiceComponent } from './components/invoice/invoice.component';
+import {ReceivableSummaryComponent} from './components/receivable-summary/receivable-summary.component';
+import {AuthGuard} from './guards/auth.guard';
+import { ProfitlossComponent } from './components/profitloss/profitloss.component';
+import { AddExpensesComponent } from './components/add-travel/add-expenses.component';
+import { ExpensesDetailComponent } from './components/travel-details/expenses-detail.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},

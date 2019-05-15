@@ -24,7 +24,7 @@
             </select>
         </div>
     </div>
-    <div class="row">
+    <div class="row  d-none d-lg-block">
         <div class="col-lg-12 col-sm-12">
             <table class="table" id="expData">
                 <thead>
@@ -79,5 +79,38 @@
                 </span>
             </table>
         </div>
+    </div>
+
+    <div class="row d-block d-md-none">
+        <mat-accordion displayMode="flat" multi class="mat-table">
+             <section matSort class="mat-elevation-z2 mat-header-row">
+              <span class="mat-header-cell" mat-sort-header="vesselName">SN.</span>
+              <span class="mat-header-cell" mat-sort-header="vesselId">Date</span>
+              <span class="mat-header-cell" mat-sort-header="vesselStatus">Name</span>
+              <span class="mat-header-cell" mat-sort-header="ircs">Amount</span>
+            </section> 
+          
+            <mat-expansion-panel *ngFor= "let travel of filteredTravelData; let i = index;">
+              <mat-expansion-panel-header class="mat-row">
+                <span class="mat-cell small-width">{{i+1}}.</span>
+                <span class="mat-cell">{{travel.date}}</span>
+                <span class="mat-cell">{{travel.name}}</span>
+                <span class="mat-cell">&#x20b9; {{travel.amount}}</span>
+              </mat-expansion-panel-header>
+              <div class="halfFont">
+                            <tr class="table">
+                                <th class="lowWidth"> Against Bill</th>
+                                <td>{{travel.againstBill}}</td>
+                            </tr>
+                            <tr class="table">
+                                <th class="lowWidth" >
+                                    Details
+                                </th>
+                                <td >{{travel.desc}}</td>
+                            </tr>
+              </div>
+            </mat-expansion-panel>
+          
+          </mat-accordion>
     </div>
 </div>

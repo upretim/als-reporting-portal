@@ -4,7 +4,7 @@ import { Observable} from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestore} from '@angular/fire/firestore';
-import { Iinvoice } from '../model/model';
+import { Iinvoice } from '../models/model';
 import { Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 
@@ -17,6 +17,7 @@ export class DataService {
    public data: any;
     list:Iinvoice[];
     clients:{}=[];
+    public travelData: any;
    // selectedInvoice: any;
    // https://embed.plnkr.co/UEPbIj4OmfWrMuU9jpzN/ - plunker link
    // https://www.youtube.com/watch?v=5I6k77uqtLY

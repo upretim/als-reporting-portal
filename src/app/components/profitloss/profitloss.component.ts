@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {DataService} from '../services/data.service';
-import { Iinvoice } from '../model/model';
-import {multiFilter} from '../utils/util.functions';
+import {DataService} from '../../services/data.service';
+import { Iinvoice } from '../../models/model';
+import {multiFilter} from '../../utils/util.functions';
 @Component({
   selector: 'app-profitloss',
   templateUrl: './profitloss.component.html',
