@@ -1,0 +1,55 @@
+ 
+ table {
+    margin: 0 auto;
+  }
+ 
+  th {
+     color: black;
+     font-weight: normal;
+  }
+
+  .my-pagination /deep/ .ngx-pagination .current {
+   border-radius: 5px;
+   background-color: #28a745;
+   border-color: #28a745;
+ }
+
+ .editIcon {
+   font-size:20px;
+   cursor: pointer;
+ }
+ tr {
+   line-height: 12px;
+   font-size: 14px;
+   color: grey;
+}
+.sum {
+  text-align: right;
+  font-weight: bold;
+}
+
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+    .hideMob {
+        display: none;
+    }
+}
+
+@media
+only screen and (min-width: 760px) {
+    .hideDesktp {
+        display: none;
+    }
+}
+
+.table {
+  border-radius: 5px;
+  width: 100%;
+  margin: 0px auto;
+  float: none;
+}
+.tr {
+  margin: 0px auto;
+  width: 90%;
+}

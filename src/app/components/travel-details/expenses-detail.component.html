@@ -1,0 +1,83 @@
+<app-nav-panel></app-nav-panel>
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-lg-2 col-sm-6">
+            <button id="addExp" class="btn btn-outline-success ml-3 mb-3 pull-right" (click)="addExpenses()"> <i
+                    class="fa fa-plus" style="font-size:14px;color: green"></i> <i class="fa fa-bus"
+                    style="font-size:14px;color:green"> Travel</i>
+            </button>
+        </div>
+        <div class="col-lg-2 col-sm-6 mb-3">
+            <select id="month" class="form-control" (change)="selectChangeMonth($event)">
+                <option value="" default selected>Select Month</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+            </select>
+        </div>
+    </div>
+    <div class="row d-none d-lg-block">
+        <div class="col-lg-12 col-sm-12">
+            <table class="table" id="expData">
+                <thead>
+                    <tr>
+                        <th>SN.</th>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Against Bill</th>
+                        <th>Detail Note</th>
+                    </tr>
+                </thead>
+                    <tr *ngFor= "let travel of filteredTravelData; let i = index;">
+                        <td>{{i+1}}.</td>
+                        <td>{{travel.date}}</td>
+                        <td>{{travel.name}}</td>
+                        <td>&#x20b9; {{travel.amount}}</td>
+                        <td>{{travel.againstBill}}</td>
+                        <td class="half-font">{{travel.desc}}</td>
+                    </tr>                  
+            </table>
+        </div>
+    </div>
+  <!-- Display for mobile devices -->
+    <div class="row d-block d-md-none">
+        <mat-accordion displayMode="flat" class="mat-table" multi="false">
+             <section matSort class="mat-elevation-z2 mat-header-row">
+              <span class="mat-header-cell">SN.</span>
+              <span class="mat-header-cell">Date</span>
+              <span class="mat-header-cell">Name</span>
+              <span class="mat-header-cell">Amount</span>
+            </section> 
+          
+            <mat-expansion-panel *ngFor= "let travel of filteredTravelData; let i = index;">
+              <mat-expansion-panel-header class="mat-row">
+                <span class="mat-cell">{{i+1}}.</span>
+                <span class="mat-cell">{{travel.date}}</span>
+                <span class="mat-cell">{{travel.name}}</span>
+                <span class="mat-cell">&#x20b9; {{travel.amount}}</span>
+              </mat-expansion-panel-header>
+                <div class="half-font">
+                    <tr class="table">
+                        <th class="low-width">For Bill</th>
+                        <td>{{travel.againstBill}}</td>
+                    </tr>
+                    <tr class="table">
+                        <th class="low-width">Details</th>
+                        <td >{{travel.desc}}</td>
+                    </tr>
+              </div>
+            </mat-expansion-panel>
+          
+          </mat-accordion>
+    </div>
+</div>

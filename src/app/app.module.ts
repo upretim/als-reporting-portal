@@ -14,21 +14,26 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
 import { ToastrModule } from 'ngx-toastr';
 import { environment } from '../environments/environment';
-import { LoginComponent } from './login/login.component';
-import { ErrorComponent } from './error/error.component';
-import { HomeComponent } from './home/home.component';
-import { InvoiceComponent } from './invoice/invoice.component';
+import { LoginComponent } from './components/login/login.component';
+import { ErrorComponent } from './components/error/error.component';
+import { HomeComponent } from './components/home/home.component';
+import { InvoiceComponent } from './components/invoice/invoice.component';
 import {NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { HttpClientModule } from  '@angular/common/http';
-import { InvoiceTableComponent } from './invoice-table/invoice-table.component';
-import {AuthService} from './auth.service';
-import {DataService} from './data.service';
-import { SummaryComponent } from './summary/summary.component';
-import { NavPanelComponent } from './nav-panel/nav-panel.component';
-import { ReceivableSummaryComponent } from './receivable-summary/receivable-summary.component';
-import { ProfitlossComponent } from './profitloss/profitloss.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { InvoiceTableComponent } from './components/invoice-table/invoice-table.component';
+import {AuthService} from './services/auth.service';
+import {DataService} from './services/data.service';
+import { SummaryComponent } from './components/summary/summary.component';
+import { ReceivableSummaryComponent } from './components/receivable-summary/receivable-summary.component';
+import { ProfitlossComponent } from './components/profitloss/profitloss.component';
+import {AddExpensesComponent}  from './components/add-travel/add-expenses.component';
+import { ExpensesDetailComponent } from './components/travel-details/expenses-detail.component';
+import { NavPanelComponent } from './components/resuable-components/nav-panel/nav-panel.component';
+import { AccordianTableViewComponent } from './components/resuable-components/accordian-table-view/accordian-table-view.component';
+
 
 
 
@@ -43,7 +48,10 @@ import { ProfitlossComponent } from './profitloss/profitloss.component';
     SummaryComponent,
     NavPanelComponent,
     ReceivableSummaryComponent,
-    ProfitlossComponent
+    ProfitlossComponent,
+    AddExpensesComponent,
+    ExpensesDetailComponent,
+    AccordianTableViewComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +70,7 @@ import { ProfitlossComponent } from './profitloss/profitloss.component';
      AngularFireDatabaseModule,
      NgxUiLoaderModule,
      NgxPaginationModule,
+     MatExpansionModule,
      ToastrModule.forRoot({
       timeOut: 2000,
       preventDuplicates: true,

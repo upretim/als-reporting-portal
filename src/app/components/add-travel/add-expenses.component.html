@@ -1,0 +1,60 @@
+<app-nav-panel></app-nav-panel>
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-sm-9 col-md-9 col-lg-9 mx-auto">
+        <h5 class="text-center">Please enter your Travel details</h5>
+      <form class="form" [formGroup]="expenseFrom" (ngSubmit)="onSubmit(expenseFrom.value)">
+          <div class="form-row">
+              <div class="col-md-5">
+                  <label for="expDate">Date</label>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input class="form-control" placeholder="yyyy-mm-dd" id ="expDate"  name="dp"  ngbDatepicker #d="ngbDatepicker" formControlName="date">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="d.toggle()" type="button"></button>
+                      </div>
+                    </div>
+                  </div>               
+             </div> 
+             <div class="form-group col-md-5">
+                      <label for="expAmount" >Amount</label>
+                      <input  id="expAmount"  class="form-control" placeholder="Expense Amount" required autofocus type="number"  formControlName="amount"/>
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-5">
+              <label for="name">Name</label>
+              <select id="name" class="form-control" formControlName="name">
+                  <option value="" default selected>Please Select</option>
+                  <option>Sunita</option>
+                  <option>Kartik</option>
+              </select>
+            </div>
+               <div class="form-group col-md-5">
+                  <label for="forBill">Against Invoice</label>
+                  <select id="forBill" class="form-control" formControlName="againstBill">
+                      <option value="" default selected>Please Select</option>
+                      <option>Yes</option>
+                      <option>No</option>
+                  </select>
+                </div>
+          </div>
+          <div class="form-row">
+              <div class=" form-group col-md-10">
+                  <label for="expenseDetails">Details</label>
+              
+                    <div class="input-group">
+                      <textarea class="form-control" placeholder="Add expenses Details" id ="expenseDetails" formControlName="desc"> 
+                     </textarea>
+                  </div>               
+             </div> 
+          </div>
+          <div class="form-group col-md-10">
+            <button id="addExpenses" [disabled]="!expenseFrom.valid"  type="submit" class="btn btn-primary float-right text-uppercase  mt-4 mb-4">Add</button>
+         </div>
+
+      </form>
+    </div>
+  </div>
+
+</div>

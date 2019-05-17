@@ -1,0 +1,27 @@
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+    .hideMob {
+        display: none;
+    }
+}
+
+@media
+only screen and (min-width: 760px) {
+    .hideDesktp {
+        display: none;
+    }
+}
+
+.noMargins{
+    margin-top:0px;
+    margin-bottom: 0px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.navBotton {
+    display: inline-block;
+    width:20px;
+    height:25px;
+}

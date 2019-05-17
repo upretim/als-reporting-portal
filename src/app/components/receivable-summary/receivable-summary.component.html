@@ -1,0 +1,63 @@
+<app-nav-panel></app-nav-panel>
+<div class="container">
+    <div>
+        <h5 class="text-center mt-3">Summary of Receivables</h5>
+    </div>
+    <div class="row">
+        <table id="summaryTable" class="table table-striped mt-3 col-lg-8 text-center col-sm-12" >
+            <thead>
+              <tr>
+                <th>SN</th>
+                <th>Name</th>
+                <th>Number of Bills</th>
+                <th>Amount</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let inv of objToPopulatUI; let i = index" class="clickbleRow">
+                <td (click) = "showDetails(inv)">{{i+1}}</td>
+                <td (click) = "showDetails(inv)">{{inv.name}}</td>
+                <td (click) = "showDetails(inv)">{{inv.length}}</td>
+                <td (click) = "showDetails(inv)">&#x20b9;  {{inv.total}}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    <div class="row pull-right col-md-8">
+        <app-summary class="col-md-9 mt-3" [totValue]="totalValue" [noOfInv]="numberOfInvoices">
+          </app-summary>
+    </div>
+   <hr/>
+    <h5 *ngIf="showDetailsFlag" class="text-center mt-5 col-12">Details of Invoices</h5>
+  
+        <div class="row" *ngIf="showDetailsFlag">
+            <table id="detailTable" class="table table-striped mt-3 mb-3 text-center col-md-12 col-sm-12" >
+                <thead>
+                  <tr>
+                    <th>SNo.</th>
+                    <th>Invoice No</th>
+                    <th>Date</th>
+                    <th>Due Date</th>
+                    <th>Billed To</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let inv of dataForDetailTable; let i = index">
+                    <td>{{i+1}}.</td>
+                    <td>{{inv.no}}</td>
+                    <td>{{inv.billDate}}</td>
+                    <td>{{inv.dueDate}}</td>
+                    <td>{{inv.billedToName}}</td>
+                    <td>&#x20b9; {{inv.amount}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        
+      </div>    
+
+    
+</div>
+
+
