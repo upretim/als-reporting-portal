@@ -10,7 +10,7 @@ table {
   .displayContent{
      display: contents;
   }
-  .halfFont {
+  .half-font {
      font-size: 80%;
   }
 
@@ -23,10 +23,9 @@ table {
    cursor: default;
 } 
 
-.lowWidth {
-   width: 35%;
+.low-width {
+   width: 35%;;
 }
-
 /* 
 //copied from https://github.com/angular/material2/blob/master/src/lib/table/table.scss */
 /* $mat-header-row-height: 56px;
@@ -66,7 +65,7 @@ $mat-row-horizontal-padding: 24px; */
 }
 
 .mat-cell, .mat-header-cell {
-  flex: 1;
+  flex: auto;
   overflow: hidden;
   word-wrap: break-word;
 }

@@ -4,7 +4,8 @@
         <div class="col-lg-2 col-sm-6">
             <button id="addExp" class="btn btn-outline-success ml-3 mb-3 pull-right" (click)="addExpenses()"> <i
                     class="fa fa-plus" style="font-size:14px;color: green"></i> <i class="fa fa-bus"
-                    style="font-size:14px;color:green"> Travel</i> </button>
+                    style="font-size:14px;color:green"> Travel</i>
+            </button>
         </div>
         <div class="col-lg-2 col-sm-6 mb-3">
             <select id="month" class="form-control" (change)="selectChangeMonth($event)">
@@ -24,7 +25,7 @@
             </select>
         </div>
     </div>
-    <div class="row  d-none d-lg-block">
+    <div class="row d-none d-lg-block">
         <div class="col-lg-12 col-sm-12">
             <table class="table" id="expData">
                 <thead>
@@ -33,81 +34,47 @@
                         <th>Date</th>
                         <th>Name</th>
                         <th>Amount</th>
-                        <th class="d-none d-lg-table-cell">Against Bill</th>
-                        <th class="d-none d-lg-table-cell">Detail Note </th>
-                        <th class="d-lg-none"></th>
+                        <th>Against Bill</th>
+                        <th>Detail Note</th>
                     </tr>
                 </thead>
-                <span *ngFor= "let travel of filteredTravelData; let i = index;" class="displayContent">
-                    <a  class="displayContent collapse w-100 text-muted removeUnderline" aria-expanded="false" data-toggle="collapse" href="#expenseRow_{{i}}">
-                        <tbody>
-                            <tr>
-                                <td>{{ i +1 }}.</td>
-                                <td>{{travel.date}}</td>
-                                <td>{{travel.name}}</td>
-                                <td>&#x20b9;  {{travel.amount}}</td>
-                                <td class="d-none d-lg-table-cell">{{travel.againstBill}}</td>
-                                <td class="d-none d-lg-table-cell halfFont">{{travel.desc}}</td>
-                                <td class="d-lg-none">
-                                    <span class="chevron"> </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </a>
-                    <tbody>
-                        <tr  class="d-lg-none">
-                            <td colspan="100%">
-                                <div class="card-collapse collapse" id="expenseRow_{{i}}" data-parent="#expData">
-                                    <table class="table bg-transparent">
-                                        <tr>
-                                            <th class="border-0  lowWidth halfFont">
-                                                Against Bill
-                                            </th>
-                                            <td class="border-0 halfFont">{{travel.againstBill}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th  class="border-0  lowWidth halfFont">
-                                                Details
-                                            </th>
-                                            <td  class="border-0 halfFont">{{travel.desc}}</td>
-                                        </tr>
-
-                                    </table>
-                                </div>
-                        </tr>
-                    </tbody>
-                </span>
+                    <tr *ngFor= "let travel of filteredTravelData; let i = index;">
+                        <td>{{i+1}}.</td>
+                        <td>{{travel.date}}</td>
+                        <td>{{travel.name}}</td>
+                        <td>&#x20b9; {{travel.amount}}</td>
+                        <td>{{travel.againstBill}}</td>
+                        <td class="half-font">{{travel.desc}}</td>
+                    </tr>                  
             </table>
         </div>
     </div>
-
+  <!-- Display for mobile devices -->
     <div class="row d-block d-md-none">
-        <mat-accordion displayMode="flat" multi class="mat-table">
+        <mat-accordion displayMode="flat" class="mat-table" multi="false">
              <section matSort class="mat-elevation-z2 mat-header-row">
-              <span class="mat-header-cell" mat-sort-header="vesselName">SN.</span>
-              <span class="mat-header-cell" mat-sort-header="vesselId">Date</span>
-              <span class="mat-header-cell" mat-sort-header="vesselStatus">Name</span>
-              <span class="mat-header-cell" mat-sort-header="ircs">Amount</span>
+              <span class="mat-header-cell">SN.</span>
+              <span class="mat-header-cell">Date</span>
+              <span class="mat-header-cell">Name</span>
+              <span class="mat-header-cell">Amount</span>
             </section> 
           
             <mat-expansion-panel *ngFor= "let travel of filteredTravelData; let i = index;">
               <mat-expansion-panel-header class="mat-row">
-                <span class="mat-cell small-width">{{i+1}}.</span>
+                <span class="mat-cell">{{i+1}}.</span>
                 <span class="mat-cell">{{travel.date}}</span>
                 <span class="mat-cell">{{travel.name}}</span>
                 <span class="mat-cell">&#x20b9; {{travel.amount}}</span>
               </mat-expansion-panel-header>
-              <div class="halfFont">
-                            <tr class="table">
-                                <th class="lowWidth"> Against Bill</th>
-                                <td>{{travel.againstBill}}</td>
-                            </tr>
-                            <tr class="table">
-                                <th class="lowWidth" >
-                                    Details
-                                </th>
-                                <td >{{travel.desc}}</td>
-                            </tr>
+                <div class="half-font">
+                    <tr class="table">
+                        <th class="low-width">For Bill</th>
+                        <td>{{travel.againstBill}}</td>
+                    </tr>
+                    <tr class="table">
+                        <th class="low-width">Details</th>
+                        <td >{{travel.desc}}</td>
+                    </tr>
               </div>
             </mat-expansion-panel>
           
