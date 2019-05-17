@@ -25,7 +25,7 @@ export class InvoiceTableComponent implements OnInit {
   totalValue: number = 0;
   numberOfInv: number = 0;
   hasDataToDisplay: boolean = true;
-  selectedPage: number =1;
+  selectedPage: number = 1;
   filterObj: any = {
   }
   constructor(private dataService: DataService, private router: Router, private ngxService: NgxUiLoaderService) { }
@@ -37,6 +37,7 @@ export class InvoiceTableComponent implements OnInit {
     else{
       this.populateUI(this.dataService.data)
     }
+    this.filterObj.amountRcvd = "";
   }
 
   DeleteInv(invoiceId) {
@@ -53,6 +54,7 @@ export class InvoiceTableComponent implements OnInit {
     let selectedClientId = event.currentTarget.value;
     this.filterObj.billedTo = selectedClientId;
     this.filterObj.subclientId = "";
+    this.filterObj.amountRcvd = "";
     if (event.currentTarget.value != "") {
       let selectedClient = this.clientList.filter( (val)=> {
         return val.clientId == event.currentTarget.value;

@@ -16,7 +16,7 @@
       </select>
     </div>
       <div class="col-lg-2 mb-3 col-sm-6">
-        <select id="amountRcvd" class="form-control"  (change)="selectChangeBillRealized($event)">
+        <select id="amountRcvd" class="form-control"  (change)="selectChangeBillRealized($event)" [value]='filterObj.amountRcvd'>
             <option value="" default selected>Bill Realized</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
