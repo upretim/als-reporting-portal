@@ -6,7 +6,7 @@ import { DataService } from '../../services/data.service';
 import { Iinvoice } from '../../models/model';
 import { Router } from "@angular/router";
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { _ } from 'underscore';
 import { multiFilter } from '../../utils/util.functions';
@@ -36,8 +36,9 @@ export class InvoiceTableComponent implements OnInit {
   cilent: string = "";
   subCilent: string = "";
   pageNumber: number;
-  anountReceived: string = "";
+  amountReceived: string = "";
   mypageNumber: number =2;
+  subscription: Subscription;
 
 
   constructor(private dataService: DataService, private _store: Store<IAppState>, private router: Router, private ngxService: NgxUiLoaderService) { }
@@ -45,9 +46,9 @@ export class InvoiceTableComponent implements OnInit {
   ngOnInit() {
 
   //  ngrx implementation
-  this._store.pipe(select(MainPageFilter)).subscribe(data => {
+  this.subscription = this._store.pipe(select(MainPageFilter)).subscribe(data => {
     this.filterObj = data;
-   console.log('Filter data form store is ', data);
+    console.log('Filter data form store is ', data);
  })
 
     if (!this.dataService.data) {
@@ -56,8 +57,14 @@ export class InvoiceTableComponent implements OnInit {
     else {
       this.populateUI(this.dataService.data)
     }
-    this.getSubClient( this.filterObj.billedTo);
+    this.getSubClient(this.filterObj.billedTo);
   }
+
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 
   DeleteInv(invoiceId) {
     this.dataService.deleteInvoice(invoiceId);
@@ -71,12 +78,13 @@ export class InvoiceTableComponent implements OnInit {
     this.selectedPage = 1;
     this.hasSubClient = false;
     this.cilent = event.currentTarget.value;
-
+    this.subCilent = "";
+    this.amountReceived = "";
     this._store.dispatch(new getClientFilter({
       invfilter: {
-        amountRcvd: this.anountReceived,
+        amountRcvd: this.amountReceived,
         billedTo: this.cilent,
-        subclientId: "",
+        subclientId: this.subCilent,
         pageNumber: 1
       },
       pageNo: {
@@ -85,15 +93,6 @@ export class InvoiceTableComponent implements OnInit {
     }));
 
    this.getSubClient(this.cilent)
-    // if (event.currentTarget.value != "") {
-    //   let selectedClient = this.clientList.filter((val) => {
-    //     return val.clientId == event.currentTarget.value;
-    //   });
-    //   if (selectedClient[0].hasChild) {
-    //     this.hasSubClient = true;
-    //     this.subClientList = selectedClient[0].childs;
-    //   }
-    // }
     this.filterData();
   }
 
@@ -110,10 +109,10 @@ export class InvoiceTableComponent implements OnInit {
   }
 
   selectChangeBillRealized(event) {
-    this.anountReceived = event.currentTarget.value;
+    this.amountReceived = event.currentTarget.value;
     this._store.dispatch(new getBillStatusFilter({
       invfilter: {
-        amountRcvd: this.anountReceived,
+        amountRcvd: this.amountReceived,
         billedTo: this.cilent,
         subclientId: this.subCilent,
         pageNumber: 1
@@ -123,17 +122,15 @@ export class InvoiceTableComponent implements OnInit {
       }
     }));
     this.selectedPage = 1;
-   // this.filterObj.amountRcvd = event.currentTarget.value;
     this.filterData();
   }
 
   selectChangeSubClient(event) {
     this.selectedPage = 1;
-   // this.filterObj.subclientId = event.currentTarget.value;
     this.subCilent = event.currentTarget.value;
     this._store.dispatch(new getSubClientFilter({
       invfilter: {
-        amountRcvd: this.anountReceived,
+        amountRcvd: this.amountReceived,
         billedTo: this.cilent,
         subclientId: this.subCilent,
         pageNumber: 1
@@ -204,7 +201,7 @@ export class InvoiceTableComponent implements OnInit {
     this.pageNumber = event;
     // this._store.dispatch(new getPageNoFilter({
     //   invfilter: {
-    //     amountRcvd: this.anountReceived,
+    //     amountRcvd: this.amountReceived,
     //     billedTo: this.cilent,
     //     subclientId: this.subCilent,
     //     pageNumber: this.pageNumber
