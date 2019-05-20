@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { IAppState } from '../../store/state/app.state';
+import { MainPageFilter } from '../../store/selectors/main-page-filter.selectors';
 import { DataService } from '../../services/data.service';
 import { Iinvoice } from '../../models/model';
 import { Router } from "@angular/router";
@@ -6,7 +9,9 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { _ } from 'underscore';
-import {multiFilter} from '../../utils/util.functions';
+import { multiFilter } from '../../utils/util.functions';
+import { getClientFilter, getSubClientFilter, getBillStatusFilter, getPageNoFilter } from '../../store/actions/main-page-filters.actions';
+
 
 // Pagination refrence
 //  https://www.npmjs.com/package/ngx-pagination
@@ -27,58 +32,117 @@ export class InvoiceTableComponent implements OnInit {
   hasDataToDisplay: boolean = true;
   selectedPage: number = 1;
   filterObj: any = {
-  }
-  constructor(private dataService: DataService, private router: Router, private ngxService: NgxUiLoaderService) { }
+  };
+  cilent: string = "";
+  subCilent: string = "";
+  pageNumber: number;
+  anountReceived: string = "";
+  mypageNumber: number =2;
+
+
+  constructor(private dataService: DataService, private _store: Store<IAppState>, private router: Router, private ngxService: NgxUiLoaderService) { }
 
   ngOnInit() {
-    if(!this.dataService.data){
+
+  //  ngrx implementation
+  this._store.pipe(select(MainPageFilter)).subscribe(data => {
+    this.filterObj = data;
+   console.log('Filter data form store is ', data);
+ })
+
+    if (!this.dataService.data) {
       this.getDataFromDB();
     }
-    else{
+    else {
       this.populateUI(this.dataService.data)
     }
-    this.filterObj.amountRcvd = "";
+    this.getSubClient( this.filterObj.billedTo);
   }
 
   DeleteInv(invoiceId) {
     this.dataService.deleteInvoice(invoiceId);
   }
   EditInv(inv) {
-     this.dataService.publishLastUpdate(inv);
+    this.dataService.publishLastUpdate(inv);
     this.router.navigate(['/invoice']);
   }
 
   selectChangeClient(event) {
     this.selectedPage = 1;
     this.hasSubClient = false;
-    let selectedClientId = event.currentTarget.value;
-    this.filterObj.billedTo = selectedClientId;
-    this.filterObj.subclientId = "";
-    this.filterObj.amountRcvd = "";
-    if (event.currentTarget.value != "") {
-      let selectedClient = this.clientList.filter( (val)=> {
-        return val.clientId == event.currentTarget.value;
+    this.cilent = event.currentTarget.value;
+
+    this._store.dispatch(new getClientFilter({
+      invfilter: {
+        amountRcvd: this.anountReceived,
+        billedTo: this.cilent,
+        subclientId: "",
+        pageNumber: 1
+      },
+      pageNo: {
+        pageNumber: 1
+      }
+    }));
+
+   this.getSubClient(this.cilent)
+    // if (event.currentTarget.value != "") {
+    //   let selectedClient = this.clientList.filter((val) => {
+    //     return val.clientId == event.currentTarget.value;
+    //   });
+    //   if (selectedClient[0].hasChild) {
+    //     this.hasSubClient = true;
+    //     this.subClientList = selectedClient[0].childs;
+    //   }
+    // }
+    this.filterData();
+  }
+
+  getSubClient(cilent){
+    if (cilent != "") {
+      let selectedClient = this.clientList.filter((val) => {
+        return val.clientId == cilent;
       });
       if (selectedClient[0].hasChild) {
         this.hasSubClient = true;
         this.subClientList = selectedClient[0].childs;
       }
     }
-    this.filterData();  
   }
 
   selectChangeBillRealized(event) {
+    this.anountReceived = event.currentTarget.value;
+    this._store.dispatch(new getBillStatusFilter({
+      invfilter: {
+        amountRcvd: this.anountReceived,
+        billedTo: this.cilent,
+        subclientId: this.subCilent,
+        pageNumber: 1
+      },
+      pageNo: {
+        pageNumber: 1
+      }
+    }));
     this.selectedPage = 1;
-    let selectedClientId = event.currentTarget.value;
-    this.filterObj.amountRcvd = selectedClientId;
-    this.filterData(); 
+   // this.filterObj.amountRcvd = event.currentTarget.value;
+    this.filterData();
   }
 
   selectChangeSubClient(event) {
     this.selectedPage = 1;
-    let selectedClientId = event.currentTarget.value;
-    this.filterObj.subclientId = selectedClientId;
-    this.filterData(); 
+   // this.filterObj.subclientId = event.currentTarget.value;
+    this.subCilent = event.currentTarget.value;
+    this._store.dispatch(new getSubClientFilter({
+      invfilter: {
+        amountRcvd: this.anountReceived,
+        billedTo: this.cilent,
+        subclientId: this.subCilent,
+        pageNumber: 1
+      },
+      pageNo: {
+        pageNumber: 1
+      }
+    }));
+    this.filterData();
   }
 
   addInvoice() {
@@ -87,15 +151,15 @@ export class InvoiceTableComponent implements OnInit {
   }
 
 
-  getDataFromDB(){
+  getDataFromDB() {
     this.ngxService.start();
     this.ngxService.startLoader('loader-01');
     combineLatest(
       this.dataService.getDataFromFireBase('Invoices'),
       this.dataService.getDataFromFireBase('Clients')
     ).pipe(
-      map(( [invoices,clients] ) => {
-        return { invoices, clients}
+      map(([invoices, clients]) => {
+        return { invoices, clients }
       })
     ).subscribe((res) => {
       this.dataService.data = {};
@@ -106,27 +170,27 @@ export class InvoiceTableComponent implements OnInit {
         return item.payload.doc.data();
       });
       invoice.reverse();
-       this.dataService.data.invoice =  invoice;
-       this.dataService.data.clientsList =  client;
-      
+      this.dataService.data.invoice = invoice;
+      this.dataService.data.clientsList = client;
+
       this.populateUI(this.dataService.data);
       this.ngxService.stopLoader('loader-01');
       this.ngxService.stop();
     }, err => {
-      console.log('Error in fetching data from Firebase ',err)
+      console.log('Error in fetching data from Firebase ', err)
     });
   }
 
-  populateUI(data){
+  populateUI(data) {
     this.invoiceData = data.invoice;
     this.clientList = data.clientsList;
     this.hasDataToDisplay = true;
     this.filterData();
   }
 
-  filterData(){
+  filterData() {
     this.invoiceData = multiFilter(this.dataService.data.invoice, this.filterObj);
-    this.totalValue = this.invoiceData.reduce( (accumulator, invoice) => {
+    this.totalValue = this.invoiceData.reduce((accumulator, invoice) => {
       return accumulator + invoice.amount;
     }, 0);
     this.hasDataToDisplay = true;
@@ -135,8 +199,20 @@ export class InvoiceTableComponent implements OnInit {
     }
   }
 
-  updatePage(event){
+  updatePage(event) {
     this.selectedPage = event;
+    this.pageNumber = event;
+    // this._store.dispatch(new getPageNoFilter({
+    //   invfilter: {
+    //     amountRcvd: this.anountReceived,
+    //     billedTo: this.cilent,
+    //     subclientId: this.subCilent,
+    //     pageNumber: this.pageNumber
+    //   },
+    //   pageNo: {
+    //     pageNumber: this.pageNumber
+    //   }
+    // }));
   }
-  
+
 }
