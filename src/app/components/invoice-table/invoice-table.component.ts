@@ -8,8 +8,9 @@ import { Router } from "@angular/router";
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { combineLatest, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { _ } from 'underscore';
+import * as _ from 'lodash';
 import { multiFilter } from '../../utils/util.functions';
+import {IInvoiceFilter} from '../../models/model'
 import { getClientFilter, getSubClientFilter, getBillStatusFilter, getPageNoFilter } from '../../store/actions/main-page-filters.actions';
 
 
@@ -31,35 +32,40 @@ export class InvoiceTableComponent implements OnInit {
   numberOfInv: number = 0;
   hasDataToDisplay: boolean = true;
   selectedPage: number = 1;
-  filterObj: any = {
-  };
-  cilent: string = "";
-  subCilent: string = "";
-  pageNumber: number;
-  amountReceived: string = "";
-  mypageNumber: number =2;
-  subscription: Subscription;
+
+  filterObj: IInvoiceFilter = {
+    amountRcvd: "",
+    billedTo: "",
+    subclientId: ""
+  }
+    cilent: string;
+    subCilent: string;
+    amountReceived: string;
+    
+    mypageNumber: number =1;
+    pageNumber: number = 1;
+    subscription: Subscription;
 
 
   constructor(private dataService: DataService, private _store: Store<IAppState>, private router: Router, private ngxService: NgxUiLoaderService) { }
 
   ngOnInit() {
-
   //  ngrx implementation
   this.subscription = this._store.pipe(select(MainPageFilter)).subscribe(data => {
-    this.filterObj = data;
-    console.log('Filter data form store is ', data);
- })
-
-    if (!this.dataService.data) {
-      this.getDataFromDB();
-    }
-    else {
-      this.populateUI(this.dataService.data)
-    }
-    this.getSubClient(this.filterObj.billedTo);
-  }
-
+      this.filterObj = data;
+      this.cilent = this.filterObj.billedTo;
+      this.subCilent  = this.filterObj.subclientId;
+      this.amountReceived =  this.filterObj.amountRcvd;
+      console.log('Filter data form store is ', data);
+      if (!this.dataService.data) {
+        this.getDataFromDB();
+      }
+      else {
+        this.populateUI(this.dataService.data)
+      }
+      this.getSubClient(this.filterObj.billedTo);
+  })
+ }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -84,8 +90,7 @@ export class InvoiceTableComponent implements OnInit {
       invfilter: {
         amountRcvd: this.amountReceived,
         billedTo: this.cilent,
-        subclientId: this.subCilent,
-        pageNumber: 1
+        subclientId: this.subCilent
       },
       pageNo: {
         pageNumber: 1
@@ -114,8 +119,7 @@ export class InvoiceTableComponent implements OnInit {
       invfilter: {
         amountRcvd: this.amountReceived,
         billedTo: this.cilent,
-        subclientId: this.subCilent,
-        pageNumber: 1
+        subclientId: this.subCilent
       },
       pageNo: {
         pageNumber: 1
@@ -132,8 +136,7 @@ export class InvoiceTableComponent implements OnInit {
       invfilter: {
         amountRcvd: this.amountReceived,
         billedTo: this.cilent,
-        subclientId: this.subCilent,
-        pageNumber: 1
+        subclientId: this.subCilent
       },
       pageNo: {
         pageNumber: 1
@@ -199,17 +202,6 @@ export class InvoiceTableComponent implements OnInit {
   updatePage(event) {
     this.selectedPage = event;
     this.pageNumber = event;
-    // this._store.dispatch(new getPageNoFilter({
-    //   invfilter: {
-    //     amountRcvd: this.amountReceived,
-    //     billedTo: this.cilent,
-    //     subclientId: this.subCilent,
-    //     pageNumber: this.pageNumber
-    //   },
-    //   pageNo: {
-    //     pageNumber: this.pageNumber
-    //   }
-    // }));
   }
 
 }

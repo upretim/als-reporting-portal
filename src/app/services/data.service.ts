@@ -71,6 +71,13 @@ export class DataService {
 
     addExpense(ExpensesDetails){
         let expense = Object.assign({},ExpensesDetails);
+
+        if(expense.date.day < 10){
+            expense.date.day = "0" + expense.date.day;
+        }
+        if(expense.date.month < 10){
+            expense.date.month = "0" + expense.date.month;
+        }
         expense['date'] = expense.date.day + "/" + expense.date.month + "/" + expense.date.year;
         expense['month'] = ExpensesDetails.date.month;
         expense['year']  = ExpensesDetails.date.year;
@@ -79,7 +86,6 @@ export class DataService {
          }
         this.angularFirestore.collection('TravelData').doc(expense.$key).set(expense)
         .then((success) =>{
-            console.log("Travel data Added Successfully ", success);
             console.log("Travel data Added Successfully ", success);
             this.toastr.success('Travel Added Successfully', 'Added Successfully');
             this.router.navigate(['/expense-details']);

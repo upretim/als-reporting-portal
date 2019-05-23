@@ -4,11 +4,11 @@
         <div class="col-lg-2 col-sm-6">
             <button id="addExp" class="btn btn-outline-success ml-3 mb-3 pull-right" (click)="addExpenses()"> <i
                     class="fa fa-plus" style="font-size:14px;color: green"></i> <i class="fa fa-bus"
-                    style="font-size:14px;color:green"> Travel</i>
+                    style="font-size:14px;color:green">Travel</i>
             </button>
         </div>
         <div class="col-lg-2 col-sm-6 mb-3">
-            <select id="month" class="form-control" (change)="selectChangeMonth($event)">
+            <select id="month" class="form-control" (change)="selectChangeMonth($event)" [value]='filterObj.month'>
                 <option value="" default selected>Select Month</option>
                 <option value="4">April</option>
                 <option value="5">May</option>

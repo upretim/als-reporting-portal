@@ -16,7 +16,6 @@ export interface IInvoiceFilter {
     amountRcvd: string;
     billedTo: string;
     subclientId: string;
-    pageNumber: number;
 }
 
 export interface IMainPageNo {

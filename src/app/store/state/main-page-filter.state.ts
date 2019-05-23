@@ -10,9 +10,8 @@ export const initialMainPageFilterState: IMainPageFilterState = {
     invfilter: {
         amountRcvd: "",
         billedTo: "",
-        subclientId: "",
-        pageNumber:1
-    },
+        subclientId: ""
+      },
     pageNo: {
         pageNumber:1
     }

@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { DataService } from '../../services/data.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import {multiFilter} from '../../utils/util.functions';
-
+import * as _ from 'lodash';
 @Component({
   selector: 'app-expenses-detail',
   templateUrl: './expenses-detail.component.html',
@@ -19,9 +19,11 @@ export class ExpensesDetailComponent implements OnInit {
   constructor(private dataService: DataService, private router: Router, private ngxService: NgxUiLoaderService) { }
 
   ngOnInit() {
+    let d = new Date();
+    this.filterObj.month = d.getMonth()+1+"";
     if (this.dataService.travelData){
       this.allTravelData = this.dataService.travelData;
-      this.filteredTravelData = this.dataService.travelData;
+      this.filteredTravelData = _.orderBy(this.dataService.travelData, ['date'],['desc']);
     }
     else{
        this.ngxService.start();
@@ -30,8 +32,8 @@ export class ExpensesDetailComponent implements OnInit {
         this.allTravelData = response.map(item => {
           return item.payload.doc.data();
         });
-        this.filteredTravelData  = this.allTravelData;
         this.dataService.travelData = this.allTravelData; 
+        this.filteredTravelData = _.orderBy(this.allTravelData, ['date'],['desc']);
         this.ngxService.stopLoader('loader-01');
         this.ngxService.stop();
       },
@@ -49,6 +51,7 @@ export class ExpensesDetailComponent implements OnInit {
 
   selectChangeMonth(event){
     this.filterObj.month = event.currentTarget.value;
-    this.filteredTravelData = multiFilter(this.allTravelData, this.filterObj);
+    let tempData = _.orderBy(this.allTravelData, ['date'],['desc']);
+    this.filteredTravelData = multiFilter(tempData, this.filterObj);
   }
 }
