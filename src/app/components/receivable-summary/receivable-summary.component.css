@@ -18,6 +18,10 @@ table {
     color: black;
     font-weight: normal;
  }
+ .pdfIcon {
+	 font-size: 15px;
+	 color: blue;
+ }
 
  /* Responsive Table*/
  @media 
@@ -54,7 +58,7 @@ only screen and (max-width: 760px),
 		/* Now like a table header */
 		position: absolute;
 		/* Top/left values mimic padding */
-		top: 6px;
+		top: 12px;
 		left: 6px;
 		width: 45%; 
 		padding-right: 10px; 
@@ -68,6 +72,7 @@ only screen and (max-width: 760px),
   table#summaryTable td:nth-of-type(2):before { content: "Client Name"; }
   table#summaryTable td:nth-of-type(3):before { content: "Number Of Bills"; }
   table#summaryTable td:nth-of-type(4):before { content: "Total  Amount"; }
+  table#summaryTable td:nth-of-type(5):before { content: "Download Pdf"; }
 
   table#detailTable tr td:first-child{display:none;}
 	td:nth-of-type(2):before { content: "Invoice No"; }

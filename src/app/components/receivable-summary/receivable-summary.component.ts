@@ -53,11 +53,14 @@ export class ReceivableSummaryComponent implements OnInit {
 
   showDetails(invoiceArray){
     this.showDetailsFlag = true;
-    console.log('data for  details ', invoiceArray);
     this.dataForDetailTable = invoiceArray;
     for(let i =0; i<invoiceArray; i++){
 
     }
+  }
+
+  showPopUp(data){
+   // console.log(data);
   }
 
 }
