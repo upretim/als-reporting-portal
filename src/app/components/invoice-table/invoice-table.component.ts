@@ -10,9 +10,8 @@ import { combineLatest, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { multiFilter } from '../../utils/util.functions';
-import {IInvoiceFilter} from '../../models/model'
-import { getClientFilter, getSubClientFilter, getBillStatusFilter, getPageNoFilter } from '../../store/actions/main-page-filters.actions';
-
+import {IInvoiceFilter} from '../../models/model';
+import { getClientFilter, getSubClientFilter, getBillStatusFilter} from '../../store/actions/main-page-filters.actions';
 
 // Pagination refrence
 //  https://www.npmjs.com/package/ngx-pagination
@@ -41,22 +40,25 @@ export class InvoiceTableComponent implements OnInit {
     cilent: string;
     subCilent: string;
     amountReceived: string;
-    
     mypageNumber: number =1;
     pageNumber: number = 1;
     subscription: Subscription;
 
 
-  constructor(private dataService: DataService, private _store: Store<IAppState>, private router: Router, private ngxService: NgxUiLoaderService) { }
+
+  constructor( private dataService: DataService, 
+               private _store: Store<IAppState>, 
+               private router: Router,
+                private ngxService: NgxUiLoaderService
+                ) { }
 
   ngOnInit() {
   //  ngrx implementation
-  this.subscription = this._store.pipe(select(MainPageFilter)).subscribe(data => {
+   this._store.pipe(select(MainPageFilter)).subscribe(data => {
       this.filterObj = data;
       this.cilent = this.filterObj.billedTo;
       this.subCilent  = this.filterObj.subclientId;
       this.amountReceived =  this.filterObj.amountRcvd;
-      console.log('Filter data form store is ', data);
       if (!this.dataService.data) {
         this.getDataFromDB();
       }
@@ -68,7 +70,9 @@ export class InvoiceTableComponent implements OnInit {
  }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    } 
   }
 
 
@@ -154,12 +158,13 @@ export class InvoiceTableComponent implements OnInit {
   getDataFromDB() {
     this.ngxService.start();
     this.ngxService.startLoader('loader-01');
-    combineLatest(
-      this.dataService.getDataFromFireBase('Invoices'),
-      this.dataService.getDataFromFireBase('Clients')
+    this.subscription = combineLatest(
+    this.dataService.getDataFromFireBase('Invoices'),
+    this.dataService.getDataFromFireBase('Clients'),
+    this.dataService.getDataFromFireBase('TravelData')
     ).pipe(
-      map(([invoices, clients]) => {
-        return { invoices, clients }
+      map(([invoices, clients, travelData]) => {
+        return { invoices, clients, travelData }
       })
     ).subscribe((res) => {
       this.dataService.data = {};
@@ -169,9 +174,13 @@ export class InvoiceTableComponent implements OnInit {
       let client = res['clients'].map(item => {
         return item.payload.doc.data();
       });
+      let travelData = res['travelData'].map(item => {
+        return item.payload.doc.data();
+      });
       invoice.reverse();
       this.dataService.data.invoice = invoice;
       this.dataService.data.clientsList = client;
+      this.dataService.travelData = travelData; 
 
       this.populateUI(this.dataService.data);
       this.ngxService.stopLoader('loader-01');
