@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService} from '../../services/data.service';
+declare var jsPDF: any;
  
 @Component({
   selector: 'app-receivable-summary',
@@ -61,6 +62,15 @@ export class ReceivableSummaryComponent implements OnInit {
 
   showPopUp(data){
    // console.log(data);
+    this.createReport()
+  }
+
+  createReport(){
+    var doc = new jsPDF();
+    doc.setFontSize(10);
+    doc.setFont('courier');
+    doc.text(20,20, "test pdf");
+    doc.save('mytestpdf.'+'pdf')
   }
 
 }
