@@ -44,6 +44,20 @@ export class DataService {
         if(!inv['$key'] ){
             inv['$key'] = invoice.no.replace(/\//g, "").replace(/-/g, "") ; 
          }
+         if(invoice.billDate.day < 10){
+            invoice.billDate.day = "0" + invoice.billDate.day;
+        }
+        if(invoice.billDate.month < 10){
+            invoice.billDate.month = "0" + invoice.billDate.month;
+        }
+        
+        if(invoice.dueDate.day < 10){
+            invoice.dueDate.day = "0" + invoice.dueDate.day;
+        }
+        if(invoice.billDate.month < 10){
+            invoice.dueDate.month = "0" + invoice.dueDate.month;
+        }
+
          inv['billDate'] = invoice.billDate.day + "/" + invoice.billDate.month + "/" + invoice.billDate.year;
          inv['dueDate'] = invoice.dueDate.day + "/" + invoice.dueDate.month + "/" + invoice.dueDate.year;
         this.angularFirestore.collection('Invoices').doc(inv.$key).set(inv)
