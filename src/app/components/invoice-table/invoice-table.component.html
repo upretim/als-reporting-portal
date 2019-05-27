@@ -43,7 +43,7 @@
         <td>{{inv.billDate}}</td>
         <td>{{inv.dueDate}}</td>
         <td>{{inv.billedToName}}</td>
-        <td>&#x20b9; {{inv.amount}}</td>
+        <td> {{inv.amount | inrConverter}}</td>
         <td>{{inv.amountRcvd}}</td>
         <td>
            <i class="fa fa-edit editIcon" style='font-size:20px' (click)="EditInv(inv)"></i>

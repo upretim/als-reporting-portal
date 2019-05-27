@@ -39,6 +39,7 @@ import { ExpensesDetailComponent } from './components/travel-details/expenses-de
 import { NavPanelComponent } from './components/resuable-components/nav-panel/nav-panel.component';
 import { AccordianTableViewComponent } from './components/resuable-components/accordian-table-view/accordian-table-view.component';
 import { DownloadsComponent } from './components/downloads/downloads.component';
+import { InrConverterPipe } from './pipes/inr-converter.pipe';
 
 
 
@@ -58,7 +59,8 @@ import { DownloadsComponent } from './components/downloads/downloads.component';
     AddExpensesComponent,
     ExpensesDetailComponent,
     AccordianTableViewComponent,
-    DownloadsComponent
+    DownloadsComponent,
+    InrConverterPipe
   ],
   imports: [
     BrowserModule,
