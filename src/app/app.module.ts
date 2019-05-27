@@ -38,6 +38,7 @@ import {AddExpensesComponent}  from './components/add-travel/add-expenses.compon
 import { ExpensesDetailComponent } from './components/travel-details/expenses-detail.component';
 import { NavPanelComponent } from './components/resuable-components/nav-panel/nav-panel.component';
 import { AccordianTableViewComponent } from './components/resuable-components/accordian-table-view/accordian-table-view.component';
+import { DownloadsComponent } from './components/downloads/downloads.component';
 
 
 
@@ -56,7 +57,8 @@ import { AccordianTableViewComponent } from './components/resuable-components/ac
     ProfitlossComponent,
     AddExpensesComponent,
     ExpensesDetailComponent,
-    AccordianTableViewComponent
+    AccordianTableViewComponent,
+    DownloadsComponent
   ],
   imports: [
     BrowserModule,
