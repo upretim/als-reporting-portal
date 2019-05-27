@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
-import { multiFilter } from '../../utils/util.functions';
+import { multiFilter, addINRCommaSeparator } from '../../utils/util.functions';
 import { DataService } from '../../services/data.service';
 import { Iinvoice } from '../../models/model';
 import { Router } from "@angular/router";
@@ -44,6 +44,9 @@ export class DownloadsComponent implements OnInit {
 
   ngOnInit() {
     this.populateUI(this.dataService.data);
+    console.log(addINRCommaSeparator(2000));
+    console.log(addINRCommaSeparator(500));
+    console.log(addINRCommaSeparator(205440));
   }
 
   selectChangeClient(event) {
@@ -132,7 +135,7 @@ export class DownloadsComponent implements OnInit {
         'billNo': this.invoiceData[i].no,
         'billDate' : this.invoiceData[i].billDate,
         'dueDate' : this.invoiceData[i].dueDate,
-        'amount' : this.invoiceData[i].amount,
+        'amount' : addINRCommaSeparator(this.invoiceData[i].amount),
         'paymentStatus': this.invoiceData[i].amountRcvd,
       }
       total = total+ this.invoiceData[i].amount;
@@ -142,9 +145,9 @@ export class DownloadsComponent implements OnInit {
      rows.push({
       'id' : "",
       'billNo': "",
-      'billDate' : "",
-      'dueDate' : "Total Due",
-      'amount' : total,
+      'billDate': "",
+      'dueDate': "Total Due",
+      'amount':  addINRCommaSeparator(total),
       'paymentStatus': "",
      });
 

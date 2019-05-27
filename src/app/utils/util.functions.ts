@@ -20,7 +20,7 @@ export function multiFilter(array, filters) {
       let otherNumbers = number.substring(0,number.length-3);
       if(otherNumbers != ''){
         lastThree = ',' + lastThree;
-        var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+        var res =  otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
           return res;
       }
       return lastThree;   
