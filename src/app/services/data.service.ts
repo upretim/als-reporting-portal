@@ -54,7 +54,7 @@ export class DataService {
         if(invoice.dueDate.day < 10){
             invoice.dueDate.day = "0" + invoice.dueDate.day;
         }
-        if(invoice.billDate.month < 10){
+        if(invoice.dueDate.month < 10){
             invoice.dueDate.month = "0" + invoice.dueDate.month;
         }
 

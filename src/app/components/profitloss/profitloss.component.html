@@ -56,11 +56,11 @@
           </tr>
           <tr *ngIf="hasDataToDisplay">
             <td colspan="4" class="sum">Total</td>
-            <td class="hideMob" >&#x20b9; {{totalSaleValue}}</td>
-            <td class="hideMob" >&#x20b9; {{totalPurchaseValue}}</td>
-            <td class="hideMob">&#x20b9; {{totalDeliveryExpenses}}</td>
-            <td class="hideMob">&#x20b9; {{totalTaxValue}}</td>
-            <td>&#x20b9; {{totalSaleValue - totalPurchaseValue - totalDeliveryExpenses - totalTaxValue}}</td>
+            <td class="hideMob">{{totalSaleValue | inrConverter}}</td>
+            <td class="hideMob">{{totalPurchaseValue | inrConverter}}</td>
+            <td class="hideMob">{{totalDeliveryExpenses | inrConverter}}</td>
+            <td class="hideMob">{{totalTaxValue | inrConverter}}</td>
+            <td>{{totalSaleValue - totalPurchaseValue - totalDeliveryExpenses - totalTaxValue | inrConverter}}</td>
           </tr>
         </tbody>
     </table>
@@ -78,12 +78,12 @@
         <tr *ngFor="let inv of invoiceData; let i = index">
            <td >{{i+1}}</td>
           <td>{{inv.no}}</td>
-          <td>&#x20b9; {{inv.amount - inv.purchaseamount - inv.othExpenses - inv.taxAmount}}</td>
+          <td>{{inv.amount - inv.purchaseamount - inv.othExpenses - inv.taxAmount | inrConverter}}</td>
           <td><i class="fa fa-eye" aria-hidden="true"></i></td>
         </tr>
         <tr *ngIf="hasDataToDisplay">
           <td colspan="2" class="sum">Total Net Value</td>
-          <td>&#x20b9; {{totalSaleValue - totalPurchaseValue - totalDeliveryExpenses - totalTaxValue}}</td>
+          <td>{{totalSaleValue - totalPurchaseValue - totalDeliveryExpenses - totalTaxValue | inrConverter}}</td>
         </tr>
       </tbody>
   </table>

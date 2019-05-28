@@ -8,6 +8,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Store, select } from '@ngrx/store';
 import { IAppState } from '../../store/state/app.state';
 import {IInvoiceFilter} from '../../models/model';
+import { getLogo } from '../../utils/logo';
 declare var jsPDF: any;
 
 declare var autoTable: any;
@@ -58,21 +59,26 @@ export class DownloadsComponent implements OnInit {
   }
 
   getSubClient(cilent){
+    this.disableDownloadButton = false;
     if (cilent != "") {
       let selectedClient = this.clientList.filter((val) => {
         return val.clientId == cilent;
       });
       if (selectedClient[0].hasChild) {
+        this.disableDownloadButton = true;
         this.hasSubClient = true;
         this.subClientList = selectedClient[0].childs;
       }
     }
-    else{
-      this.disableDownloadButton = true;
-    }
   }
   selectChangeSubClient(event) {
     this.filterObj.subclientId = event.currentTarget.value;
+    if(this.filterObj.subclientId==""){
+      this.disableDownloadButton = true;
+    }
+    else{
+      this.disableDownloadButton = false;
+    }
     this.filterData();
   }
 
@@ -88,9 +94,6 @@ export class DownloadsComponent implements OnInit {
     }
     else{
       this.hasDataToDisplay = true;
-      if(this.filterObj.billedTo!=""){
-        this.disableDownloadButton = false;
-      }
     }
   }
 
@@ -101,6 +104,7 @@ export class DownloadsComponent implements OnInit {
   }
 
   generatePdf() {
+    let logoString = getLogo();
     let clientName = this.invoiceData[0].billedToName;
     var columns = [{
             title: "SN.",
@@ -141,7 +145,6 @@ export class DownloadsComponent implements OnInit {
       total = total+ this.invoiceData[i].amount;
       rows.push(objToPush);
     }
-    // rows.reverse();
      rows.push({
       'id' : "",
       'billNo': "",
@@ -150,18 +153,42 @@ export class DownloadsComponent implements OnInit {
       'amount':  addINRCommaSeparator(total),
       'paymentStatus': "",
      });
+     let address = {
+      name : "Arth Lab Supplies",
+      addlineOne : "B-6, Jeewan Park, Uttam Nagar",
+      addlineTwo : "New Delhi- 110059",
+      phoneNo : "Mobile: +91-7042573075",
+      email : "Email: contact@arthlabsupplies.com",
+      website : "Web: www.arthlabsupplies.com"
+     }
+     
+
 
     var doc = new jsPDF('p', 'pt');
     var header = function (data) {
         doc.setFontSize(11);
         doc.setTextColor(40);
         doc.setFontStyle('normal');
-        //doc.addImage(headerImgData, 'JPEG', data.settings.margin.left, 20, 50, 50);
-        //30, 120 X and Y
-        doc.text('Receivable summary ' + clientName, 30, 120);
+        doc.text('Receivable summary ' + clientName, 30, 135);
     };
+    doc.addImage(logoString, 'JPEG', 10, 10, 150, 64);
     doc.autoTable(columns, rows, {margin: {top: 150}, didDrawPage: header});
-     doc.save( clientName + ".pdf");
+
+    doc.setFontSize(11);
+    doc.setFontType('bold');
+    doc.setTextColor(40);
+    let xValue = 420;
+    let Yvalue = 20;
+    doc.text(address.name, xValue, 20);
+    doc.setFontSize(10);
+    doc.setFontType('normal');
+    doc.text(address.addlineOne, xValue, 34);
+    doc.text(address.addlineTwo, xValue, 48);
+    doc.text(address.phoneNo, xValue, 62);
+    doc.text(address.email, xValue, 76);
+    doc.text(address.website, xValue, 90);
+
+    doc.save( clientName + ".pdf");
  }
 
 }

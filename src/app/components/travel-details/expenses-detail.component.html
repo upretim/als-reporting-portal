@@ -42,7 +42,7 @@
                         <td>{{i+1}}.</td>
                         <td>{{travel.date}}</td>
                         <td>{{travel.name}}</td>
-                        <td>&#x20b9; {{travel.amount}}</td>
+                        <td>{{travel.amount | inrConverter}}</td>
                         <td>{{travel.againstBill}}</td>
                         <td class="half-font">{{travel.desc}}</td>
                     </tr>                  
@@ -64,7 +64,7 @@
                 <span class="mat-cell">{{i+1}}.</span>
                 <span class="mat-cell">{{travel.date}}</span>
                 <span class="mat-cell">{{travel.name}}</span>
-                <span class="mat-cell">&#x20b9; {{travel.amount}}</span>
+                <span class="mat-cell">{{travel.amount | inrConverter}}</span>
               </mat-expansion-panel-header>
                 <div class="half-font">
                     <tr class="table">
