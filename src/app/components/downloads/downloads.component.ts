@@ -104,6 +104,7 @@ export class DownloadsComponent implements OnInit {
   }
 
   generatePdf() {
+    let bottomY = 0;
     let logoString = getLogo();
     let clientName = this.invoiceData[0].billedToName;
     var columns = [{
@@ -156,7 +157,7 @@ export class DownloadsComponent implements OnInit {
      let address = {
       name : "Arth Lab Supplies",
       addlineOne : "B-6, Jeewan Park, Uttam Nagar",
-      addlineTwo : "New Delhi- 110059",
+      addlineTwo : "New Delhi - 110059",
       phoneNo : "Mobile: +91-7042573075",
       email : "Email: contact@arthlabsupplies.com",
       website : "Web: www.arthlabsupplies.com"
@@ -171,24 +172,35 @@ export class DownloadsComponent implements OnInit {
         doc.setFontStyle('normal');
         doc.text('Receivable summary ' + clientName, 30, 135);
     };
+    let marginTop = 150;
     doc.addImage(logoString, 'JPEG', 10, 10, 150, 64);
-    doc.autoTable(columns, rows, {margin: {top: 150}, didDrawPage: header});
-
-    doc.setFontSize(11);
-    doc.setFontType('bold');
-    doc.setTextColor(40);
-    let xValue = 420;
-    let Yvalue = 20;
-    doc.text(address.name, xValue, 20);
-    doc.setFontSize(10);
-    doc.setFontType('normal');
-    doc.text(address.addlineOne, xValue, 34);
-    doc.text(address.addlineTwo, xValue, 48);
-    doc.text(address.phoneNo, xValue, 62);
-    doc.text(address.email, xValue, 76);
-    doc.text(address.website, xValue, 90);
-
-    doc.save( clientName + ".pdf");
+    doc.autoTable(columns, rows, {margin: {top: marginTop}, didDrawPage: header});
+    let marginBottm = 30;
+    bottomY = marginTop +  marginBottm + (this.invoiceData.length+1)*25;
+      doc.setFontSize(11);
+      doc.setFontType('bold');
+      doc.setTextColor(40);
+      let xValue = 420;
+      let Yvalue = 20;
+      let lineHeight = 14;
+      doc.text(address.name, xValue, Yvalue);
+      doc.setFontSize(10);
+      doc.setFontType('normal');
+      Yvalue = Yvalue + lineHeight;
+      doc.text(address.addlineOne, xValue, Yvalue);
+      Yvalue = Yvalue + lineHeight;
+      doc.text(address.addlineTwo, xValue, Yvalue);
+      Yvalue = Yvalue + lineHeight;
+      doc.text(address.phoneNo, xValue, Yvalue);
+      Yvalue = Yvalue + lineHeight;
+      doc.text(address.email, xValue, Yvalue);
+      Yvalue = Yvalue + lineHeight;
+      doc.text(address.website, xValue, Yvalue);
+      doc.setFontSize(12);
+      doc.text('Summary of Receivables', 40, bottomY);
+      doc.text('Number of invoices: ' + (this.invoiceData.length), 40, bottomY+20);
+      doc.text('Total amount due: ' + addINRCommaSeparator(total), 40, bottomY+40);
+      doc.save(clientName + ".pdf");
  }
 
 }
