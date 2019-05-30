@@ -9,6 +9,7 @@ import { Store, select } from '@ngrx/store';
 import { IAppState } from '../../store/state/app.state';
 import {IInvoiceFilter} from '../../models/model';
 import { getLogo } from '../../utils/logo';
+
 declare var jsPDF: any;
 
 declare var autoTable: any;
