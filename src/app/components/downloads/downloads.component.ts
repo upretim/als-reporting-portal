@@ -174,7 +174,7 @@ export class DownloadsComponent implements OnInit {
         doc.text('Receivable summary ' + clientName, 30, 135);
     };
     let marginTop = 150;
-    doc.addImage(logoString, 'JPEG', 10, 10, 150, 64);
+     doc.addImage(logoString, 'JPEG', 10, 10, 150, 64);
     doc.autoTable(columns, rows, {margin: {top: marginTop}, didDrawPage: header});
     let marginBottm = 30;
     bottomY = marginTop +  marginBottm + (this.invoiceData.length+1)*25;
