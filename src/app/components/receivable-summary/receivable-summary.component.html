@@ -10,8 +10,7 @@
                 <th>SN</th>
                 <th>Name</th>
                 <th>Number of Bills</th>
-                <th>Amount</th>
-                
+                <th>Amount</th>                
               </tr>
             </thead>
             <tbody>
@@ -19,7 +18,7 @@
                 <td (click) = "showDetails(inv)">{{i+1}}</td>
                 <td (click) = "showDetails(inv)">{{inv.name}}</td>
                 <td (click) = "showDetails(inv)">{{inv.length}}</td>
-                <td (click) = "showDetails(inv)">&#x20b9;  {{inv.total}}</td>
+                <td (click) = "showDetails(inv)">{{inv.total | inrConverter}}</td>
               </tr>
             </tbody>
           </table>
@@ -28,7 +27,6 @@
         <app-summary class="col-md-9 mt-3" [totValue]="totalValue" [noOfInv]="numberOfInvoices">
           </app-summary>
     </div>
-   <hr/>
     <h5 *ngIf="showDetailsFlag" class="text-center mt-5 col-12">Details of Invoices</h5>
   
         <div class="row" *ngIf="showDetailsFlag">
@@ -50,14 +48,12 @@
                     <td>{{inv.billDate}}</td>
                     <td>{{inv.dueDate}}</td>
                     <td>{{inv.billedToName}}</td>
-                    <td>&#x20b9; {{inv.amount}}</td>
+                    <td>{{inv.amount | inrConverter }}</td>
                   </tr>
                 </tbody>
               </table>
         
-      </div>    
-
-    
+      </div>   
 </div>
 
 

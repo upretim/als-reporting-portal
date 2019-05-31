@@ -35,4 +35,8 @@ export class NavPanelComponent implements OnInit {
     this.router.navigate(['/expense-details']);
   }
 
+  downloads(){
+    this.router.navigate(['/downloads']);
+  }
+
 }

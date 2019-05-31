@@ -1,5 +1,12 @@
+
+//  doc for jspdf table implementation
+///https://codepen.io/someatoms/pen/adojWy
+//https://stackoverflow.com/questions/51228330/jspdf-auto-table-header-text-not-working-and-how-to-render-html-to-header/51229332;
 import { Component, OnInit } from '@angular/core';
 import { DataService} from '../../services/data.service';
+declare var jsPDF: any;
+
+declare var autoTable: any;
  
 @Component({
   selector: 'app-receivable-summary',
@@ -53,11 +60,6 @@ export class ReceivableSummaryComponent implements OnInit {
 
   showDetails(invoiceArray){
     this.showDetailsFlag = true;
-    console.log('data for  details ', invoiceArray);
     this.dataForDetailTable = invoiceArray;
-    for(let i =0; i<invoiceArray; i++){
-
-    }
   }
-
 }

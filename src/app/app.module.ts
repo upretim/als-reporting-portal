@@ -23,6 +23,11 @@ import {FormsModule} from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { HttpClientModule } from  '@angular/common/http';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {StoreModule} from '@ngrx/store';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreRouterConnectingModule} from '@ngrx/router-store'
+import {appReducers} from './store/reducers/app.reducer';
 import { InvoiceTableComponent } from './components/invoice-table/invoice-table.component';
 import {AuthService} from './services/auth.service';
 import {DataService} from './services/data.service';
@@ -33,6 +38,8 @@ import {AddExpensesComponent}  from './components/add-travel/add-expenses.compon
 import { ExpensesDetailComponent } from './components/travel-details/expenses-detail.component';
 import { NavPanelComponent } from './components/resuable-components/nav-panel/nav-panel.component';
 import { AccordianTableViewComponent } from './components/resuable-components/accordian-table-view/accordian-table-view.component';
+import { DownloadsComponent } from './components/downloads/downloads.component';
+import { InrConverterPipe } from './pipes/inr-converter.pipe';
 
 
 
@@ -51,7 +58,9 @@ import { AccordianTableViewComponent } from './components/resuable-components/ac
     ProfitlossComponent,
     AddExpensesComponent,
     ExpensesDetailComponent,
-    AccordianTableViewComponent
+    AccordianTableViewComponent,
+    DownloadsComponent,
+    InrConverterPipe
   ],
   imports: [
     BrowserModule,
@@ -71,6 +80,10 @@ import { AccordianTableViewComponent } from './components/resuable-components/ac
      NgxUiLoaderModule,
      NgxPaginationModule,
      MatExpansionModule,
+     StoreModule.forRoot(appReducers),
+      StoreDevtoolsModule,
+      EffectsModule,
+      StoreRouterConnectingModule,
      ToastrModule.forRoot({
       timeOut: 2000,
       preventDuplicates: true,

@@ -1,0 +1,22 @@
+<app-nav-panel></app-nav-panel>
+<div class="container">   
+   <div class="row text-center mt-3">
+    <div class="col-lg-3 col-sm-6 mb-3">
+      <select id="clientId" class="form-control"  (change)="selectChangeClient($event)">
+          <option value="" default selected>Select Client</option>
+          <option [value]="client.clientId" *ngFor="let client of clientList; let i = index">{{client.name}}</option>
+      </select>
+    </div>
+    <div class="col-lg-3 col-sm-6 mb-3" *ngIf="hasSubClient">
+      <select id="clientSubId" class="form-control"  (change)="selectChangeSubClient($event)">
+          <option value="" default selected>Select Location/Dept</option>
+          <option *ngFor="let subClient of subClientList; let i = index" [value]="subClient.subclientId">{{subClient.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div *ngIf="!hasDataToDisplay" class="text-center">
+    <label class="font-weight-normal">No data for download</label> 
+   </div>
+
+  <button class="btn btn-success pull-right" [disabled]="disableDownloadButton" (click)="generatePdf()">Download PDF</button>
+  </div>

@@ -11,3 +11,13 @@ export interface Iinvoice {
     othExpenses: number,
     taxAmount: number
 }
+
+export interface IInvoiceFilter {
+    amountRcvd: string;
+    billedTo: string;
+    subclientId: string;
+}
+
+export interface IMainPageNo {
+    pageNumber: number;
+}
