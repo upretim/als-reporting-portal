@@ -14,6 +14,8 @@ export class ExpensesDetailComponent implements OnInit {
   filteredTravelData = [];
   allTravelData = [];
   filterObj: any = {
+    name: "",
+    month: ""
   }
   subscription: Subscription;
 
@@ -23,11 +25,17 @@ export class ExpensesDetailComponent implements OnInit {
               ) { }
 
   ngOnInit() {
-    let d = new Date();
-    this.filterObj.month = d.getMonth()+1+"";
+    let month = new Date().getMonth()+1;
+    if(month<10){
+      this.filterObj.month = "0"+ month;
+    }
+    else{
+      this.filterObj.month = "" + month
+    }
+    
     if (this.dataService.travelData){
       this.allTravelData = this.dataService.travelData;
-      this.filteredTravelData = _.orderBy(this.dataService.travelData, ['date'],['desc']);
+      this.filteredTravelData = multiFilter( _.orderBy(this.dataService.travelData, ['date'],['desc']), this.filterObj);
     }
   }
 
@@ -40,6 +48,11 @@ export class ExpensesDetailComponent implements OnInit {
 
   selectChangeMonth(event){
     this.filterObj.month = event.currentTarget.value;
+    let tempData = _.orderBy(this.allTravelData, ['date'],['desc']);
+    this.filteredTravelData = multiFilter(tempData, this.filterObj);
+  }
+  nameChange(event){
+    this.filterObj.name = event.currentTarget.value;
     let tempData = _.orderBy(this.allTravelData, ['date'],['desc']);
     this.filteredTravelData = multiFilter(tempData, this.filterObj);
   }
