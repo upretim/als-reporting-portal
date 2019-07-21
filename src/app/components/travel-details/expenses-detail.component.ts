@@ -3,44 +3,43 @@ import { Router } from "@angular/router";
 import { DataService } from '../../services/data.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import {multiFilter} from '../../utils/util.functions';
-
+import * as _ from 'lodash';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-expenses-detail',
   templateUrl: './expenses-detail.component.html',
   styleUrls: ['./expenses-detail.component.css']
 })
 export class ExpensesDetailComponent implements OnInit {
-
   filteredTravelData = [];
   allTravelData = [];
   filterObj: any = {
+    name: "",
+    month: ""
   }
+  subscription: Subscription;
 
-  constructor(private dataService: DataService, private router: Router, private ngxService: NgxUiLoaderService) { }
+  constructor(private dataService: DataService,
+              private router: Router, 
+              private ngxService: NgxUiLoaderService
+              ) { }
 
   ngOnInit() {
-    if (this.dataService.travelData){
-      this.allTravelData = this.dataService.travelData;
-      this.filteredTravelData = this.dataService.travelData;
+    let month = new Date().getMonth()+1;
+    if(month<10){
+      this.filterObj.month = "0"+ month;
     }
     else{
-       this.ngxService.start();
-       this.ngxService.startLoader('loader-01');
-       this.dataService.getDataFromFireBase('TravelData').subscribe((response)=>{
-        this.allTravelData = response.map(item => {
-          return item.payload.doc.data();
-        });
-        this.filteredTravelData  = this.allTravelData;
-        this.dataService.travelData = this.allTravelData; 
-        this.ngxService.stopLoader('loader-01');
-        this.ngxService.stop();
-      },
-      (error)=>{
-        console.log('Error in ferching travel details', error);
-        this.ngxService.stopLoader('loader-01');
-        this.ngxService.stop();
-      })
+      this.filterObj.month = "" + month
     }
+    
+    if (this.dataService.travelData){
+      this.allTravelData = this.dataService.travelData;
+      this.filteredTravelData = multiFilter( _.orderBy(this.dataService.travelData, ['date'],['desc']), this.filterObj);
+    }
+  }
+
+  ngOnDestroy(): void {
   }
 
   addExpenses(){
@@ -49,6 +48,12 @@ export class ExpensesDetailComponent implements OnInit {
 
   selectChangeMonth(event){
     this.filterObj.month = event.currentTarget.value;
-    this.filteredTravelData = multiFilter(this.allTravelData, this.filterObj);
+    let tempData = _.orderBy(this.allTravelData, ['date'],['desc']);
+    this.filteredTravelData = multiFilter(tempData, this.filterObj);
+  }
+  nameChange(event){
+    this.filterObj.name = event.currentTarget.value;
+    let tempData = _.orderBy(this.allTravelData, ['date'],['desc']);
+    this.filteredTravelData = multiFilter(tempData, this.filterObj);
   }
 }

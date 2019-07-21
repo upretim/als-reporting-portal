@@ -32,7 +32,8 @@ export class ProfitlossComponent implements OnInit {
   ngOnInit() {
     this.addMonthYearToInvoiceData(this.dataService.data.invoice);
     let d = new Date();
-    this.filterObj.month = d.getMonth()+1+"";
+    (d.getMonth()+1) <10? this.filterObj.month = "0" + (d.getMonth()+1)+"" :this.filterObj.month = (d.getMonth()+1)+""
+    ;
     this.filterData();  
   }
 
@@ -40,8 +41,6 @@ export class ProfitlossComponent implements OnInit {
     this.filterObj.month = event.currentTarget.value;
     this.filterData();  
   }
-
- 
 
   selectChangeClient(event) {
     this.selectedPage = 1;

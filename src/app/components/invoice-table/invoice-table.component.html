@@ -4,13 +4,13 @@
         <button id="addInv" class="btn btn-outline-success mb-3 ml-3 pull-right" (click)="addInvoice()"> <i class="fa fa-plus" style="font-size:14px;color: green"></i>  <i class="fa fa-file-text" style="font-size:14px;color:green"></i> Invoice</button>   
     </div>
     <div class="col-lg-3 col-sm-6 mb-3">
-      <select id="clientId" class="form-control"  (change)="selectChangeClient($event)">
+      <select id="clientId" class="form-control"  (change)="selectChangeClient($event)"  [value]='filterObj.billedTo'>
           <option value="" default selected>Select Client</option>
           <option [value]="client.clientId" *ngFor="let client of clientList; let i = index">{{client.name}}</option>
       </select>
     </div>
     <div class="col-lg-3 col-sm-6 mb-3" *ngIf="hasSubClient">
-      <select id="clientSubId" class="form-control"  (change)="selectChangeSubClient($event)">
+      <select id="clientSubId" class="form-control"  (change)="selectChangeSubClient($event)" [value]='filterObj.subclientId'>
           <option value="" default selected>Select Location/Dept</option>
           <option *ngFor="let subClient of subClientList; let i = index" [value]="subClient.subclientId">{{subClient.name}}</option>
       </select>
@@ -37,13 +37,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let inv of invoiceData | paginate:{ itemsPerPage: 8, currentPage: selectedPage }; let i = index">
+      <tr *ngFor="let inv of invoiceData | paginate:{ itemsPerPage: 8, currentPage: pageNumber }; let i = index">
         <td >{{(selectedPage-1)*8 + i+1}}.</td>
         <td>{{inv.no}}</td>
         <td>{{inv.billDate}}</td>
         <td>{{inv.dueDate}}</td>
         <td>{{inv.billedToName}}</td>
-        <td>&#x20b9; {{inv.amount}}</td>
+        <td> {{inv.amount | inrConverter}}</td>
         <td>{{inv.amountRcvd}}</td>
         <td>
            <i class="fa fa-edit editIcon" style='font-size:20px' (click)="EditInv(inv)"></i>
