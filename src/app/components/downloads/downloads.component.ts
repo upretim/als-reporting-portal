@@ -46,9 +46,6 @@ export class DownloadsComponent implements OnInit {
 
   ngOnInit() {
     this.populateUI(this.dataService.data);
-    console.log(addINRCommaSeparator(2000));
-    console.log(addINRCommaSeparator(500));
-    console.log(addINRCommaSeparator(205440));
   }
 
   selectChangeClient(event) {

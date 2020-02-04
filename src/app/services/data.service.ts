@@ -9,7 +9,6 @@ import { Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 
 
-
 @Injectable({
     providedIn: 'root'
 })
@@ -85,7 +84,7 @@ export class DataService {
 
     addExpense(ExpensesDetails){
         let expense = Object.assign({},ExpensesDetails);
-
+        console.log('ExpensesDetails is ', ExpensesDetails)
         if(expense.date.day < 10){
             expense.date.day = "0" + expense.date.day;
         }

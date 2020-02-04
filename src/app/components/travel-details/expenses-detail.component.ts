@@ -32,6 +32,7 @@ export class ExpensesDetailComponent implements OnInit {
     else{
       this.filterObj.month = "" + month
     }
+    //this.filterObj.month = "" + month;
     
     if (this.dataService.travelData){
       this.allTravelData = this.dataService.travelData;
